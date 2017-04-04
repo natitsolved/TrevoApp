@@ -1,4 +1,4 @@
-app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state, $ionicLoading, $timeout, $window, $cordovaDevice) {
+app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state, $ionicLoading, $timeout, $window, $cordovaDevice) {
     //ionic.material.ink.displayEffect();
     ionicMaterialInk.displayEffect();
 
@@ -56,7 +56,7 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     $scope.gotoNextSignUp = function () {
         $timeout(countUp, 500);
         
-        if ($scope.user.email && $scope.user.pwd && $scope.user.name && $scope.user.dob && $scope.user.user_type)
+        if ($scope.user.email && $scope.user.name && $scope.user.dob && $scope.user.user_type)
         {
             var firstencodedString = JSON.stringify({ Email: $scope.user.email, Password: $scope.user.pwd, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
             $window.localStorage["firstencodedString"] = JSON.stringify(firstencodedString);
@@ -101,55 +101,9 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
             console.log('Selected date is : ', val);
         }
     };
-    var fbLoginSuccess = function (response) {
-        if (!response.authResponse) {
-            fbLoginError("Cannot find the authResponse");
-            return;
-        }
-      
-        //This method is executed when the user press the "Login with facebook" button
-       
-    }
-    var fbLoginError = function (error) {
-        console.log('fbLoginError', error);
-        $ionicLoading.hide();
-    };
-    $scope.facebookSignIn = function () {
-        alert("hi");
-        //console.log('hi');
-        facebookConnectPlugin.getLoginStatus(function (success) {
+   
 
-
-            // Ask the permissions you need. You can learn more about
-            // FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-            facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-
-        });
-
-    }
-
-    $scope.googleSignIn = function () {
-        window.plugins.googleplus.login(
-     {
-         'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-         'webClientId': '573674606386-inq1ijsa8hbpj2o57fd5slbgu81b6lan.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
-         'offline': true, // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
-     },
-     function (obj) {
-         var userId = obj.userId;
-         authService.externalLogin(userId).then(function (data) {
-             $state.go('userListing', {}, { reload: true });
-         }, function (error) {
-             $window.localStorage["externalAuthId"] = userId;
-             $state.go('')
-             console.log(error);
-         });
-     },
-     function (msg) {
-         alert('error: ' + msg);
-     }
- );
-    };
+   
 
 
 

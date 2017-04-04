@@ -26,7 +26,7 @@ angular.module('starter')
         username = user.Name;
         isAuthenticated = true;
 
-
+       
         // Set the token as header for your requests!
         //$http.defaults.headers.common['X-Auth-Token'] = token;
     }
@@ -81,31 +81,13 @@ angular.module('starter')
         });
     };
 
-    var getAllUserswithCountry = function () {
-        return $q(function (resolve, reject) {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
-            $http({
-                method: 'GET',
-                url: $rootScope.serviceurl + "GetAllUserWithCountryIcon",
-                headers: { 'Content-Type': 'application/json' }
-            }).success(function (response) {
-                console.log(response);
-                $ionicLoading.hide();
-                resolve(response);
-            }).error(function () {
-                $ionicLoading.hide();
-                reject('Login Failed.');
-            });
-        });
-    };
+    
     var externalLogin = function (data) {
         return $q(function (resolve, reject) {
             $ionicLoading.show({
                 template: 'Loading...'
             });
-            var encodedString =JSON.stringify( { Id: data.userId});
+            var encodedString = JSON.stringify({ Id: data });
             $http({
                 method: 'POST',
                 url: $rootScope.serviceurl + "GetUserDetailsByExternalAuthId",
@@ -131,6 +113,63 @@ angular.module('starter')
             }).error(function (err) {
                 $ionicLoading.hide();
                 reject(err);
+            });
+        });
+    };
+
+    
+    var getAllUserswithCountry = function () {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'GET',
+                url: $rootScope.serviceurl + "GetAllUserWithCountryIcon",
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function () {
+                $ionicLoading.hide();
+                reject('Login Failed.');
+            });
+        });
+    };
+    var register = function (data) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            
+            //console.log(firstencodedString);
+            //var firstencodedString = JSON.stringify({ Email: firstencodedString.Emailn, Password: firstencodedString.Passwordn, Name: firstencodedString.Namen, Dob: firstencodedString.Dobn, Gender: firstencodedString.Gendern, DeviceId: "deviceId", CountryId: $scop.udl.country, NativeLanguageId: $scop.udl.nativeLanguage, LearningLanguageId: $scop.udl.learningLanguage, LanguageLevelId: $scop.udl.languagelevel });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "Register",
+                data: data,
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                if (response.UserId !== '') {
+                    //storeUserCredentials(response.email);
+                    userInfo = {
+                        accessId: response.UserId,
+                        emailId: response.email,
+                        name: response.Email
+                    };
+                    $window.localStorage["userInfo"] = JSON.stringify(userInfo);
+                    $ionicLoading.hide();
+                    resolve(response.email);
+                } else {
+                    $ionicLoading.hide();
+                    reject('Registration Failed.');
+                }
+                //console.log(response); 
+            }).error(function (data) {
+                $ionicLoading.hide();
+                reject(data.Message);
+                //console.log('failed...'); 
             });
         });
     };
@@ -171,42 +210,6 @@ angular.module('starter')
             });
         });
     };
-
-   
-    var register = function (data) {
-        return $q(function (resolve, reject) {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
-            $http({
-                method: 'POST',
-                url: $rootScope.serviceurl + "Register",
-                data: data,
-                headers: { 'Content-Type': 'application/json' }
-            }).success(function (response) {
-                if (response.UserId !== '') {
-                    //storeUserCredentials(response.email);
-                    userInfo = {
-                        accessId: response.UserId,
-                        emailId: response.email,
-                        name: response.Email
-                    };
-                    $window.localStorage["userInfo"] = JSON.stringify(userInfo);
-                    $ionicLoading.hide();
-                    resolve(response.email);
-                } else {
-                    $ionicLoading.hide();
-                    reject('Registration Failed.');
-                }
-                //console.log(response); 
-            }).error(function (data) {
-                $ionicLoading.hide();
-                reject(data.Message);
-                //console.log('failed...'); 
-            });
-        });
-    };
-
     var logout = function () {
         destroyUserCredentials();
     };
@@ -265,7 +268,7 @@ angular.module('starter')
         sendForgotpassword: sendForgotpassword,
         externalLogin: externalLogin,
         externalRegister:externalRegister,
-        getAllUserswithCountry: getAllUserswithCountry,
+        getAllUserswithCountry:getAllUserswithCountry,
         isAuthenticated: function () { return isAuthenticated; },
         checkUniqueValue: function (table, field, value) {
             var encodedString = 'table=' + encodeURIComponent(table) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(value);

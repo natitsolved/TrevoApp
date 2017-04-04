@@ -1,0 +1,64 @@
+<ion-view view-title="Intro">
+<div class="row bar bar-header">
+        <div class="col col-10">
+            <i style="font-size: 28px; color:#fff;" class="ion-android-arrow-back" ng-click="goToWelcome()">
+            </i>
+        </div>
+        <div class="col col-70">
+            <h3 class="cart_heading">Sign Up</h3>
+			 
+
+        </div>
+        <div class="col col-20">
+            <a href="javascript:void(0);" ng-click="gotoNextSignUp(user)" class="next_anchor" >NEXT</a>
+        </div>
+    </div>
+  <ion-content class="padding-top sign_in_back" >
+	<div class="row">
+		<div class="product_card search_result">
+		  	<div class="list padding-right padding-left">             
+                  <label class="item item-input-inset  log_in_email">
+                      <i class="icon ion-ios-email-outline placeholder-icon"></i>
+                      <input type="email" name="userEmail" ng-model="user.email" placeholder="Email" required ng-pattern="emailFormat">
+                  </label>
+
+                  <label class="item item-input-inset  log_in_email">
+                      <i class="icon ion-ios-person-outline placeholder-icon"></i>
+                      <input type="text" placeholder="Name" name="userName" ng-model="user.name">
+                  </label>
+
+                  <p class="spanDate">
+                      <span class="spanDate1"><i class="icon ion-android-calendar placeholder-icon"></i></span>
+                      <datepicker style="width: 90%; float: initial;" date-format="yyyy-MM-dd">
+                          <input ng-model="user.dob" type="text" name="dateofBirth" />
+                      </datepicker>
+                  </p>
+                  <div class="row" style="margin-top: -5px;">
+
+                      <div class="part_male" style="width: 30%;float: left">
+                          <label class="control control--radio" style="color:#aaaaaa;font-size: 14px">
+                              <i style="color: #aaaaaa; font-size:22px;" class="icon ion-man"></i> Male
+                              <input name="radio" checked="checked" value="U" type="radio" ng-model="user.user_type">
+                              <div class="control__indicator"></div>
+                          </label>
+
+                      </div>
+                      <div class="part_female" style="width: 35%;float: left">
+                          <label class="control control--radio" style="color:#aaaaaa;font-size: 14px">
+                              <i style="color: #aaaaaa; font-size:22px;" class="icon ion-woman"></i> Female
+                              <input name="radio" checked="checked" value="S" type="radio" ng-model="user.user_type">
+                              <div class="control__indicator"></div>
+                          </label>
+                      </div>
+
+                  </div>
+                 
+
+</div>
+		  		  
+		  </div>	
+	</div>
+	
+  </ion-content>
+  
+</ion-view>

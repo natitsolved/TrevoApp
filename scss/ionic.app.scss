@@ -1,0 +1,451 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+/************add by soutik****************/
+
+$font: 'Lato', sans-serif;
+$primary-color: #fff;
+$accent_color: #ff0000;
+$primary_dark: #008d8b;
+$primary_light: #4dbfbf;
+$secondery_dark: #019d9e;
+
+$accent_dark: #fd8b00;
+$accent_light: #ffab40;
+
+
+.button.button-assertive{ background-color: $accent_color;}
+.button.button-calm{background:$primary_light}
+
+.width_heght{width:100%;height:100%;}
+
+body, .ionic-body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, html {font-family: 'Lato', sans-serif !important;font-weight: 400; }
+.padding{padding:0 !important}
+.slide_height{
+.scroll,.slider{height:100%}
+}
+.intro_holder{
+	@extend .width_heght;
+	img{@extend .width_heght;}
+	.intro_text_holder{@extend .width_heght;background-size:cover !important}
+}
+
+.slider_text{
+	width:100%;position:absolute;zindex:999;padding:20px;box-sizeng:border-box;bottom:10%;
+	h2{text-transform:uppercase;font-size:30px;color:$primary-color;display:block;text-align:center}
+	p{font-size:16px;color:$primary-color;display:block;text-align:center;margin-top: 18px;}
+	.button-calm{border:0;display:block;width:100%;color:$primary-color;text-transform:none;opacity:1;text-shadow:none;font-family: 'Lato', sans-serif !important;margin-top:60px;}
+}
+#fab{line-height: 57px;}
+.slider-pager .slider-pager-page{color:$primary-color;}
+.button-assertive{background:$accent_color;border:0;font-family:$font !important;}
+
+
+/***********************splash**********************/
+.splash_screen{@extend .width_heght;display:table;background-image:url(../img/splashbackground.png);background-size:100% auto;background-position:center center;
+
+.splash_logo{animation-duration: 4s;margin:0 auto;position:relative;display:table-cell;vertical-align:middle;text-align:center;
+	img{width: 63%;height: auto;}
+	}
+}
+/*************  Login  ************/
+.login-wrapper{background-image:url(../img/login_bg.jpg);background-position:center;background-size:cover}
+.login_logo{width:200px;height:auto;display:block;margin:0 auto; margin-top:70px; margin-bottom:40px;}
+
+.login_holder .item-input-inset{background:rgba(58,58,58,.7); border:1px solid rgba(164,164,164,0.4); border-radius:2px; padding:5px 20px; margin-bottom:14px}
+.login_holder input[type="text"], .login_holder input[type="password"]{width:100%; background :none; color:#fff; font-weight:300}
+.login_holder input[type="text"]::-webkit-input-placeholder {color: #fff; text-shadow:none}
+.login_holder input[type="text"]:-moz-placeholder { /* Firefox 18- */color: #fff; text-shadow:none  }
+.login_holder input[type="text"]::-moz-placeholder {  /* Firefox 19+ */color: #fff; text-shadow:none  }
+.login_holder input[type="text"]:-ms-input-placeholder {color: #fff; text-shadow:none}
+.login_holder input[type="password"]::-webkit-input-placeholder {color: #fff; text-shadow:none}
+.login_holder input[type="password"]:-moz-placeholder { /* Firefox 18- */color: #fff; text-shadow:none  }
+.login_holder input[type="password"]::-moz-placeholder {  /* Firefox 19+ */color: #fff; text-shadow:none  }
+.login_holder input[type="password"]:-ms-input-placeholder {color: #fff; text-shadow:none}
+.login_holder .placeholder-icon{color:#fff; font-size:24px; padding-right:10px}
+.login_holder .button-assertive{background:$accent_color !important;border:0; border-radius:2px!important; box-shadow:none; margin-top:15px}
+.login_holder .button-assertive.btn-facebook{background:#39579b !important}
+.login_holder .button-assertive.btn-gplus{background:#df4a32 !important}
+
+.login_holder .button-assertive i{font-size: 28px;position: absolute;left: 20px;}
+
+.login_holder .button-light{border-radius:45px; box-shadow:none; font-family:$font !important;}
+.forgot{color:$primary-color;font-family:$font;font-weight: 400;font-size:14px; text-align:center; display:block; text-decoration:none; font-weight:300}
+.forgot a{color:$primary-color;font-weight:400}
+.or{color:$primary-color; font-family:$font;}
+
+
+
+
+
+/******************* Register *********************/
+.signup_logo{width:80px;height:auto;display:block;margin:20px auto;}
+.signup-holder .item-checkbox{background:none; border:0}
+.item-checkbox span{color:#fff;font-family:$font;font-weight: 300;}
+.already{text-align:center; color:#fff;
+	a{color:#fff}
+}
+/*--------------------- Custome Radio ------------------------*/
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin:0 auto;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color:#fff;
+  padding-right:15px;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background:rgba(58, 58, 58, 0.7);
+  border: solid 2px rgba(164, 164, 164, 0.4);
+}
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  background: #fff;
+}
+.control input:checked ~ .control__indicator {
+  background: rgba(58, 58, 58, 0.7);
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: rgba(58, 58, 58, 0.7);
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 8px;
+  top: 4px;
+  width: 3px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+  border-color: #7b7b7b;
+}
+.control--radio .control__indicator:after {
+  left: 3px;
+  top: 3px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #03c9f3;
+}
+.control--radio input:disabled ~ .control__indicator:after {
+  background: #7b7b7b;
+}
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 15px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  background: #e6e6e6;
+  color: #7b7b7b;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:hover,
+.select select:focus {
+  color: #000;
+  background: #ccc;
+}
+.select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.select__arrow {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+.select select:hover ~ .select__arrow,
+.select select:focus ~ .select__arrow {
+  border-top-color: #000;
+}
+.select select:disabled ~ .select__arrow {
+  border-top-color: #ccc;
+}
+.button-icon{color:#fff;}
+/********************** radio end *************************/
+
+
+/***************** Home *******************/
+.padding-top{padding-top:58px !important;background-color:#ececec}
+.map-bg{background:url(../img/map.png) no-repeat top center; }
+.bar-header{background-image:url(../img/login_bg.jpg);height:58px;padding-top:7px;background-size: 100% auto;}
+.text-logo{width:80px; margin-top:17px}
+.footer-icon-bar {height:54px; margin-bottom:0;background:#e21e26;color:#fff;}
+.footer-icon-bar .tab-item{color:#c1c1c1; font-size: 13px!important; padding-top:2px}
+.footer-icon-bar .tab-item:hover{color:$primary_dark}
+.footer-icon-bar .icon {height: 28px;font-size: 26px;}
+
+.footer-icon-bar img {
+    height: 26px;
+    display: block;
+    margin: 3px auto;
+}
+.footer-icon-bar .tab-item{color:#fff;}
+.bottom-footer{padding:0; height:48px}
+.bottom-footer .button-assertive{padding:3px 0; background:$accent_color; font-size:18px; font-family:$font; text-transform:uppercase}
+.bottom-footer .button-assertive span{display:inline-block; border:2px solid #fff; border-radius:100%; width:22px; height:22px; line-height:18px; text-align:center; font-size:12px; position:absolute; right:12px; top:12px}
+
+.home-wrapper{
+	top:55%;position:fixed; width:100%;
+	.item-input-inset{border:1px solid #ccc; background:#fff;}
+	.item-input-inset:first-child:nth-last-child(2) {
+	 border-bottom:0; margin-bottom:-1px
+	}
+	/*.item-input-inset:first-child{border-bottom:0; margin-bottom:-1px}*/
+	
+	
+	
+	.item-input-wrapper{background:none}
+	.icon{color:#707070; font-size:20px; margin-right:5px;position:absolute;left:15px}
+	.padding-left-15{padding-left:15px !important}
+}
+.inner_logo {width:130px;margin-top:10px}
+.inner_logo img{width:100%;}
+.serach{float:right;background:none;}
+
+.home_slide{width:100%;
+	img{width:100%}
+}
+ul.product_card {padding: 10px;}
+.product_card .item{padding:10px;margin-top:10px;}
+.product_card .home_product_img{width:43%;float:left;
+	img{width:100%}
+}
+.product_card .card_details_body{width:53%;float:right;
+h3{color:#262626;font-weight:400;font-size:18px}
+p{color: #606060;font-weight: 400;font-size: 14px;line-height: 17px;span{color:#e21e26}}
+}
+.bid_now{background: #e21e26;
+    color: #fff;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 3px;
+    padding: 5px 9px;
+    float: right !important;
+    display: block;}
+p.time{line-height:25px !important}
+
+/********************** Accept *****************/
+
+.common-body{
+	width:100%; background:#f2f2f2; padding:50px 0px; overflow:hidden; height:100%;
+}
+.accept-top{
+	background:#fff; margin-bottom:0;
+	.input-label{font-size:12px; color:#adadad}
+	.item{border-bottom:1px solid #d4d4d4}
+	.input-label{padding-top:0}
+	input[type="text"]{height:22px;border-radius:0;}
+	input[type="text"]::-webkit-input-placeholder {color: #000; text-shadow:none}
+	input[type="text"]:-moz-placeholder { /* Firefox 18- */color: #000; text-shadow:none  }
+	input[type="text"]::-moz-placeholder {  /* Firefox 19+ */color: #000; text-shadow:none  }
+	input[type="text"]:-ms-input-placeholder {color: #000; text-shadow:none}
+}
+.item-description{
+	.input-label{color:#adadad; font-size:12px; text-transform:uppercase; padding-bottom:3px;
+		em{font-size:10px;color:#000}
+	}
+	.item-input{padding-left:5px;}
+	.item {border:none}
+	input[type="text"]{height:48px; font-size:14px; border:1px solid #d4d4d4; box-shadow:none; padding-left:8px; border-radius:0;}
+	input[type="text"]::-webkit-input-placeholder {color: #000; text-shadow:none}
+	input[type="text"]:-moz-placeholder { /* Firefox 18- */color: #000; text-shadow:none  }
+	input[type="text"]::-moz-placeholder {  /* Firefox 19+ */color: #000; text-shadow:none  }
+	input[type="text"]:-ms-input-placeholder {color: #000; text-shadow:none}
+	textarea{height:100px; font-size:14px; border:1px solid #d4d4d4; box-shadow:none; padding-left:8px; border-radius:0; resize:none}
+	textarea::-webkit-input-placeholder {color: #000; text-shadow:none}
+	textarea:-moz-placeholder { /* Firefox 18- */color: #000; text-shadow:none  }
+	textarea::-moz-placeholder {  /* Firefox 19+ */color: #000; text-shadow:none  }
+	textarea:-ms-input-placeholder {color: #000; text-shadow:none}
+}
+
+/********************** food-request *****************/
+
+.estimated-prc{border:1px solid #d4d4d4!important; padding:0 5px}
+.estimated-prc{
+	input{margin:0 !important; padding:0!important; margin:0 5px!important; text-align:center; height:48px!important; border:none!important; background:none}
+	.icon{padding-top:0; color:$secondery_dark}
+}
+.add-more{font-size:14px; padding:0 3px; color:$accent_color; margin-top:5px; display:block; text-decoration:none}
+
+
+/*************************soutik 14.10**************************************/
+.body_gray{background:#f2f2f2}
+.relative_Point{position:relative;
+	i{position:absolute;left:15px;top:17px}
+	input[type="text"]{padding-left:30px;}
+}
+.custome_popup{
+	display:block;width:100%;height:auto;overflow:hidden;
+	p{disply:block;text-align:center;color:#019d9e;font-size:18px;line-height:18px !important;margin-bottom:20px;
+	i{font-size:22px;margin-right:10px}
+	}
+	
+	.img_circle{width:70px;height:70px;border:2px solid #019d9e;border-radius:100%;overflow:hidden;margin:10px auto;float:none;
+	img{width:100%;height:100%;}
+	}
+	strong{display:block;text-align:center;}
+	span{display:block;text-align:center;line-height:20px;font-size:14px;font-weight: 300;
+	i{color:#19be19;margin-right: 5px;}
+	}
+}
+.popup-head{border-color:#019d9e}
+.popup-buttons {
+	button{border:0;color:#fff;}
+	.button-default{background:#019d9e}
+	.button-positive{background:#ff0000}
+	}
+/*************************end soutik**************************************/
+
+
+
+
+.loginBg{@extend .splash_screen;background-image:url(../img/login_background.png);display:table;
+.login_holder{display:table-cell;vertical-align:middle;}
+input{color:#fff;font-family: 'Lato', sans-serif;font-weight:400;}
+}
+.input-label{color:$primary_light;}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{font-size:16px}
+
+
+.checkbox input:before, .checkbox-icon:before{background:none;}
+.btnblank{background:none;color:#fff;border:1px solid #fff}
+.link{ color:$primary_light;font-family:$font;font-weight: 400;font-size:14px;float:right;}
+.trems{ color:$primary_light;}
+
+
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before{background:$primary_light !important;border-color:$primary_dark !important}
+
+
+/****************************/
+
+.h1{color:#fff;}
+
+.bar .title{line-height:50px; text-transform:uppercase}
+
+
+.transparent_bar{background:none;box-shadow:none;}
+.profile_header{
+	width:100%;height:50%;background-attachment:fixed;margin-top:0;position:relative;
+		.porofile_header_text{z-index: 9;bottom: 0;position: absolute;
+			h2,h4{color:#fff;}
+		}
+}
+.profile_header:before{position:absolute;width:100%;height:100%;top:0;left:0;z-index:1;content:"";background:rgba(0,0,0,.30)
+
+
+}
+
+.category_card{
+	border:0;margin:0;padding:0;
+	button.button-fab{width:110px;height:110px;margin:10px auto;border:0;display:block;
+		img{width:100%}
+	}
+	.col-50{position:relative}
+	h4{display:block;text-transform:uppercase;text-align:center;font-size: 13px;color:#717171}
+}
+
+
+.uplod-phto{position:absolute; right:15px; bottom:10px; color:#fff; z-index:999;}
+.uplod-phto .icon{line-height:48px; vertical-align:middle!important;}
+.uplod-phto .icon:before{font-size:35px}
+
+
+.search-bar-header{
+	padding-top:12px;
+	i{margin-top:4px}
+	i:before{font-size:20px;}
+	label{background:#fff}
+}
+.doctor-list .item{border-bottom:1px solid #ccc!important}
+.doctor-list .item h2{margin-bottom:4px}
+
+/*************************/
+
+
+
+/*******************************/
+
+.video-chat-body{width:100%; height:100%}
+.new-transparent-header{background:rgba(0,0,0,0.3)}
+.video-chat-footer{height:auto!important; background:none !important; box-shadow:none; border:0}
+.video-chat-footer .buttons-holder{width:100%;text-align:center; position:relative; height:auto}
+.video-chat-footer .buttons-holder a{ position:relative!important; top:0; margin:0 5px;}
+.video-chat-footer .icon:before{padding-right: 2px;padding-left: 2px;font-size: 30px !important;line-height: 50px !important;}
+.video-chat-footer a.button-assertive{background:$accent_color;}
+.small-video-holder{width:80px; height:95px; position:fixed; bottom:12%; right:3%}
+.small-video-holder img{width:100%; height:100%;}
+.soumen{margin:0}
+

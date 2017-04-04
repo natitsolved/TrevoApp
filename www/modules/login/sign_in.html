@@ -1,0 +1,32 @@
+<ion-view view-title="Intro">
+    <ion-content class="login-wrapper padding slide_height">
+        
+       
+        <div class="animated slideInRight">
+            <div class="login_holder">
+                <img ng-src="img/login-logo.png" alt="" class="login_logo" />
+                <form name="form" ng-submit="login(user)" class="list padding-right padding-left">
+                    <label class="item item-input-inset  log_in_email" ng-class="{ 'red' :form.userEmail.$error.required,'otherwise':!form.userEmail.$error.required}">
+                        <i class="icon ion-ios-person-outline placeholder-icon"></i>
+                        <input type="email" name="userEmail" placeholder="Email" ng-model="user.email" required ng-pattern="emailFormat">
+                    </label>
+                   
+
+                    <label class="item item-input-inset  log_in_paswrd" ng-class="{'red' :form.password.$error.required ,'otherwise':!form.password.$error.required}">
+                        <i class="icon ion-ios-unlocked-outline placeholder-icon"></i>
+                        <input type="password" name="password" placeholder="Password" ng-model="user.pwd" required ng-minlength="6">
+
+                    </label>
+                    
+                    <p class="need_account" style=""> <a href="javascript:void(0)" ng-click="goToForgotPass()" >Forgot Password?</a></p>
+
+                    <button type="submit" class="button button-full button-assertive log_in_btn" ng-disabled="form.$invalid">Sign In</button>
+                </form>
+                <p class="need_account" style="" ng-click="goToSignUp()">Need an Account ? <span>Sign Up</span></p>
+
+            </div>
+        </div>
+    </ion-content>
+    
+</ion-view>
+

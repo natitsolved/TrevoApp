@@ -1,0 +1,90 @@
+<ion-view view-title="Intro">
+<div class="row bar bar-header">
+        <div class="col col-10">
+            <i style="font-size: 28px; color:#fff;" class="ion-android-arrow-back" ng-click="goToWelcome()">
+            </i>
+        </div>
+        <div class="col col-70">
+            <h3 class="cart_heading">Sign Up</h3>
+			 
+
+        </div>
+        <div class="col col-20">
+            <a href="javascript:void(0);" ng-click="gotoNextSignUp(user)" class="next_anchor" >NEXT</a>
+        </div>
+    </div>
+  <ion-content class="padding-top sign_in_back" >
+	<div class="row">
+		<div class="product_card search_result">
+		
+		  	<div class="row">
+		  	<div class="col" style="text-align:center"></div>
+		  		<div class="col" style="text-align:center">
+		  			<a href="javascript:void(0);"  ng-click="facebookSignIn()"><img style="width: 45px;margin: 0 auto;" src="img/face.png" /></a>
+		  		</div>
+		  		<div class="col" style="text-align:center">
+		  			<img style="width: 45px;margin: 0 auto;" src="img/twit.png" />
+		  		</div>
+		  		<div class="col" style="text-align:center">
+                  <a href="javascript:void(0);" ng-click="googleSignIn()"><img style="width: 45px;margin: 0 auto;" src="img/gplus.png" /></a>
+		  		</div>	<div class="col" style="text-align:center"></div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="col" style="text-align: center">
+		  			<img src="img/or.png" style="margin:0 auto; width: 100%;" />
+		  		</div>
+		  	</div>
+
+		  	<div class="list padding-right padding-left">
+			  <p class="login_p" style="text-align: left">Sign up with email</p>
+             
+                  <label class="item item-input-inset  log_in_email">
+                      <i class="icon ion-ios-email-outline placeholder-icon"></i>
+                      <input type="email" name="userEmail" ng-model="user.email" placeholder="Email" required ng-pattern="emailFormat">
+                  </label>
+
+                  <label class="item item-input-inset  log_in_paswrd">
+                      <i class="icon ion-ios-unlocked-outline placeholder-icon"></i>
+                      <input type="password" name="userPassword" ng-model="user.pwd" placeholder="Password" required ng-minlength="6">
+                  </label>
+
+                  <label class="item item-input-inset  log_in_email">
+                      <i class="icon ion-ios-person-outline placeholder-icon"></i>
+                      <input type="text" placeholder="Name" name="userName" ng-model="user.name">
+                  </label>
+
+                  <p class="spanDate">
+                      <span class="spanDate1"><i class="icon ion-android-calendar placeholder-icon"></i></span>
+                      <datepicker style="width: 90%; float: initial;" date-format="yyyy-MM-dd">
+                          <input ng-model="user.dob" type="text" name="dateofBirth" />
+                      </datepicker>
+                  </p>
+                  <div class="row" style="margin-top: -5px;">
+
+                      <div class="part_male" style="width: 30%;float: left">
+                          <label class="control control--radio" style="color:#aaaaaa;font-size: 14px">
+                              <i style="color: #aaaaaa; font-size:22px;" class="icon ion-man"></i> Male
+                              <input name="radio" checked="checked" value="U" type="radio" ng-model="user.user_type">
+                              <div class="control__indicator"></div>
+                          </label>
+
+                      </div>
+                      <div class="part_female" style="width: 35%;float: left">
+                          <label class="control control--radio" style="color:#aaaaaa;font-size: 14px">
+                              <i style="color: #aaaaaa; font-size:22px;" class="icon ion-woman"></i> Female
+                              <input name="radio" checked="checked" value="S" type="radio" ng-model="user.user_type">
+                              <div class="control__indicator"></div>
+                          </label>
+                      </div>
+
+                  </div>
+                 
+
+</div>
+		  		  
+		  </div>	
+	</div>
+	
+  </ion-content>
+  
+</ion-view>

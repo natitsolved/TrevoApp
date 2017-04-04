@@ -1,0 +1,216 @@
+<ion-view view-title="Intro" cache-view="false">
+<div class="row bar bar-header" style="height:58px">
+        <div class="col col-10">
+            <i style="font-size: 28px; color:#fff;" class="ion-android-arrow-back" ng-click="takeToUserListing()"></i>
+        </div>
+        <div class="col col-70">
+            <img src="{{recieverImage}}" style="width:45px; float:left; border-radius:50%;margin-top: -3px; margin-right: 10px;height:45px;" /> 
+            <h3 class="cart_heading">  {{recieverName}}</h3>
+			 
+
+        </div>
+    <div class="col col-10">
+        <!--<i class="ion-camera" ng-click="openCamera()"></i>-->
+        <span style="font-size:25px!important; color:#fff;" class="icon-right ion-grid" ng-click="showsearch()"></span>
+    </div>
+    <!--<div class="col col-10">
+        <i class="ion-paperclip" ng-click="chooseFile()"></i>
+    </div>-->
+        <!--<div class="col col-20">
+            <a class="next_anchor" href="#">NEXT</a>
+        </div>-->
+    </div>
+    <div class="list list-inset searchclass" ng-class="{'active':isdiplay}" style="width: 100%; margin: 0 auto; height: auto; padding:5px 10px!important;">
+
+        <span class="item item-input" style="width: 33%; float:left; text-align:center;">
+            <img src="img/camera.png" ng-click="openCamera()" style="width:45px; margin: 0 auto;">
+        </span>
+        <span class="item item-input" style="width: 33%; float:left; text-align:center;">
+            <img src="img/video.png" style="width:45px; margin: 0 auto;" name=file ngf-select="uploadFile()" ng-model="files">
+        </span>
+        <span class="item item-input" style="width: 33%; float:left; text-align:center;">
+            <img src="img/attachments.png" ng-click="chooseFile()" style="width:45px; margin: 0 auto;">
+        </span>
+
+
+    </div>
+    <!--<div class="list list-inset searchclass" ng-class="{'active':isdiplay}">
+        <span class="item item-input">
+            <i class="ion-camera" ng-click="openCamera()" style="font-size:40px;margin-left:10px;margin-top:25px;"></i>
+            <i class="ion-videocamera" name=file ngf-select="uploadFile()" ng-model="files" style="font-size:40px;margin-left:120px;margin-top:25px;"></i>
+            <i class="ion-paperclip" ng-click="chooseFile()" style="font-size:40px;margin-left:120px;margin-top:25px;"></i>
+        </span>
+        
+    </div>-->
+  <ion-content class="padding-top sign_in_back"  >
+	
+  <div>
+  <div class="list chat_only" >
+ <div>
+ 
+    
+		    	
+	<div ng-repeat="msg in ChatList track by $index" >
+
+        <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
+            <div class="avatar-image"><img src="{{recieverImage}}"></div>
+            <div class="msg" ng-show="msg.message !==undefined">
+                {{msg.message}}
+
+            </div>
+            <img ng-show="msg.imgURI !== undefined" ng-src="{{msg.imgURI}}" style="width:250px; height:200px;float:left">
+
+        </div>
+        <div class="sender-1 chat_row" ng-show="msg.IsSender==1">
+
+            <div class="msg" on-long-press="itemOnLongPress()" on-touch-end="itemOnTouchEnd()" ng-show="msg.message !==undefined">
+                {{msg.message}}
+            </div>
+            <img ng-show="msg.imgURI !== undefined" ng-src="{{msg.imgURI}}" style="width:250px; height:200px;float:right;">
+
+
+        </div>
+    </div>	    	
+ 
+     <div id="recieverVideo" style="width:152px;float:left;"></div>
+		    	
+ 
+     <div id="senderVideo"  style="width:152px;float:right">
+     </div>
+    
+     <!--<video id="video" controls style="width:152px"></video>--> 
+         <!--<div class="sender-2 chat_row" >
+                          <div class="avatar-image"><img src="../img/profile.jpg"></div>
+                          <div class="msg">
+                               hello
+
+                          </div>
+                      </div>-->
+         <!--<div class="sender-1 chat_row">
+                           <div class="msg">
+                               fdgdgdfgd
+                           </div>
+                       </div>
+
+                       <div class="sender-2 chat_row" >
+                           <div class="avatar-image"><img src="../img/profile.jpg"></div>
+                           <div class="msg">
+                                hello
+                           </div>
+                       </div>
+
+        <div class="sender-1 chat_row">
+                           <div class="msg">
+                               fdgdgdfgd
+                           </div>
+                       </div>
+                       <div class="sender-2 chat_row" >
+                           <div class="avatar-image"><img src="../img/profile.jpg"></div>
+                           <div class="msg">
+                                hello
+                           </div>
+                           <div class="modal_part">
+                               <div class="onclick_part" style="position: relative; width:100%; float:left">
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   More...
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <span class="arrow-bottom"></span>
+                           </div>
+                           </div>
+                       </div>
+
+        <div class="sender-1 chat_row">
+
+                           <div class="msg">
+                               fdgdgdfgd
+                           </div>
+                       </div>
+                       <div class="sender-2 chat_row" >
+                           <div class="avatar-image"><img src="../img/profile.jpg"></div>
+                           <div class="msg">
+                                hello
+                           </div>
+                       </div>
+        <div class="sender-1 chat_row" style="position: relative;">
+
+                           <div class="msg">
+                               fdgdgdfgd
+                           </div>
+                             <div class="modal_part">
+                               <div class="onclick_part" style="position: relative; width:100%; float:left">
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts">
+                                   More...
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <div class="parts_two">
+                                   <i class="ion-ios-star-outline"></i>
+                               </div>
+                               <span class="arrow-bottom"></span>
+                           </div>
+                           </div>
+                       </div>-->
+</div>
+ </div>
+ 
+ </div>
+      
+  </ion-content>
+   
+    <div class="writing_chat">
+       
+        <div class="form-group">
+        	<div class="row">
+            	<div class="col col-70">
+                	<span class="item item-input">  
+                        <textarea placeholder="Type Message" required="" ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px"></textarea>
+                        <span ng-click="takeToTranslatePage(data)" style="margin-right:4px; margin-top: 5px;"> <img src="img/translate.png" style="width:32px;" /> </span>
+                    </span>  
+                </div>
+                <div class="col col-20">
+                	<button class="button button-small button-calm btnn_chat" style="height:45px;" type="button" ng-click="send_chat(data)"> Send</button>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+ 
+	
+	
+	
+	
+</ion-view>
+
+
+

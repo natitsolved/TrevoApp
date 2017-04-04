@@ -1,0 +1,38 @@
+<ion-view view-title="UserList">
+    <div class="row bar bar-header">
+        <div class="col col-70">
+            <h3 class="cart_heading">User Listing</h3>
+
+        </div>
+
+    </div>
+
+    <ion-content class="padding-top sign_in_back">
+      
+      
+		 <ion-list class="list_user_list" ng-repeat="user in userList track by $index">
+		  <ion-item ng-click="goToChat(user.User_Id,user.Name,user.ImagePath)">
+		    <div class="left_image_list">
+		      <img src="{{user.ImagePath}}">
+		      <div class="country_image">
+		      		<img src="{{user.Icon_Path}}" style="width: 20px; height:20px;">
+		      	</div>
+		    </div>
+		    <div class="right_list_text">
+			    <div class="list_user_list-name_date">
+			    <h2>{{user.Name}}</h2>
+			    <span>12.05AM</span>
+			    </div>
+			    <div class="remaining_list_info">
+			    <!--<h3>Don't Know What To Do!</h3>
+			    <p>I've had a pretty messed up day. If we just...</p>-->
+                    <p>{{user.NativeAbbrv}} <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> {{user.LearningAbbrv}}</p>
+			    </div>
+		    </div>
+		  </ion-item>
+		</ion-list>
+		
+		
+  
+    </ion-content>
+</ion-view>

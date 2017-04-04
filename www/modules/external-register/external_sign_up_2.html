@@ -1,0 +1,120 @@
+<ion-view view-title="Intro">
+<div class="row bar bar-header">
+        <div class="col col-10">
+            <i style="font-size: 28px; color:#fff;" class="ion-android-arrow-back" ng-click="goFirstSignUp()"></i>
+        </div>
+        <div class="col col-70">
+            <h3 class="cart_heading">Sign Up</h3>
+        </div>
+        <div class="col col-20">
+            <a class="next_anchor" href="javascript:void(0);" ng-click="signup(udl)">NEXT</a>
+        </div>
+    </div>
+  <ion-content class="padding-top sign_in_back" >
+	
+	<div class="row">
+		<div class="product_card search_result" style="width: 100%;">
+		  <div class="list padding-right padding-left">
+	        	
+          <label class="item item-input item-select" style="border-radius: 10px;">
+              <div class="input-label" style="padding-left:6px;">
+                  <span ng-show="isShowText">
+                      I am from
+                  </span>
+                  <span ng-show="isShowImg">
+                      <img src="{{imgSrc}}" style="width:22px;" />
+                  </span>
+              </div>
+
+              <select ng-model="udl.country" style="border-radius: 10px;" ng-change="getTheFlagIcon()">
+                  <option value="1">India</option>
+                  <option value="2" >Australia</option>
+                  <option value="3">France</option>
+              </select>
+          </label>
+          
+				
+          <label class="item item-input item-select" style="border-radius: 10px;">
+              <div class="input-label" style="padding-left: 6px;">
+                  <span ng-show="isShowNatText">
+                      Native Language
+                  </span>
+                  <span ng-show="isShowAbbrv">
+                      {{NatAbbrv}}
+                  </span>
+              </div>
+
+              <select ng-model="udl.nativeLanguage" style="border-radius: 10px;" ng-change="getTheAbbreviation()">
+                  <option value="1">Bengali</option>
+                  <option value="2">French</option>
+                  <option value="3">English</option>
+              </select>
+          </label> 
+          
+          
+          <label class="item item-input item-select" style="border-radius: 10px;">
+              <div class="input-label" style="padding-left: 6px;">
+                 <span ng-show="isShowLearningText">
+                     I am learning
+                 </span>
+                  <span ng-show="isShowLearningAbbrev">
+                      {{LearningAbbrev}}
+                  </span>
+              </div>
+
+              <select ng-model="udl.learningLanguage" style="border-radius: 10px;" ng-change="getTheLearningAbbreviation()">
+                  <option value="1">English</option>
+                  <option value="2" >Bengali</option>
+                  <option value="3">French</option>
+              </select>
+          </label>
+                <!--<select ng-options="country as country.name for country in countryList track by (country.id) || user.country" style="width: 100%; color: black; border: 1px solid #e6e6e6;     border-radius: 5px; background: #fff;height:42px; margin:10px 0; padding: 6px; outline: none;" ng-model="user.countryList" ng-change="loadStates(user.countryList.id)" disabled>
+                    <option value="1">I am learning</option>
+                    <option value="2">English</option>
+                    <option value="3">Bengali</option>
+                    <option value="4">French</option>
+                </select>-->
+            
+         
+          
+          
+          <p class="warning_p" style="margin-top: 10px;">You cannot change your nationality and mother tongue after selecting it. Please provide authentic personal information.</p>
+          
+          
+				
+          <label class="item item-input item-select" style="border-radius: 10px;">
+              <div class="input-label" style="padding-left: 6px;">
+                  Language Level
+              </div>
+
+              <select ng-model="udl.languagelevel" style="border-radius: 10px;">
+                  <option value="1">Beginer</option>
+                  <option value="2">Intermediate</option>
+                  <option value="3">Professional</option>
+              </select>
+          </label>
+				
+	     	</div>
+		  	
+		  			  
+		  </div>	
+	</div>
+	
+
+  </ion-content>
+ 
+	<style>
+	.ion-android-calendar {font-size: 20px;}
+	h3.cart_heading {color: #fff;font-size: 20px;margin-left: 5px;margin-top: 0px;}
+	.cart_part{padding-bottom: 3px; border-bottom: 1px solid #e8e7e7;}
+	.price_p_part {font-weight: 600}
+	.price_currency {color: #2bbb9d;}
+	.card_details_body.category_page_list .head_part_velo {padding-bottom: 3px; border-bottom: 1px solid #e8e7e7; }
+	.card_details_body.category_page_list .head_part_velo h3 {width: 90%; float:right;}
+	.food_type {width:20px; float: left; text-align: center;}
+	.food_type img {width: 16px; margin: 0 auto;padding-top: 7px;}
+		.card_details_body.category_page_list {width:100%!important; float:left!important; }
+		p.head_loc {padding-bottom: 6px;}
+		.time.rate_home {line-height: 19px!important;}
+	</style>
+</ion-view>

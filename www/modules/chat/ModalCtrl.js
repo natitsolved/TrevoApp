@@ -59,7 +59,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
         var sourceEn = "EN";
         var target = changeLanguage;
         var text = $scope.toTranslateText;
-       // $scope.message = "dhfgshjdf";
+        //$scope.message = "dhfgshjdf";
         var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + target + '&q=' + text;
         $http({
             url: urlToHit,

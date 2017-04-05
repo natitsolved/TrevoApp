@@ -35,8 +35,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
     }
     $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     console.log($scope.userInfo);
-    var socket = io('http://166.62.40.135:8095', { query: "userId=" + $scope.userInfo.userId });
-    console.log(socket);
+    
 
    
     $scope.isdiplay = false;
@@ -85,7 +84,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         data = { senderId: $scope.userInfo.userId, recieverId: reciverId, message: $scope.data, image: undefined, video: undefined };
         data = JSON.stringify(data);
         console.log(data);
-        socket.emit('chat_send', data);
+        $rootScope.socket.emit('chat_send', data);
         var pushData = { message: $scope.data, IsSender: 1, imgURI: undefined, videoURI: undefined };
 
         $scope.SenderChatList.push(pushData);
@@ -103,7 +102,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         });
     }
 
-    socket.on('chat_rcv', function (data) {
+    $rootScope.socket.on('chat_rcv', function (data) {
         console.log("chat recieved" + data);
         console.log($scope.userInfo);
         data = JSON.parse(data);
@@ -214,7 +213,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                         data = { senderId: $scope.userInfo.userId, recieverId: reciverId, message: undefined, image: url, video: undefined };
                         data = JSON.stringify(data);
                         console.log(data);
-                        socket.emit('chat_send', data);
+                        $rootScope.socket.emit('chat_send', data);
                         $ionicLoading.hide();
                     }, function (err) {
                         $ionicLoading.hide();
@@ -316,7 +315,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                         data = { senderId: $scope.userInfo.userId, recieverId: reciverId, message: undefined, image: url, video: undefined };
                         data = JSON.stringify(data);
                         console.log(data);
-                        socket.emit('chat_send', data);
+                        $rootScope.socket.emit('chat_send', data);
                         $ionicLoading.hide();
                     }, function (err) {
                         $ionicLoading.hide();
@@ -443,7 +442,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                 data = { senderId: $scope.userInfo.userId, recieverId: reciverId, message: undefined, image: undefined, video: url };
                 data = JSON.stringify(data);
                 console.log(data);
-                socket.emit('chat_send', data);
+                $rootScope.socket.emit('chat_send', data);
                 $ionicLoading.hide();
             }, function (err) {
                 $ionicLoading.hide();

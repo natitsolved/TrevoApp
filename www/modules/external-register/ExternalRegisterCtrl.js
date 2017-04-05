@@ -58,7 +58,7 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
         
         if ($scope.user.email && $scope.user.pwd && $scope.user.name && $scope.user.dob && $scope.user.user_type)
         {
-            var firstencodedString = JSON.stringify({ Email: $scope.user.email, Password: $scope.user.pwd, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
+            var firstencodedString = JSON.stringify({ Email: $scope.user.email, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
             $window.localStorage["firstencodedString"] = JSON.stringify(firstencodedString);
             $state.go('signupnext');
         }
@@ -77,7 +77,7 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
         $timeout(countUp, 500);
         
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {
-            var secondencodedString = JSON.stringify({ Email: $scope.user.email, Password: $scope.user.pwd, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
+            var secondencodedString = JSON.stringify({ Email: $scope.user.email, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
             $window.localStorage["firstencodedString"] = JSON.stringify(firstencodedString);
             $state.go('signupnext', {}, { reload: true });
         }

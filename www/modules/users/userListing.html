@@ -4,12 +4,17 @@
             <h3 class="cart_heading">User Listing</h3>
 
         </div>
+        <div class="col col-10" style="float:right;">
+            <i class="ion-log-out" ng-click="logOut()"></i>
+        </div>
 
     </div>
 
     <ion-content class="padding-top sign_in_back">
       
-      
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
 		 <ion-list class="list_user_list" ng-repeat="user in userList track by $index">
 		  <ion-item ng-click="goToChat(user.User_Id,user.Name,user.ImagePath)">
 		    <div class="left_image_list">
@@ -22,6 +27,7 @@
 			    <div class="list_user_list-name_date">
 			    <h2>{{user.Name}}</h2>
 			    <span>12.05AM</span>
+                 <span ng-show="user.IsOnline"><img src="img/green_dot.jpg"  style="width:12px;"/></span>
 			    </div>
 			    <div class="remaining_list_info">
 			    <!--<h3>Don't Know What To Do!</h3>

@@ -9,9 +9,11 @@ app.constant('JS_REQUIRES', {
         'login': ['modules/login/SigninCtrl.js', 'js/services/authService.js'],
         'signup': ['modules/register/RegisterCtrl.js', 'js/services/authService.js', 'modules/external-register/ExternalRegisterCtrl.js'],
         'chat': ['modules/chat/ChatCtrl.js', 'modules/chat/ModalCtrl.js'],
+        'chatbot': ['modules/chatbot/ChatbotCtrl.js'],
         'usersListing': ['modules/users/UserCtrl.js'],
         'forgotPass': ['modules/forgot-password/ForgotPswdCtrl.js'],
         'welcome': ['modules/app/AppCtrl.js'],
+        
         //*** Services
 
     },

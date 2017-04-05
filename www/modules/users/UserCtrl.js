@@ -36,5 +36,11 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $window.localStorage["userDetails"] = JSON.stringify(userDetails);
         $state.go('chat', {}, { reload: true });
     }
+
+    $scope.goToChatbot = function () {
+        //var userDetails = { userId: userId, name: name, imagePath, imagePath };
+        //$window.localStorage["userDetails"] = JSON.stringify(userDetails);
+        $state.go('chatbot', {}, { reload: true });
+    }
    
 });

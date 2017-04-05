@@ -51,6 +51,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 
      })
 
+        .state('chatbot', {
+            url: '/chatbot',
+            templateUrl: 'modules/chatbot/chatbot.html',
+            resolve: loadSequence('chatbot'),
+            controller: 'ChatbotCtrl'
+
+        })
+
     .state('chatTranslate', {
         url: '/translate',
         templateUrl: 'modules/chat/modal.html',

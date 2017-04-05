@@ -3,6 +3,7 @@ angular.module('starter')
     var LOCAL_TOKEN_KEY = 'yourTokenKey';
     var username = '';
     var userInfo = '';
+    var robchatInfo='';
     var isAuthenticated = false;
     var role = '';
     var authToken;
@@ -174,6 +175,37 @@ angular.module('starter')
         });
     };
 
+    var sendMsg = function (data) {
+        return $q(function(resolve,reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            var obj =JSON.stringify( { message: data });
+            $http({
+                method: 'POST',
+                url: 'http://138.68.12.41:5001/Chatbot',
+                data: obj,
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                if (response.Ack == '1') {
+                    robchatInfo = {
+                        messagereturn:response.data
+                    };
+                    $ionicLoading.hide();
+                    resolve(response.data);
+                } else {
+                    $ionicLoading.hide();
+                    reject(response);
+                }
+                //console.log(response); 
+            }).error(function (data) {
+                $ionicLoading.hide();
+                reject(data.Message);
+                //console.log('failed...'); 
+            });
+        });
+    };
+
     var externalRegister = function (data) {
         return $q(function (resolve, reject) {
             $ionicLoading.show({
@@ -265,6 +297,7 @@ angular.module('starter')
         isAuthorized: isAuthorized,
         getUserInfo: getUserInfo,
         register: register,
+        sendMsg:sendMsg,
         sendForgotpassword: sendForgotpassword,
         externalLogin: externalLogin,
         externalRegister:externalRegister,

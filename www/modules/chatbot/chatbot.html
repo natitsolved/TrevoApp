@@ -1,0 +1,71 @@
+<ion-view view-title="Intro" cache-view="false">
+<div class="row bar bar-header" style="height:58px">
+        <div class="col col-10">
+            <i style="font-size: 28px; color:#fff;" class="ion-android-arrow-back" ng-click="takebotToUserListing()"></i>
+        </div>
+        <div class="col col-70">
+            <img src="img/chat_bot_icon.jpg" style="width:45px; float:left; border-radius:50%;margin-top: -3px; margin-right: 10px;height:45px;" />
+                <h3 class="cart_heading">Chat Bott</h3>
+
+</div>
+    </div>
+    
+  <ion-content class="padding-top sign_in_back"  >
+	
+  <div>
+  <div class="list chat_only" >
+ <div>
+ 
+    
+		    	
+	<div ng-repeat="msg in ChatList track by $index" >
+
+        <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
+            <div class="avatar-image"><img src="img/chat_bot_icon.jpg"></div>
+            <div class="msg" ng-show="msg.message !==undefined">
+                {{msg.message}}
+
+            </div>
+           
+
+        </div>
+        <div class="sender-1 chat_row" ng-show="msg.IsSender==1">
+
+            <div class="msg"  ng-show="msg.message !==undefined">
+                {{msg.message}}
+            </div>
+            
+
+
+        </div>
+    </div>	    	
+  
+</div>
+ </div>
+ 
+ </div>
+      
+  </ion-content>
+   
+    <div class="writing_chat">
+       
+        <div class="form-group">
+        	<div class="row">
+            	<div class="col col-70">
+                	<span class="item item-input">  
+                        <textarea placeholder="Type Message" required="" ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px"></textarea>
+                        <!--<span ng-click="takeToTranslatePage(data)" style="margin-right:4px; margin-top: 5px;"> <img src="img/translate.png" style="width:32px;" /> </span>-->
+                    </span>  
+                </div>
+                <div class="col col-20">
+                	<button class="button button-small button-calm btnn_chat" style="height:45px;" type="button" ng-click="send_chat(data)"> Send</button>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+ 
+</ion-view>
+
+
+

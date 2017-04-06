@@ -785,3 +785,6 @@ ion-list.list_user_list.disable-user-behavior {
     .remaining_list_info p {
         font-size: 12px;
     }
+
+    .tab-item.foot .icon { height: 25px; font-size: 25px; margin-top:5px;}
+    	.tab-item.foot.active { color: #60cdf6;}

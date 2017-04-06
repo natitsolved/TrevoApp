@@ -108,38 +108,89 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         data = JSON.parse(data);
         if (data.recieverId == $scope.userInfo.userId)
         {
-            var query = "INSERT INTO ChatTable (senderId, reciverId,message,IsSender,imagePath,videoPath) VALUES (?,?,?,?,?,?)";
-            $cordovaSQLite.execute($scope.db, query, [data.senderId, $scope.userInfo.userId, data.message, 0, data.image, data.video]).then(function (res) {
-                var message = "INSERT ID -> " + res.insertId;
-                console.log(message);
-                var url = data.video;
-                var pushData = { message: data.message, IsSender: 0, imgURI: data.image, videoURI: data.video };
-                $scope.RecieverChatList.push(pushData);
-                $scope.ChatList.push(pushData);
-                console.log($scope.RecieverChatList);
-                $scope.data = '';
-                if (url != undefined) {
-                    var recieverVideo = document.getElementById('recieverVideo');
-                    var video = document.createElement('video');
-                    video.src = url;
-                    video.autoPlay = true;
-                    video.setAttribute("width", "152px");
-                    video.controls = "controls";
-                    recieverVideo.appendChild(video);
-                    setTimeout(function () {
-                        video.pause();
+            if ($window.localStorage["imageStore"]) {
+                if (data.image == $window.localStorage["imageStore"])
+                { }
+                else
+                {
+                    var query = "INSERT INTO ChatTable (senderId, reciverId,message,IsSender,imagePath,videoPath) VALUES (?,?,?,?,?,?)";
+                    $cordovaSQLite.execute($scope.db, query, [data.senderId, $scope.userInfo.userId, data.message, 0, data.image, data.video]).then(function (res) {
+                        var message = "INSERT ID -> " + res.insertId;
+                        console.log(message);
+                        var url = data.video;
+                        if (data.image != undefined) {
+                            $window.localStorage["imageStore"] = data.image;
+                        }
+                        var pushData = { message: data.message, IsSender: 0, imgURI: data.image, videoURI: data.video };
+                        $scope.RecieverChatList.push(pushData);
+                        $scope.ChatList.push(pushData);
+                        console.log($scope.RecieverChatList);
+                        $scope.data = '';
+                        if (url != undefined) {
+                            var recieverVideo = document.getElementById('recieverVideo');
+                            var video = document.createElement('video');
+                            video.src = url;
+                            video.autoPlay = true;
+                            video.setAttribute("width", "152px");
+                            video.controls = "controls";
+                            recieverVideo.appendChild(video);
+                            setTimeout(function () {
+                                video.pause();
 
-                        video.src = url;
+                                video.src = url;
 
-                        video.load();
-                        video.play();
-                    }, 3000);
+                                video.load();
+                                video.play();
+                            }, 3000);
+                        }
+
+                    }, function (err) {
+                        console.error(err);
+                        alert(err);
+                    });
                 }
+            }
+            else {
+                if (data.image==undefined || (data.image !=$window.localStorage["imageStore"]))
+                {
+                    var query = "INSERT INTO ChatTable (senderId, reciverId,message,IsSender,imagePath,videoPath) VALUES (?,?,?,?,?,?)";
+                    $cordovaSQLite.execute($scope.db, query, [data.senderId, $scope.userInfo.userId, data.message, 0, data.image, data.video]).then(function (res) {
+                        var message = "INSERT ID -> " + res.insertId;
+                        console.log(message);
+                        var url = data.video;
+                        if (data.image != undefined) {
+                            $window.localStorage["imageStore"] = data.image;
+                        }
+                        var pushData = { message: data.message, IsSender: 0, imgURI: data.image, videoURI: data.video };
+                        $scope.RecieverChatList.push(pushData);
+                        $scope.ChatList.push(pushData);
+                        console.log($scope.RecieverChatList);
+                        $scope.data = '';
+                        if (url != undefined) {
+                            var recieverVideo = document.getElementById('recieverVideo');
+                            var video = document.createElement('video');
+                            video.src = url;
+                            video.autoPlay = true;
+                            video.setAttribute("width", "152px");
+                            video.controls = "controls";
+                            recieverVideo.appendChild(video);
+                            setTimeout(function () {
+                                video.pause();
 
-            }, function (err) {
-                console.error(err);
-                alert(err);
-            });
+                                video.src = url;
+
+                                video.load();
+                                video.play();
+                            }, 3000);
+                        }
+
+                    }, function (err) {
+                        console.error(err);
+                        alert(err);
+                    });
+                }
+            }
+            
         }
         
     });

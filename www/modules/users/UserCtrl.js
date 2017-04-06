@@ -40,10 +40,12 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         });
     };
    
-
-    $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
-    $rootScope.socket = io('http://166.62.40.135:8095', { query: "userId=" + $scope.userInfo.userId });
-    console.log($rootScope.socket);
+    if ($window.localStorage["userInfo"]) {
+        $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
+        $rootScope.socket = io('http://166.62.40.135:8095', { query: "userId=" + $scope.userInfo.userId });
+        console.log($rootScope.socket);
+    }
+    
     $scope.getUserListing();
     $scope.goToChat = function (userId,name,imagePath)
     {

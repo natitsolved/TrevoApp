@@ -13,7 +13,10 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     }
     $scope.getUserListing = function () {
-        $rootScope.socket.emit('get_connected_users');
+        if($rootScope.socket)
+        {
+
+             $rootScope.socket.emit('get_connected_users');
         $rootScope.socket.on('sent_connected_users', function (res) {
             console.log(res);
             res = res.toString();
@@ -38,6 +41,8 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                 });
             });
         });
+        }
+       
     };
    
     if ($window.localStorage["userInfo"]) {

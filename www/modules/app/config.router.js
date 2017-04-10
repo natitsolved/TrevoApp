@@ -89,6 +89,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          resolve: loadSequence('signup', '720kb.datepicker'),
          controller: 'ExternalRegisterCtrl'
      })
+      .state('externalsignupnext', {
+         url: '/externalsignupnext',
+         templateUrl: 'modules/external-register/external_sign_up_2.html',
+         resolve: loadSequence('signup', '720kb.datepicker'),
+         controller: 'ExternalRegisterCtrl'
+     })
 
     ;
 

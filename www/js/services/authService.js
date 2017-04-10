@@ -51,8 +51,8 @@ angular.module('starter')
             $ionicLoading.show({
                 template: 'Loading...'
             });
-            var uuid = $cordovaDevice.getUUID();
-            var encodedString = JSON.stringify({ Email: email, Password: password, DeviceId: uuid });
+            //var uuid = $cordovaDevice.getUUID();
+            var encodedString = JSON.stringify({ Email: email, Password: password, DeviceId: 'DeviceId' });
             $http({
                 method: 'POST',
                 url: $rootScope.serviceurl + "Login",

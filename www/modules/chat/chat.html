@@ -29,17 +29,18 @@
 
                     <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
                         <div class="avatar-image"><img src="{{recieverImage}}"></div>
-                        <div class="msg" ng-show="msg.message !==undefined"  on-hold="alerts($index, msg.message)">
+                        <div class="msg" ng-show="msg.message !==undefined"  ng-click="alerts($index, msg.message)">
                             {{msg.message}}
+                             <div class="bottom-part" id="{{'translatedText_'+$index}}"></div>
 
                         </div>
                         <div class="clearfix"></div>
-                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark"  style="display:none;" id="{{'recvrSpinner_'+$index}}"></ion-spinner></div>
+                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark"  style="display:none;" id="{{'spinner_'+$index}}"></ion-spinner></div>
                         <img ng-show="msg.imgURI !== undefined" ng-src="{{msg.imgURI}}" style="width:250px; height:200px;float:left">
                     </div>
                     <div class="sender-1 chat_row" ng-show="msg.IsSender==1">
 
-                        <div class="msg"  ng-show="msg.message !==undefined" on-hold="alerts($index, msg.message)">
+                        <div class="msg"  ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message)">
                             {{msg.message}}
                             <div class="bottom-part" id="{{'translatedText_'+$index}}"></div>
                         </div>

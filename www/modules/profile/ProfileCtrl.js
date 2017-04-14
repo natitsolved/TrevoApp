@@ -1,4 +1,4 @@
-app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $state, momentService, $window, profileService, $rootScope, $timeout) {
+app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $state, momentService, $window, profileService, $rootScope, $timeout,$ionicLoading) {
 
 
     //ionic.material.ink.displayEffect();
@@ -153,6 +153,9 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
         profileService.getAllHobbies().then(function (data) {
             console.log($scope.userDetails.UserHobbies)
             $rootScope.hobbiesList = data;
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
             $timeout(markUserHobbies, 2000);
         }, function (error) {
             var alertPopup = $ionicPopup.alert({
@@ -208,6 +211,7 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
 
     function markUserHobbies()
     {
+         $ionicLoading.hide();
         if ($scope.userDetails.UserHobbies) {
             for (var i = 0; i < $rootScope.hobbiesList.length; i++) {
                 if ($scope.userDetails.UserHobbies.includes($rootScope.hobbiesList[i].Name)) {

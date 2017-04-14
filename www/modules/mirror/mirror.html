@@ -1,0 +1,50 @@
+<ion-view view-title="Discover" cache-view="false">
+
+ <div class="bar bar-header new-header">
+  <!--<button class="button ion-android-arrow-back"></button>-->
+  <h1 class="title">Discover</h1>
+  <!--<button class="button"><img src="img/chat_bot_icon.png"></button>-->
+</div> 
+  <ion-content class="padding-top sign_in_back">
+      <ion-refresher pulling-text="Pull to refresh..."
+                     on-refresh="doRefresh()">
+      </ion-refresher>
+	<div class="list card card-mirror" ng-repeat="moment in momentsList track by $index">
+	  <div class="item item-avatar">
+	    <img src="{{moment.ImagePath}}">
+	    <div class="country_image">
+      		<img src="{{moment.CountryImagePath}}" style="width: 20px; height:20px;">
+      	</div>
+      	<div class="row">
+		  <div class="col">
+		  	<h2>{{moment.Name}}</h2>
+		  	<p class="ng-binding">{{moment.NativeLangAbbrev}} <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> {{moment.LearningLangAbbrev}}</p>
+		  </div>
+		  <div class="col">
+		  	<b>{{moment.PostingTime}}</b>
+		  </div>
+		</div>
+	  </div>
+		
+	  <div class="item item-body">
+	    <img class="full-image" src="{{moment.UploadedImage}}" ng-show="moment.UploadedImage!=null">
+	    <p>
+	      <!--This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+	      the content is from a card-body consisting of an image and paragraph text. The footer
+	      consists of tabs, icons aligned left, within the card-footer.-->
+            {{moment.Message}}
+	    </p>
+	    <p>
+	      <a href="javascript:void(0)" class="subdued"><i class="ion-heart"></i> 11</a>
+	      <a href="javascript:void(0)" class="subdued" ng-click="takeToAddMomentPage(moment.MomentId)"><i class="ion-ios-chatbubble"></i> 13</a>
+	      <a href="javascript:void(0)" class="subdued"><i class="ion-settings"></i></a>
+	    </p>
+	  </div>
+	</div>
+	
+  </ion-content>
+    <div data-ng-include="'modules/partials/footerMenu.html'"></div>
+</ion-view>
+
+
+

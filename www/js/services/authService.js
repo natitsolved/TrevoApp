@@ -66,7 +66,8 @@ angular.module('starter')
                         userId: response.UserID,
                         emailId: response.Email,
                         name: response.Name,
-                        image: response.ImagePath
+                        image: response.ImagePath,
+                        nativeLang: response.NativeLangugae
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();
@@ -96,13 +97,13 @@ angular.module('starter')
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (res) {
                 console.log(res);
-                if (response.UserID !== '') {
-                    storeUserCredentials(response);
+                if (res.UserID !== '') {
+                   // storeUserCredentials(response);
                     userInfo = {
-                        userId: response.UserID,
-                        emailId: response.Email,
-                        name: response.Name,
-                        image: response.ImagePath
+                        userId: res.UserID,
+                        emailId: res.Email,
+                        name: res.Name,
+                        image: res.ImagePath
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();
@@ -155,9 +156,10 @@ angular.module('starter')
                 if (response.UserId !== '') {
                     //storeUserCredentials(response.email);
                     userInfo = {
-                        accessId: response.UserId,
-                        emailId: response.email,
-                        name: response.Email
+                        userId: response.UserId,
+                        emailId: response.Email,
+                        name: response.Name,
+                        nativeLang: response.NativeLangugae
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();
@@ -224,8 +226,8 @@ angular.module('starter')
                     //storeUserCredentials(response.email);
                     userInfo = {
                         accessId: response.UserId,
-                        emailId: response.email,
-                        name: response.Email
+                        email: response.Email,
+                        name: response.Name
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();

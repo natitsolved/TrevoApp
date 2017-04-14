@@ -56,6 +56,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
     $scope.changeTranslation = function (changeLanguage)
     {
         console.log(changeLanguage);
+        console.log($scope.toTranslateText);
         var sourceEn = "EN";
         var target = changeLanguage;
         var text = $scope.toTranslateText;
@@ -73,4 +74,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
             console.log(error.data.error.message);
         });
     }
+
+
+   
 });

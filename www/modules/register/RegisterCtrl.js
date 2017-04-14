@@ -17,7 +17,7 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     $scope.isShowLearningAbbrev = false;
     $scope.datafirst = {};
     $scope.data = {};
-    $scope.udl = { country: '', nativeLanguage: '', learningLanguage: '', languagelevel: '' };
+    $scope.udl = { country: '1', nativeLanguage: '1', learningLanguage: '1', languagelevel: '1' };
     var uuid = $cordovaDevice.getUUID();
     $scope.signup = function () {
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {
@@ -105,16 +105,29 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
             fbLoginError("Cannot find the authResponse");
             return;
         }
+        else
+        {
+
+            var userId = response.authResponse.userID;
+         authService.externalLogin(userId).then(function (data) {
+             $state.go('userListing', {}, { reload: true });
+         }, function (error) {
+            var obj={externalAuthType:"FB",externalAuthId:userId}
+             $window.localStorage["externalLoginInfo"] =JSON.stringify(obj) ;
+             $state.go('externalsignup', {}, { reload: true });
+             console.log(error);
+         });
+        }
       
         //This method is executed when the user press the "Login with facebook" button
        
     }
     var fbLoginError = function (error) {
         console.log('fbLoginError', error);
-        $ionicLoading.hide();
+        
     };
     $scope.facebookSignIn = function () {
-        alert("hi");
+        
         //console.log('hi');
         facebookConnectPlugin.getLoginStatus(function (success) {
 
@@ -139,13 +152,14 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
          authService.externalLogin(userId).then(function (data) {
              $state.go('userListing', {}, { reload: true });
          }, function (error) {
-             $window.localStorage["externalAuthId"] = userId;
+            var obj={externalAuthType:"GPlus",externalAuthId:userId}
+             $window.localStorage["externalLoginInfo"] =JSON.stringify(obj) ;
              $state.go('externalsignup', {}, { reload: true });
              console.log(error);
          });
      },
      function (msg) {
-         alert('error: ' + msg);
+         console.log(msg);
      }
  );
     };

@@ -7,65 +7,46 @@
             <h3 class="cart_heading">Translate</h3>
 
         </div>
-       
+
     </div>
 
     <ion-content class="padding-top sign_in_back">
-        <!--{{message}}-->
         <div class="translate_page" style="background: #fff; width: 98%; margin: 0 auto; padding: 10px 8px;">
 
             <ion-card>
                 <ion-card-header>
                     <div class="row" style="border-bottom: 1px solid #e6e6e6">
                         <div class="col" style="text-align: center">
-                            <!--<p class="translate_head_p" style="margin-bottom:0;">English <i style="margin-left:10px;" class="ion-ios-arrow-down"></i></p>-->
-                           
-
-                                <select ng-model="nativeLanguage" style="background:#fff; border:none; padding:0 5px; " >
-                                    <option value="EN">English</option>
-                                    <option value="ES">Spanish</option>
-                                    <option value="FR">French</option>
-                                    <option value="DE">German</option>
-                                    <option value="PT">Portugese</option>
-                                    <option value="IT">Italian</option>
-                                </select>
+                            <select ng-model="nativeLanguage" style="background:#fff; border:none; padding:0 5px; ">
+                                <option value="EN">English</option>
+                                <option value="ES">Spanish</option>
+                                <option value="FR">French</option>
+                                <option value="DE">German</option>
+                                <option value="PT">Portugese</option>
+                                <option value="IT">Italian</option>
+                            </select>
 
                         </div>
                         <div class="col" style="text-align: center">
                             <i style="font-size: 18px; color: #b3b3b3;" class="ion-arrow-swap"></i>
                         </div>
                         <div class="col" style="text-align: center">
-                            <!--<p class="translate_head_p" style="margin-bottom:0;">English <i style="margin-left:10px;" class="ion-ios-arrow-down"></i></p>-->
-                            
-
-                                <select ng-model="changeLanguage" style="background:#fff; border:none; padding:0 5px; " ng-change="changeTranslation(changeLanguage)" >
-                                    <option value="EN">English</option>
-                                    <option value="ES">Spanish</option>
-                                    <option value="FR">French</option>
-                                    <option value="DE">German</option>
-                                    <option value="PT">Portugese</option>
-                                    <option value="IT">Italian</option>
-                                </select>
+                            <select ng-model="changeLanguage" style="background:#fff; border:none; padding:0 5px; " ng-change="changeTranslation(changeLanguage)">
+                                <option value="EN">English</option>
+                                <option value="ES">Spanish</option>
+                                <option value="FR">French</option>
+                                <option value="DE">German</option>
+                                <option value="PT">Portugese</option>
+                                <option value="IT">Italian</option>
+                            </select>
                         </div>
                     </div>
                 </ion-card-header>
                 <ion-card-content>
                     <label class="item item-input text" style="margin-top:10px;">
-                        <textarea placeholder="Enter your text..." rows="4" name="description" ng-model="toTranslateText"></textarea>
+                        <textarea placeholder="Enter your text..." rows="4" name="description" ng-model="toTranslateText" ></textarea>
                     </label>
                     <div class="row">
-                        <!--<div class="col" style="text-align: right">
-                            <i class="ion-android-send"></i> 
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-android-volume-up" style="font-size: 22px;"></i>
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-android-star-outline" style="font-size: 22px;"></i>
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-ios-copy-outline" style="font-size: 22px;"></i>
-                        </div>-->
                         <div class="col" style="text-align: right">
                             <i class="ion-android-send" style="font-size: 22px;" ng-click="SendChat(message)"></i>
                         </div>
@@ -80,25 +61,9 @@
 
             <ion-card>
                 <ion-card-content>
-                    <label class="item item-input text" style=" margin-top 10px;">
+                    <label class="item item-input text" style="margin-top:10px;">
                         <textarea placeholder="Enter your text..." rows="4" name="description" ng-model="message"></textarea>
                     </label>
-                    <!--<div class="row">
-                        <div class="col" style="text-align: right">
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-android-volume-up" style="font-size: 22px;"></i>
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-android-star-outline" style="font-size: 22px;"></i>
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-ios-copy-outline" style="font-size: 22px;"></i>
-                        </div>
-                        <div class="col" style="text-align: right">
-                            <i class="ion-android-send" style="font-size: 22px;"></i>
-                        </div>
-                    </div>-->
                 </ion-card-content>
             </ion-card>
 

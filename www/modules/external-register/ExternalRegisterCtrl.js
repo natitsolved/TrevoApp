@@ -18,6 +18,10 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
     $scope.datafirst = {};
     $scope.data = {};
     $scope.udl = { country: '', nativeLanguage: '', learningLanguage: '', languagelevel: '' };
+    $scope.udl.country="1";
+    $scope.udl.nativeLanguage="1";
+    $scope.udl.learningLanguage="1";
+    $scope.udl.languagelevel="1";
     var uuid = $cordovaDevice.getUUID();
     $scope.signup = function () {
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {
@@ -26,7 +30,7 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
             var externalLoginInfo = JSON.parse($window.localStorage["externalLoginInfo"]);
             var data = { Email: firstencodedString.Email, Name: firstencodedString.Name, Dob: firstencodedString.Dob, Gender: firstencodedString.Gender, DeviceId: uuid, CountryId: $scope.udl.country, NativeLanguageId: $scope.udl.nativeLanguage, LearningLanguageId: $scope.udl.learningLanguage, LanguageLevelId: $scope.udl.languagelevel, ExternalAuthType: externalLoginInfo.externalAuthType, ExternalAuthUserId: externalLoginInfo.externalAuthId };
             //var firstencodedString = JSON.stringify({ Email: firstencodedString.Emailn, Password: firstencodedString.Passwordn, Name: firstencodedString.Namen, Dob: firstencodedString.Dobn, Gender: firstencodedString.Gendern, DeviceId: "deviceId", CountryId: $scop.udl.country, NativeLanguageId: $scop.udl.nativeLanguage, LearningLanguageId: $scop.udl.learningLanguage, LanguageLevelId: $scop.udl.languagelevel });
-            authService.register(data).then(function (authenticated) {
+            authService.externalRegister(data).then(function (authenticated) {
                 //$scope.setCurrentSession(authService.getUserInfo());
                 //$scope.setCurrentUsername(authenticated);
                 $state.go('userListing', {}, { reload: true });
@@ -50,7 +54,7 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
         $state.go('afterSplash', {}, { reload: true });
     }
     $scope.goFirstSignUp = function () {
-        $state.go('signup');
+        $state.go('externalsignup');
     }
     $scope.user = { email: '', pwd: '', name: '', dob: '', user_type:'' };
     $scope.gotoNextSignUp = function () {
@@ -60,7 +64,7 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
         {
             var firstencodedString = JSON.stringify({ Email: $scope.user.email, Name: $scope.user.name, Dob: $scope.user.dob, Gender: $scope.user.user_type });
             $window.localStorage["firstencodedString"] = JSON.stringify(firstencodedString);
-            $state.go('signupnext');
+            $state.go('externalsignupnext');
         }
         else
         {

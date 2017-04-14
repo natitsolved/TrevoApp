@@ -1,0 +1,70 @@
+<ion-view view-title="Intro" cache-view="false">
+
+ <div class="bar bar-header new-header">
+  <h1 class="title">Profile</h1>
+</div> 
+  <ion-content class="padding-top sign_in_back">
+	<div class="row profile-head">
+	  <div class="col col-75">
+	  	<img src="{{userDetails.ImagePath}}" ng-show="userDetails.ImagePath!=null" name=file ngf-select="takeFromCamera(files)" ng-model="files" ngf-accept="'image/*'">
+	  	<h5 ng-click="takeToUpdatePage('name',userDetails.Name)">{{userDetails.Name}}</h5>
+	  	<p>{{userDetails.Email_Id}}</p>
+	  	<a ng-click="takeToUpdatePage('address',userDetails.Address)" style="cursor:pointer;">{{userDetails.Address}}</a>
+	  	<p class="ng-binding">EN <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> ES</p>
+	  </div>
+	  <div class="col">
+	  	<p class="follow"><span>1</span> Following</p>
+	  	<p class="follow"><span>1</span> Followers</p>
+	  </div>
+	</div>
+	<div class="row profile-options">
+		<div class="col">
+			<a href=""><img src="img/004-translation-and-localization.png"><span>0</span></a>
+			<a href=""><img src="img/003-spell-check-interface-symbol.png"><span>2</span></a>
+			<a href=""><img src="img/002-star.png"><span>1</span></a>
+			<a href=""><img src="img/001-speaker.png"><span>0</span></a>
+            <a href=""><img src="img/001-speaker.png"><span>0</span></a>
+            <a href="" ng-click="addNewDiscover()"><i class="ion-android-add"></i>Add discover</a>
+		</div>
+	</div>
+
+	<div class="row self-intro">
+		<div class="col col-10">
+			<i class="ion-ios-person"></i>
+		</div>
+		<div class="col col-90" ng-click="takeToUpdatePage('selfintro',selfIntro)">
+			<h2>Self Info</h2>
+			<p ng-model="selfIntro">{{selfIntro}}</p>
+		</div>
+	</div>
+	<div class="row self-intro">
+		<div class="col col-10">
+			<i class="ion-information-circled"></i>
+		</div>
+		<div class="col col-90" ng-click="updateHobbies()">
+			<h2>Hobbies</h2>
+			<p >{{userDetails.UserHobbies}}</p>
+		</div>
+	</div>
+	<div class="row self-intro">
+		<div class="col col-10">
+			<i class="ion-gear-a"></i>
+		</div>
+		<div class="col col-90">
+			<h2>Settings</h2>
+			
+		</div>
+	</div>	
+	<div class="row self-intro">
+		<div class="col col-10">
+		<i class="ion-ios-settings-strong"></i></div>
+		<div class="col col-90">
+			<h2>Moments</h2>
+		</div>
+	</div>
+  </ion-content>
+    <div data-ng-include="'modules/partials/footerMenu.html'"></div>
+</ion-view>
+
+
+

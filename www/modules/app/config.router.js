@@ -89,7 +89,54 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          resolve: loadSequence('signup', '720kb.datepicker'),
          controller: 'ExternalRegisterCtrl'
      })
-
+      .state('externalsignupnext', {
+         url: '/externalsignupnext',
+         templateUrl: 'modules/external-register/external_sign_up_2.html',
+         resolve: loadSequence('signup', '720kb.datepicker'),
+         controller: 'ExternalRegisterCtrl'
+      })
+    .state('discover', {
+        url: '/discover',
+        templateUrl: 'modules/mirror/mirror.html',
+        resolve: loadSequence('discover'),
+        controller: 'MirrorCtrl'
+    })
+     .state('discoverList', {
+         url: '/discoverList',
+         templateUrl: 'modules/mirror/mirrorListByParent.html',
+         resolve: loadSequence('discover'),
+         controller: 'MirrorCtrl'
+     })
+    .state('profile', {
+        url: '/profile',
+        templateUrl: 'modules/profile/profile.html',
+        resolve: loadSequence('profile'),
+        controller: 'ProfileCtrl'
+    })
+     .state('newDiscover', {
+         url: '/newDiscover',
+         templateUrl: 'modules/profile/NewDiscover.html',
+         resolve: loadSequence('profile'),
+         controller: 'ProfileCtrl'
+     })
+     .state('userUpdate', {
+         url: '/userUpdate',
+         templateUrl: 'modules/profile/userUpdate.html',
+         resolve: loadSequence('profile'),
+         controller: 'ProfileCtrl'
+     })
+     .state('hobbies', {
+         url: '/hobbies',
+         templateUrl: 'modules/profile/hobbies.html',
+         resolve: loadSequence('profile'),
+         controller: 'ProfileCtrl'
+     })
+     .state('publicProfile', {
+         url: '/publicProfile',
+         templateUrl: 'modules/publicProfile/publicProfile.html',
+         resolve: loadSequence('profile'),
+         controller: 'publicProfileCtrl'
+     })
     ;
 
     $urlRouterProvider.otherwise('welcome');

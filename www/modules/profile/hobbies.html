@@ -1,0 +1,24 @@
+<ion-view view-title="Hobbies" cache-view="false">
+
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToProfile()"></button>
+        <h1 class="title">Hobies List</h1>
+        <button class="button" ng-click="updateUserHobbies()" style="max-width:60px !important;width:60px !important; font-size:14px !important; text-align:right">Save</button>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+        <div class="list card card-mirror new-card-mirror">
+            
+                <div class="row" ng-repeat="hobby in hobbiesList" style="padding:5px 10px">
+                    <div class="col-75">
+                        <h5 ng-click="showRight(hobby.HobbiesId)">{{hobby.Name}}</h5>
+                    </div>
+                    <div class="col-25"><span style="float:right; margin-top:8px" class="ng-binding" id="{{'rightDiv_'+hobby.HobbiesId}} "></span></div>
+                </div>
+            
+        </div>
+    </ion-content>
+   
+</ion-view>
+
+
+

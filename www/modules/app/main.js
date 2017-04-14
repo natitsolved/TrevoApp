@@ -81,7 +81,7 @@ app.run(['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$ionicPopup'
                     ionic.Platform.exitApp(); // stops the app
                 });
             });
-            if ($window.localStorage["userInfo"] != undefined)
+            if ($window.localStorage["userInfo"])
             {
                 $state.go('userListing', {}, { reload: true });
             }
@@ -93,6 +93,10 @@ app.run(['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$ionicPopup'
         $ionicPlatform.registerBackButtonAction(function (event) {
             event.preventDefault();
         }, 100);
+
+
+
+
 
     }]);
 

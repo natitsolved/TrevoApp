@@ -412,6 +412,58 @@ p.topic_info.pr {
         background: #efefef;
     }
 
+.card-mirror .item.item-avatar{min-height:0;padding-left:70px;border-bottom: 1px solid #5f5d5d}
+.card-mirror .item.item-avatar .row,.card-mirror .item.item-avatar .row .col{padding: 0}
+.card-mirror .item.item-avatar p{font-size: 12px}
+.card-mirror .item.item-avatar b{text-align: right;font-size: 12px;display: block;}
+.card-mirror .item.item-avatar .country_image{position: absolute;top: 40px;left: 10px;border-radius: 100%;overflow: hidden;width: 16px;height: 16px;}
+.card-mirror .item.item-body p{font-size: 13px}
+.new-header button{background: none;border: 0;box-shadow: none !important;font-size: 20px !important;color: #fff !important;}
+.new-header h1.title{color:#fff;font-size: 14px}
+.new-header button img{height:100%;width: auto;}
+.new-header h1.title span{display: table;margin: 0 0;}
+.new-header h1.title span img{float:left;width: 30px;height: 30px;display: inline-block;margin-top: 10px;border-radius: 100%;margin-right:10px}
+
+.profile-head{background: #fff;}
+.profile-head img{max-width: 35px;max-height: 35px;width: 100%;height: 100%;border-radius: 50%;}
+.profile-head h5{margin: 2px 0; color:#60cdf6}
+.profile-head p{margin: 2px 0;display: block;font-size: 13px}
+.profile-head p.loctn span{color:#60cdf6}
+.profile-options{border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc}
+.profile-options a{display: block;background:#d4d4d4;float:left;padding: 5px 10px;margin:10px 5px 10px 0;display: block !important;text-decoration:none;color: #474545;border-radius:3px}
+.profile-options a span{float:right;line-height:16px}
+.profile-options a img{height: 16px;float:left;margin-right:5px}
+
+.row.self-intro{background:#fff;margin:1px 0 !important;padding-top:5px !important}
+.self-intro i{font-size: 15px;color:#fff;background:#0db5e4;display: block;width:20px;height:20px;text-align: center;line-height: 20px;border-radius: 2px;}
+.self-intro h2{font-size: 14px;margin: 2px 0}
+.self-intro p{font-size: 13px;margin: 0;line-height: 17px;;display: block;margin-top:10px}
+.follow{padding: 5px;border:1px solid #cccccc;background:#dedede;font-size: 12px !important;text-align: center;}
+.follow span{display: block;text-align: center;}
+
+.writing_chat span.item-input{padding: 0}
+.writing_chat textarea{resize: none;line-height: 30px;font-size: 13px;padding-left: 10px}
+.writing_chat button.btnn_chat{height:41px}
+
+.lang-box-holder{width:auto; float: right; min-width:70%; margin-top: 15px}
+.lang-holder{width:auto; float: left; text-align: center; padding: 0 5px}
+.lang-holder h4{text-transform: uppercase; margin: 4px 0 2px; font-size:14px; line-height: 16px; color: #5b5b5b}
+.lang-holder p{font-size:12px; font-weight: 300}
+.lang-holder .levelbar{width:94%; height: 3px; position: relative; background: #e3e3e3; margin: 0 auto; display: block;}
+.lang-holder .levelbar span{width:auto; height: 3px; position: absolute; background: #60cdf6; left: 0; top:0}
+.lang-box-holder .arrow-wrap{position: relative; float: left; height: 53px; width:20px; text-align: center;}
+.lang-box-holder .arrow-wrap span{position: absolute; top:0 ; left: 0; right: 0; bottom: 0; margin: auto; font-size:24px; color: #5b5b5b; height: 30px}
+.pad-left0{padding-left: 0}
+
+.three-links{background: #fff; margin: 10px 0 !important; margin-top:5px !important; text-align: center; padding-bottom: 0}
+.three-links a{display: inline-block; background: #fff; text-decoration: none; padding: 5px 10px; mar}
+.three-links a span{width:35px; height: 35px; display: inline-block; border: 2px solid #60cdf6; border-radius: 50%; margin: 0 auto; line-height: 32px; text-align: center; font-size:22px; color:#60cdf6}
+.three-links a b{display:block; text-align: center; font-weight: normal; color:#8f8f8f; font-size: 13px}
+
+.about-wrap{background: #60cdf6; color: #fff}
+.about-wrap h4{color: #fff; margin-bottom: 5px; font-size:20px}
+.about-wrap p{color: #fff; font-weight: 300; margin-bottom: 5px}
+
 
 /*Edit Profile*/
 
@@ -500,12 +552,13 @@ p.topic_info.pr {
     padding: 5px 5px 5px 8px;
     border-radius: 8px;
     position: absolute;
-    z-index: 99999999;
+    z-index: 9;
     top: -72px;
     left: 0;
     right: 0;
     display: table;
 }
+
 
 .parts {
     border-radius: 5px;
@@ -623,14 +676,9 @@ body {
             width: 40px;
             height: 40px;
         }
-
-    .sender-2.chat_row > .msg {
-        width: 78%;
-        float: left;
-        background: #fff;
-        padding: 11px;
-        border-radius: 10px;
-    }
+.sender-2.chat_row > .msg-area {width: auto;float: left;max-width: 76%;margin-left: 9px;font-size: 13px;}
+.sender-2.chat_row > .msg-area > .msg {width: auto;float: left;background: #fff;padding: 6px;border-radius: 6px;font-size: 13px;}
+.sender-2.chat_row > .msg-area > .loading-area{float: left;}
 
 .sender-1.chat_row {
     /* overflow: hidden;*/
@@ -655,23 +703,16 @@ body {
             height: 40px;
         }
 
-    .sender-1.chat_row > .msg {
-        width: 78%;
-        float: right;
-        text-align: left;
-        padding: 11px;
-        background: #60cdf6;
-        border-radius: 10px;
-        color: #fff;
-    }
+.sender-1.chat_row > .msg {width: auto;float: right;text-align: center;padding: 6px;background: #60cdf6;border-radius: 6px;color: #fff;font-size: 12px;max-width: 75%;}
+.sender-1.chat_row > .msg > .top-part{width:100%; float: left;}
+.sender-1.chat_row > .msg > .bottom-part{width:100%; float: left; border-top: 1px solid #5abade}
+.sender-1.chat_row > .loading-area{float: right;}
 
-.list.chat_only {
-    float: left;
+.list.chat_only {width:100%;
+   float: left;
     margin-top: 5px;
-    padding: 5px 5px 135px 5px;
-    ;
-    margin: 15px 5px;
-    width: 100%;
+    padding: 5px 0 135px 0;
+    margin: 15px 0;
 }
 
 .writing_chat {
@@ -788,3 +829,45 @@ ion-list.list_user_list.disable-user-behavior {
 
     .tab-item.foot .icon { height: 25px; font-size: 25px; margin-top:5px;}
     	.tab-item.foot.active { color: #60cdf6;}
+    	    	   	
+
+
+/*******************************/
+
+.new-card-mirror{margin-top:10px}
+.new-card-mirror .item.item-avatar{border-bottom:none !important}
+.new-card-mirror .item-avatar {padding-bottom: 0}
+.new-card-mirror .item-avatar img{border: 2px solid #60cdf6; box-shadow:none}
+.new-card-mirror .item-avatar h2{color:#285769}
+.new-card-mirror .item-avatar b{font-weight:normal; color: #737373}
+.new-card-mirror .Mn-image{margin-left: -15px; margin-right: -15px; box-shadow:none}
+.cmnts-area{padding: 0; margin-bottom: 5px}
+.cmnts-area .col{padding: 0}
+.cmnts-area .fab{color:#777676; margin-top: 0}
+.cmnts-area .fab i{color:#60cdf6;}
+.cmnts-area .share{color:#777676; text-align: right; margin-top: 0; font-weight:300}
+
+.custom-item-body{padding-left: 70px}
+p.custom-para{overflow: visible;text-overflow: ellipsis;white-space: normal;}
+
+.dark-txt{color:#454545!important}
+.dark-txt a{color:#454545!important}
+.border-top-grey{border-top:1px solid #e1e1e1!important}
+.inner-item-avatar{padding-left: 50px !important; margin-bottom: 10px!important; border-bottom: none!important}
+.inner-item-avatar img{left: 0!important; width:35px !important; height: 35px!important }
+.margin-bottom10{margin-bottom: 10px !important}
+
+
+
+/************************************/
+
+.modal_part.new-modal_part{background: none; padding: 0; top:auto; bottom:30px; }
+.modal_part.new-modal_part .toparea{width:100%; border-radius: 8px; overflow: hidden; background: #fff; margin-bottom: 10px}
+.modal_part.new-modal_part .bottomarea{width:100%; padding-bottom: 20px}
+.modal_part.new-modal_part .bottomarea button{border-radius: 8px; background:red; padding:10px; text-align: center;color:#fff; display: block; box-shadow: none!important; width:100%; outline: none !important; border: none !important}
+.modal_part.new-modal_part a{display: block; padding: 10px 6px; text-align: left; color:#000; text-decoration: none; font-size:14px; border-top:1px solid #ececec;  font-size:14px; position: relative; padding-left: 38px}
+.modal_part.new-modal_part a:first-child{border-top:0}
+.modal_part.new-modal_part a span{position: absolute; left:10px; top:10px; font-size:18px; color:#000; text-align: center; display: inline-block;width:20px; opacity: 0.4}
+.modal_part.new-modal_part a span img{width:18px}
+
+.dark-overlay{width:100%; height: 100%; position: fixed;; top:0; left:0; background: rgba(0,0,0,0.6); z-index:99999}

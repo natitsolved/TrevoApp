@@ -1,0 +1,102 @@
+<ion-view view-title="Public Profile" cache-view="false">
+   
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToUserListing()"></button>
+        <h1 class="title">User Profile</h1>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+        <div class="row profile-head">
+            <div class="col col-50">
+                <div class="row">
+                    <div class="col col-25 pad-left0">
+                        <img src="{{userProfile.ImagePath}}">
+                    </div>
+                    <div class="col col-75">
+                        <h5>{{userProfile.Name}}</h5>
+                        <!--<p>@hello_soutikbose </p>-->
+                        <p class="loctn"><span><i class="icon ion-ios-location"></i></span>{{userProfile.Address}}</p>
+                        <!--<p class="ng-binding">EN <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> ES</p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="lang-box-holder">
+                    <div class="lang-holder">
+                        <h4>{{userProfile.NativeAbbrv}}</h4>
+                        <div class="levelbar">
+                            <span style="width:100%"></span>
+                        </div>
+                        <!--<p>English</p>-->
+                    </div>
+                    <div class="arrow-wrap"><span><i class="icon ion-ios-arrow-forward"></i></span></div>
+                    <div class="lang-holder">
+                        <h4>{{userProfile.LearningAbbrv}}</h4>
+                        <div class="levelbar">
+                            <span style="width:20%"></span>
+                        </div>
+                        <!--<p>Bengali</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row three-links">
+            <div class="col">
+                <a href="">
+                    <span><i class="icon ion-ios-chatboxes-outline"></i></span>
+                    <b>Message</b>
+                </a>
+            </div>
+            <div class="col">
+                <a href="">
+                    <span><i class="icon ion-android-bicycle"></i></span>
+                    <b>Follow</b>
+                </a>
+            </div>
+            <div class="col">
+                <a href="">
+                    <span><i class="icon ion-close"></i></span>
+                    <b>Block/Report</b>
+                </a>
+            </div>
+        </div>
+        <div class="row about-wrap">
+            <div class="col">
+                <h4>About</h4>
+                <p>{{userProfile.Self_Introduction}}</p>
+            </div>
+        </div>
+
+        <div class="list card card-mirror new-card-mirror" ng-repeat="userMoment in userMomentsList track by $index">
+            <div class="item item-avatar">
+                <img src="{{userMoment.ImagePath}}" ng-show="userMoment.ImagePath!=null">
+                <div class="row">
+                    <div class="col">
+                        <h2>{{userMoment.Name}}</h2>
+                        <p class="ng-binding">{{userMoment.NativeLangAbbrev}} <span><i style="margin:0 3px;font-size:12px;" class="icon ion-ios-arrow-forward"></i></span> {{userMoment.LearningLangAbbrev}}</p>
+                    </div>
+                    <div class="col">
+                        <b>{{userMoment.PostingTime}} <i class="icon ion-ios-arrow-down"></i></b>
+                    </div>
+                </div>
+            </div>
+            <div class="item item-body">
+                <div class="Mn-image">
+                    <img class="{{userMoment.UploadedImage}}" ng-show="userMoment.UploadedImage!=null">
+                </div>
+                <p ng-show="userMoment.Message!=null">
+                    {{userMoment.Message}}
+                </p>
+                <div class="row cmnts-area">
+                    <div class="col"><p class="fab"><i class="ion-heart"></i> 11</p></div>
+                    <div class="col"><p class="share">50 Comments 23 Share</p></div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+  
+</ion-view>
+
+
+

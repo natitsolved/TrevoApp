@@ -1,13 +1,8 @@
 <ion-view view-title="UserList">
-    <div class="row bar bar-header">
-        <div class="col col-70">
-            <h3 class="cart_heading">User Listing</h3>
-        </div>
-       
-        <div class="col col-30">
-            <a href="javascript:void(0);" ng-click="goToChatbot()"><img src="img/chat_bot_icon.jpg" style="width:45px; float:right; border-radius:50%;margin-top: -7px; margin-right: -2px;height:42px;" /></a>
-</div>
-    </div>
+    <div class="bar bar-header new-header">
+        <h1 class="title">User Listing</h1>
+        <button class="button" ng-click="goToChatbot()"><img src="img/chat_bot_icon.png"></button>
+    </div> 
 
     <ion-content class="padding-top sign_in_back">
       
@@ -15,18 +10,17 @@
                        on-refresh="doRefresh()">
         </ion-refresher>
 		 <ion-list class="list_user_list" ng-repeat="user in userList track by $index">
-		  <ion-item ng-click="goToChat(user.User_Id,user.Name,user.ImagePath)">
+		  <ion-item >
 		    <div class="left_image_list">
-		      <img src="{{user.ImagePath}}">
+		      <img src="{{user.ImagePath}}" ng-click="goToUserProfile(user.User_Id,user.Name,user.ImagePath,user.NativeAbbrv,user.LearningAbbrv)">
 		      <div class="country_image">
 		      		<img src="{{user.Icon_Path}}" style="width: 20px; height:20px;">
 		      	</div>
 		    </div>
-		    <div class="right_list_text">
+		    <div class="right_list_text" ng-click="goToChat(user.User_Id,user.Name,user.ImagePath)">
 			    <div class="list_user_list-name_date">
 			    <h2>{{user.Name}}</h2>
 			    <span>12.05AM</span>
-                 <span ng-show="user.IsOnline"><img src="img/green_dot.jpg"  style="width:12px;"/></span>
 			    </div>
 			    <div class="remaining_list_info">
                     <p>{{user.NativeAbbrv}} <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> {{user.LearningAbbrv}}</p>
@@ -39,26 +33,5 @@
 		
   
     </ion-content>
-    <div class="tabs tabs-icon-bottom">
-        <a class="tab-item foot" href="javascript:void(0)">
-            <i class="icon ion-person-stalker"></i>
-            Profile
-        </a>
-
-        <a class="tab-item foot" href="javascript:void(0)">
-            <i class="icon ion-chatbubbles"></i>
-            Chat
-        </a>
-
-        <a class="tab-item foot" href="javascript:void(0)">
-            <i class="icon ion-ios-settings-strong"></i>
-            Mirror
-        </a>
-
-        <a class="tab-item foot" href="javascript:void(0)" ng-click="logOut()">
-            <i class="icon ion-log-out"></i>
-            Logout
-        </a>
-
-    </div>
+    <div data-ng-include="'modules/partials/footerMenu.html'"></div>
 </ion-view>

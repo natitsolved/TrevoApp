@@ -1,0 +1,30 @@
+<ion-view view-title="User Info Update" cache-view="false">
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToProfile()"></button>
+        <h1 class="title">Update User Info</h1>
+        <button class="button" ng-click="updateUserInfo(content)" style="max-width:60px !important;width:60px !important; font-size:14px !important; text-align:right">Save</button>
+    </div> 
+    
+    <ion-content class="padding-top sign_in_back">
+        <div class="row self-intro">
+            <div class="col col-10">
+                <i class="ion-ios-person"></i>
+            </div>
+            <div class="col col-90">
+                <h2>{{label}}</h2>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col col-100">
+             
+                <textarea ng-model="content" style="width:100%;"></textarea>
+            </div>
+        </div>
+       
+    </ion-content>
+    
+</ion-view>
+
+
+

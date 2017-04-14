@@ -13,6 +13,8 @@ app.constant('JS_REQUIRES', {
         'usersListing': ['modules/users/UserCtrl.js'],
         'forgotPass': ['modules/forgot-password/ForgotPswdCtrl.js'],
         'welcome': ['modules/app/AppCtrl.js'],
+        'discover': ['modules/mirror/MirrorCtrl.js', 'js/services/momentService.js'],
+        'profile': ['modules/profile/ProfileCtrl.js', 'js/services/momentService.js', 'js/services/profileService.js', 'modules/publicProfile/publicProfileCtrl.js']
         
         //*** Services
 
@@ -33,6 +35,10 @@ app.constant('JS_REQUIRES', {
        {
            name: '720kb.datepicker',
            files: ['js/datepicker/angular-datepicker.min.css', 'js/datepicker/angular-datepicker.min.js']
+       },
+       {
+           name: 'angularjs-dropdown-multiselect',
+           files: ['js/angularjs-dropdown-multiselect.min.js']
        },
     ]
 });

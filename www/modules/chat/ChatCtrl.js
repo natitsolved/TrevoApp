@@ -476,6 +476,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
     $scope.tranlateToNativeLang = function () {
         console.log($scope.transaltionObj);
         if ($window.localStorage["userInfo"]) {
+            var element;
             var spinnerId = "spinner_" +$scope.transaltionObj.id;
             var spinnerElement = angular.element(document.querySelector('#' + spinnerId));
             spinnerElement[0].style.display = "block";
@@ -483,7 +484,10 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
             var targetEn = userDetails.nativeLang;
             if (targetEn) {
                 var sourceEn = "en";
-                var element = "translatedText_" + $scope.transaltionObj.id;
+                if($scope.transaltionObj.isSender==1)
+                 element = "translatedText_" + $scope.transaltionObj.id;
+             else
+                element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
                 var myElement = angular.element(document.querySelector('#' + element));
                 var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
                 $http({
@@ -512,8 +516,8 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
     $scope.hideCard = function () {
         $scope.show = true;
     }
-    $scope.alerts = function (id, message) {
-        $scope.transaltionObj = { id: id, message: message };
+    $scope.alerts = function (id, message,isSender) {
+        $scope.transaltionObj = { id: id, message: message ,isSender:isSender};
         $scope.show = false;
     }
 });

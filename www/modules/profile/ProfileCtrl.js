@@ -80,7 +80,13 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
     $scope.init();
 
 
-    $scope.updateUserInfo = function (content) {
+    $scope.updateUserInfo = function () {
+
+      var Id = "content";
+        console.log(Id);
+        var myElement = angular.element(document.querySelector('#' + Id));
+        console.log(myElement);
+        var contentValue=myElement[0].value;
         if ($scope.userInfo)
         { }
         else
@@ -88,14 +94,14 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
             $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
         }
         if ($rootScope.isSelfIntro == 'name') {
-            if (!content) {
+            if (!contentValue) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Error',
                     template: "Name can not be blank."
                 });
             }
             else {
-                var obj = { userId: $scope.userInfo.userId, content: content };
+                var obj = { userId: $scope.userInfo.userId, content: contentValue };
                 profileService.updateUserName(obj).then(function (data) {
                     $state.go('profile', {}, { reload: true });
                 }, function (error) {
@@ -107,7 +113,7 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
             }
         }
         else if ($rootScope.isSelfIntro == 'selfintro') {
-            var obj = { userId: $scope.userInfo.userId, content: content };
+            var obj = { userId: $scope.userInfo.userId, content: contentValue };
             profileService.updateUserSelfIntroduction(obj).then(function (data) {
                 $state.go('profile', {}, { reload: true });
             }, function (error) {
@@ -119,7 +125,7 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
         }
         else {
 
-            var obj = { userId: $scope.userInfo.userId, content: content };
+            var obj = { userId: $scope.userInfo.userId, content: contentValue };
             profileService.updateUserAddress(obj).then(function (data) {
                 $state.go('profile', {}, { reload: true });
             }, function (error) {

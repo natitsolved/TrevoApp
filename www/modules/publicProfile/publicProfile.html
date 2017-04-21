@@ -9,7 +9,7 @@
             <div class="col col-50">
                 <div class="row">
                     <div class="col col-25 pad-left0">
-                        <img src="{{userProfile.ImagePath}}">
+                        <img ng-src="{{userProfile.ImagePath}}">
                     </div>
                     <div class="col col-75">
                         <h5>{{userProfile.Name}}</h5>
@@ -42,14 +42,14 @@
 
         <div class="row three-links">
             <div class="col">
-                <a href="">
+                <a href="" ng-click="goToChat(userProfile.User_Id,userProfile.Name,userProfile.ImagePath)">
                     <span><i class="icon ion-ios-chatboxes-outline"></i></span>
                     <b>Message</b>
                 </a>
             </div>
             <div class="col">
-                <a href="">
-                    <span><i class="icon ion-android-bicycle"></i></span>
+                <a href="" ng-click="follow(userProfile.User_Id)">
+                    <span><i ng-class="{'icon ion-android-bicycle':!isdiplay,'icon ion-backspace-outline':isdiplay}" id="followId"></i></span>
                     <b>Follow</b>
                 </a>
             </div>
@@ -69,7 +69,7 @@
 
         <div class="list card card-mirror new-card-mirror" ng-repeat="userMoment in userMomentsList track by $index">
             <div class="item item-avatar">
-                <img src="{{userMoment.ImagePath}}" ng-show="userMoment.ImagePath!=null">
+                <img ng-src="{{userMoment.ImagePath}}" ng-show="userMoment.ImagePath!=null">
                 <div class="row">
                     <div class="col">
                         <h2>{{userMoment.Name}}</h2>
@@ -88,8 +88,8 @@
                     {{userMoment.Message}}
                 </p>
                 <div class="row cmnts-area">
-                    <div class="col"><p class="fab"><i class="ion-heart"></i> 11</p></div>
-                    <div class="col"><p class="share">50 Comments 23 Share</p></div>
+                    <div class="col"><p class="fab"><i class="ion-heart"></i>{{userMoment.FavouritesCount}}</p></div>
+                    <div class="col"><p class="share">{{userMoment.RepliesCount}} Comments 23 Share</p></div>
                 </div>
             </div>
         </div>

@@ -8,14 +8,14 @@ app.constant('JS_REQUIRES', {
         //*** Controllers
         'login': ['modules/login/SigninCtrl.js', 'js/services/authService.js'],
         'signup': ['modules/register/RegisterCtrl.js', 'js/services/authService.js', 'modules/external-register/ExternalRegisterCtrl.js'],
-        'chat': ['modules/chat/ChatCtrl.js', 'modules/chat/ModalCtrl.js'],
+        'chat': ['modules/chat/ChatCtrl.js', 'modules/chat/ModalCtrl.js', 'js/services/momentService.js'],
         'chatbot': ['modules/chatbot/ChatbotCtrl.js'],
         'usersListing': ['modules/users/UserCtrl.js'],
         'forgotPass': ['modules/forgot-password/ForgotPswdCtrl.js'],
         'welcome': ['modules/app/AppCtrl.js'],
         'discover': ['modules/mirror/MirrorCtrl.js', 'js/services/momentService.js'],
-        'profile': ['modules/profile/ProfileCtrl.js', 'js/services/momentService.js', 'js/services/profileService.js', 'modules/publicProfile/publicProfileCtrl.js']
-        
+        'profile': ['modules/profile/ProfileCtrl.js', 'js/services/momentService.js', 'js/services/profileService.js', 'modules/publicProfile/publicProfileCtrl.js'],
+        'search': ['modules/search/SearchCtrl.js', 'js/services/momentService.js'],
         //*** Services
 
     },
@@ -39,7 +39,7 @@ app.constant('JS_REQUIRES', {
        {
            name: 'angularjs-dropdown-multiselect',
            files: ['js/angularjs-dropdown-multiselect.min.js']
-       },
+       }
     ]
 });
 

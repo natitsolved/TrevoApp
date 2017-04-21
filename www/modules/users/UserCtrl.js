@@ -1,4 +1,4 @@
-app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state, $window, $rootScope) {
+app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state, $window, $rootScope, $ionicLoading) {
     //ionic.material.ink.displayEffect();
     ionicMaterialInk.displayEffect();
 
@@ -13,6 +13,7 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     }
     $scope.getUserListing = function () {
+       
         authService.getAllUserswithCountry().then(function (data) {
             $scope.userList = [];
             for (var i = 0; i < data.length; i++) {
@@ -20,7 +21,9 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                     $scope.userList.push(data[i]);
                 }
             }
+           
         }, function (err) {
+          
             var alertPopup = $ionicPopup.alert({
                 title: 'Error',
                 template: 'There is some error. Please try again later.'
@@ -36,16 +39,18 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
 
     $scope.getUserListing();
     $scope.goToChat = function (userId, name, imagePath) {
-        var userDetails = { userId: userId, name: name, imagePath, imagePath };
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+        var userDetails = { userId: userId, name: name, imagePath:imagePath };
         $window.localStorage["userDetails"] = JSON.stringify(userDetails);
+        $ionicLoading.hide();
         $state.go('chat', {}, { reload: true });
     }
 
    
 
     $scope.goToChatbot = function () {
-        //var userDetails = { userId: userId, name: name, imagePath, imagePath };
-        //$window.localStorage["userDetails"] = JSON.stringify(userDetails);
         $state.go('chatbot', {}, { reload: true });
     }
 

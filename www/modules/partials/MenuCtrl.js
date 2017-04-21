@@ -19,4 +19,9 @@ app.controller('MenuCtrl', function ($scope, authService, $state) {
     {
         $state.go('profile', {}, { reload: true });
     }
+
+    $scope.takeToSearch = function ()
+    {
+        $state.go('search', {}, { reload: true });
+    }
 });

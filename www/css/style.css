@@ -706,6 +706,8 @@ body {
 .sender-1.chat_row > .msg {width: auto;float: right;text-align: center;padding: 6px;background: #60cdf6;border-radius: 6px;color: #fff;font-size: 12px;max-width: 75%;}
 .sender-1.chat_row > .msg > .top-part{width:100%; float: left;}
 .sender-1.chat_row > .msg > .bottom-part{width:100%; float: left; border-top: 1px solid #5abade}
+.sender-1.chat_row > .msg > .incorrectBottom-part{width:100%; float: left; border-top: 1px solid #5abade;color:red;text-decoration:line-through}
+.sender-1.chat_row > .msg > .correctBottom-part{width:100%; float: left; border-top: 1px solid #5abade;color:green;}
 .sender-1.chat_row > .loading-area{float: right;}
 
 .list.chat_only {width:100%;
@@ -818,6 +820,7 @@ ion-list.list_user_list.disable-user-behavior {
     width: 100%;
     float: left;
 }
+
 
     .remaining_list_info h3 {
         font-size: 13px;

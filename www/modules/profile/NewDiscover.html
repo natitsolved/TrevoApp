@@ -8,7 +8,8 @@
         <div class="row">
             <div class="col col-70">
                 <span class="item item-input">
-                    <textarea placeholder="Type Message" required ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px;resize:none!important"></textarea>
+                    <textarea placeholder="Type Message" required ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px;resize:none!important"  on-hold="showButton()"></textarea>
+                    <button ng-show="showPasteButton" ng-click="pasteText()">Paste</button>
                     <img src="img/attachments.png" style="width:30px; margin: 0 auto;" name=file ngf-select ng-model="files" ngf-accept="'image/*'">
                 </span>
             </div>

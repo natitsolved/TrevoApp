@@ -1,0 +1,44 @@
+<ion-view view-title="Correct spelling" cache-view="false">
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToChat()"></button>
+        <h1 class="title">Correct Spelling</h1>
+        <button class="button" ng-click="sendChatAfterSpellCheck()" style="max-width:60px !important;width:60px !important; font-size:14px !important; text-align:right">Send</button>
+    </div>
+
+    <ion-content class="padding-top sign_in_back">
+        <div class="row">
+            <div class="col col-100">
+
+                <textarea ng-model="messageToChangeSpell" style="width:100%;resize:none;" id="content" >{{messageToChangeSpell}}</textarea>
+                <img src="img/incorrect.png"  style="float:right;width:12px;margin-top:-28px;" ng-show="isShowImg"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-100">
+
+                <textarea ng-model="correctSpellingText" style="width:100%;resize:none;" ng-show="isShowCorrect" id="correctContent">{{correctSpellingText}}</textarea>
+                <img src="img/ok.png" style="float:right;width:12px;margin-top:-26px;" ng-show="isShowImg"/>
+            </div>
+        </div>
+        <div class="list card card-mirror new-card-mirror">
+
+            <div class="row" ng-repeat="item in array_of_suggestions track by $index" style="padding:5px 10px">
+                <div class="col-75">
+                    <h5 ng-click="showRight($index,item)">{{item}}</h5>
+                </div>
+                <div class="col-25"><span style="float:right; margin-top:8px" class="ng-binding" id="{{'rightDiv_'+$index}} "></span></div>
+            </div>
+
+        </div>
+        <div>
+            Add Notes
+
+            <input type="text" ng-model="notes" id="notes" style="width:100%;"/>
+        </div>
+
+    </ion-content>
+
+</ion-view>
+
+
+

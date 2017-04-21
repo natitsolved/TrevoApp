@@ -11,9 +11,9 @@
       </ion-refresher>
 	<div class="list card card-mirror" ng-repeat="moment in momentsList track by $index">
 	  <div class="item item-avatar">
-	    <img src="{{moment.ImagePath}}">
+	    <img ng-src="{{moment.ImagePath}}">
 	    <div class="country_image">
-      		<img src="{{moment.CountryImagePath}}" style="width: 20px; height:20px;">
+      		<img ng-src="{{moment.CountryImagePath}}" style="width: 20px; height:20px;">
       	</div>
       	<div class="row">
 		  <div class="col">
@@ -27,16 +27,13 @@
 	  </div>
 		
 	  <div class="item item-body">
-	    <img class="full-image" src="{{moment.UploadedImage}}" ng-show="moment.UploadedImage!=null">
+	    <img class="full-image" ng-src="{{moment.UploadedImage}}" ng-show="moment.UploadedImage!=null">
 	    <p>
-	      <!--This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-	      the content is from a card-body consisting of an image and paragraph text. The footer
-	      consists of tabs, icons aligned left, within the card-footer.-->
             {{moment.Message}}
 	    </p>
 	    <p>
-	      <a href="javascript:void(0)" class="subdued"><i class="ion-heart"></i> 11</a>
-	      <a href="javascript:void(0)" class="subdued" ng-click="takeToAddMomentPage(moment.MomentId)"><i class="ion-ios-chatbubble"></i> 13</a>
+	      <a href="javascript:void(0)" class="subdued" ng-click="markMomentAsFav(moment.MomentId,moment.PosterUserId)"><i class="ion-heart" id="{{'heart_'+moment.MomentId}}"></i>{{moment.FavouritesCount}}</a>
+	      <a href="javascript:void(0)" class="subdued" ng-click="takeToAddMomentPage(moment.MomentId)"><i class="ion-ios-chatbubble"></i>{{moment.RepliesCount}}</a>
 	      <a href="javascript:void(0)" class="subdued"><i class="ion-settings"></i></a>
 	    </p>
 	  </div>

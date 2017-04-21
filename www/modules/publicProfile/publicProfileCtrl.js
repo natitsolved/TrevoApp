@@ -12,12 +12,26 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
     $scope.init = function () {
         if ($window.localStorage["userProfile"]) {
             var obj = JSON.parse($window.localStorage["userProfile"]);
-            $window.localStorage["userProfile"] = '';
             profileService.getUserDetailsById(obj.userId).then(function (data) {
                 $scope.userProfile = data;
                 profileService.getMomentsListByUserId(obj.userId).then(function (data) {
                     $scope.userMomentsList = data;
-                    console.log($scope.userMomentsList);
+                    var userDetails=JSON.parse($window.localStorage["userInfo"]);
+                    var item = { Id: userDetails.userId, ScheduleId: obj.userId };
+                    profileService.checkIfUserFollowsTheUser(item).then(function (data) {
+                        if (data.IsSuccess) {
+                            $scope.isdiplay = true;
+                        }
+                        else {
+                            $scope.isdiplay = false;
+                        }
+                       
+                    }, function (err1) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Error',
+                            template: err1.Message
+                        });
+                    })
                 }, function (error) {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Error',
@@ -39,8 +53,33 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
         $state.go('userListing', {}, { reload: true });
     }
 
-
+    $scope.goToChat = function (userId, name, imagePath) {
+        var userDetails = { userId: userId, name: name, imagePath, imagePath };
+        $window.localStorage["userDetails"] = JSON.stringify(userDetails);
+        $state.go('chat', {}, { reload: true });
+    }
    
+
+    $scope.follow = function (userId)
+    {
+        if ($window.localStorage["userInfo"])
+        {
+            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+            var myElement = angular.element(document.querySelector('#followId'));
+            if (myElement[0].className == "icon ion-android-bicycle") {
+                var item = { FollowerUserId: userDetails.userId, FollowingUserId: userId };
+                profileService.saveUserFollowDetails(item).then(function (data) {
+                    $state.go('publicProfile', {}, { reload: true });
+                });
+            }
+            else {
+                var item = { FollowerUserId: userDetails.userId, FollowingUserId: userId };
+                profileService.removeUserFollowDetails(item).then(function (data) {
+                    $state.go('publicProfile', {}, { reload: true });
+                });
+            }
+        }
+    }
 
 
 

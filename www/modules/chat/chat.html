@@ -1,8 +1,10 @@
 <ion-view view-title="Intro" cache-view="false">
-    
+
     <div class="bar bar-header new-header">
         <button class="button ion-android-arrow-back" ng-click="takeToUserListing()"></button>
-        <h1 class="title"><span><img src="{{recieverImage}}" /> {{recieverName}}</span></h1>
+        <h1 class="title"><span><img ng-src="{{recieverImage}}" /> {{recieverName}}<span style="float:right;font-size:7px;margin-top:14px;margin-left:-27px;" ng-show="IsOnline">Online</span></span></h1>
+
+        <!--<img src="img/green_dot.jpg" style="width:12px;height:12px;margin-top:30px;" />-->
         <button class="button" ng-click="showsearch()"><i class="icon-right ion-grid"></i></button>
     </div>
     <div class="list list-inset searchclass" ng-class="{'active':isdiplay}" style="width: 100%; margin: 0 auto; height: auto; padding:5px 10px!important;">
@@ -19,7 +21,7 @@
 
 
     </div>
-   
+
     <ion-content class="padding-top sign_in_back">
 
         <div>
@@ -28,27 +30,29 @@
                 <div ng-repeat="msg in ChatList track by $index">
 
                     <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
-                        <div class="avatar-image"><img src="{{recieverImage}}"></div>
-                        <div class="msg" ng-show="msg.message !==undefined"  ng-click="alerts($index, msg.message,msg.IsSender)">
+                        <div class="avatar-image"><img ng-src="{{recieverImage}}"></div>
+                        <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender,msg.id)">
                             {{msg.message}}
-                             <div class="bottom-part" id="{{'rcvrTranslatedText_'+$index}}"></div>
+                            <div class="bottom-part" id="{{'rcvrTranslatedText_'+$index}}"></div>
 
                         </div>
                         <div class="clearfix"></div>
-                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark"  style="display:none;" id="{{'spinner_'+$index}}"></ion-spinner></div>
+                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark" ng-show="rcvrHideShowLoader[$index]" id="{{'spinner_'+$index}}"></ion-spinner></div>
                         <img ng-show="msg.imgURI !== undefined" ng-src="{{msg.imgURI}}" style="width:250px; height:200px;float:left">
                     </div>
                     <div class="sender-1 chat_row" ng-show="msg.IsSender==1">
-
-                        <div class="msg"  ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender)">
+                        <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender,msg.id)">
+                            <i class="icon ion-star" ng-show="senderFav[msg.id]" style="color:orange;"></i>
                             {{msg.message}}
                             <div class="bottom-part" id="{{'translatedText_'+$index}}"></div>
+                            <div ng-show="msg.IncorrectText!=undefined" class="incorrectBottom-part">{{msg.IncorrectText}} <img ng-src="{{msg.inCorrectedPngSrc}}" ng-show="msg.inCorrectedPngSrc!=undefined" style="width:12px;" /></div>
+                            <div ng-show="msg.CorrectedText!=undefined" class="correctBottom-part">{{msg.CorrectedText}} <img ng-src="{{msg.correctedPngSrc}}" ng-show="msg.correctedPngSrc!=undefined" style="width:12px;" /></div>
+                            <div ng-show="msg.notes!=undefined" style="font-weight:bolder;color:black;">Notes</div>
+                            <div class="bottom-part" ng-show="msg.notes!=''">{{msg.notes}}</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark" style="display:none;" id="{{'spinner_'+$index}}"></ion-spinner></div>
+                        <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark" ng-show="hideShowLoader[$index]" id="{{'spinner_'+$index}}"></ion-spinner></div>
                         <img ng-show="msg.imgURI !== undefined" ng-src="{{msg.imgURI}}" style="width:250px; height:200px;float:right;">
-                       
-
                     </div>
                 </div>
 
@@ -60,7 +64,7 @@
             </div>
         </div>
 
-        
+
 
     </ion-content>
     <div class="dark-overlay" ng-hide="show">
@@ -68,19 +72,19 @@
             <div class="modal_part new-modal_part animated bounceInUp">
                 <div class="onclick_part" style="position: relative; width:100%; float:left">
                     <div class="toparea">
-                        <a href="#" class="icon-item">
-                            <span><i class="icon ion-star"></i></span> Download Share Deck
+                        <a href="#" class="icon-item" ng-click="markAsFav()">
+                            <span><i class="icon ion-star"></i></span> Favourite
                         </a>
-                        <a href="#" class="icon-item">
+                        <a href="javascript:void(0)" class="icon-item" ng-click="checkSpelling()">
                             <span><img src="img/003-spell-check-interface-symbol.png"></span> Checker
                         </a>
-                        <a href="#" class="icon-item">
+                        <a href="javascript:void(0)" class="icon-item" ng-click="speakText()">
                             <span><img src="img/001-speaker.png"></span> Sound
                         </a>
-                        <a href="#" class="icon-item" ng-click="tranlateToNativeLang()">
+                        <a href="javascript:void(0)" class="icon-item" ng-click="tranlateToNativeLang()">
                             <span><img src="img/004-translation-and-localization.png"></span> Translate
                         </a>
-                        <a href="#" class="icon-item">
+                        <a href="javascript:void(0)" class="icon-item" ng-click="copyText()">
                             <span><i class="icon ion-ios-copy-outline"></i></span> Copy
                         </a>
                     </div>
@@ -97,8 +101,9 @@
             <div class="row">
                 <div class="col col-70">
                     <span class="item item-input">
-                        <textarea placeholder="Type Message" required="" ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px"></textarea>
-                        <span ng-click="takeToTranslatePage(data)" style="margin-right:4px; margin-top: 5px;"> <img src="img/translate.png" style="width:32px;" /> </span>
+                        <textarea placeholder="Type Message" required="" ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px" on-hold="showButton()"></textarea>
+                        <button ng-show="showPasteButton" ng-click="pasteText()">Paste</button>
+                        <span ng-click="takeToTranslatePage(data)" style="margin-right:4px;margin-top: 5px;"> <img src="img/translate.png" style="width:32px;" /> </span>
                     </span>
                 </div>
                 <div class="col col-20">

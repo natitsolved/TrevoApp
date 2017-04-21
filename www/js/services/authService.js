@@ -39,6 +39,10 @@ angular.module('starter')
         //$http.defaults.headers.common['X-Auth-Token'] = undefined;
       //  $window.localStorage.removeItem(LOCAL_TOKEN_KEY);
         $window.localStorage["userInfo"] = '';
+        $window.localStorage["userDetails"] = '';
+        $window.localStorage["translateInfo"] = '';
+        $window.localStorage["firstencodedString"] = ''
+        $window.localStorage["userProfile"] = '';
         userInfo = '';
     }
 
@@ -51,8 +55,8 @@ angular.module('starter')
             $ionicLoading.show({
                 template: 'Loading...'
             });
-            //var uuid = $cordovaDevice.getUUID();
-            var encodedString = JSON.stringify({ Email: email, Password: password, DeviceId: 'DeviceId' });
+           //var uuid = $cordovaDevice.getUUID();
+           var encodedString = JSON.stringify({ Email: email, Password: password, DeviceId: 'Device Id' });
             $http({
                 method: 'POST',
                 url: $rootScope.serviceurl + "Login",
@@ -67,7 +71,8 @@ angular.module('starter')
                         emailId: response.Email,
                         name: response.Name,
                         image: response.ImagePath,
-                        nativeLang: response.NativeLangugae
+                        nativeLang: response.NativeLangugae,
+                        favMomentList: response.FavMomentList
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();
@@ -289,7 +294,7 @@ angular.module('starter')
             });
         });
     };
-
+    
 
     return {
         getUser: getUser,
@@ -302,7 +307,7 @@ angular.module('starter')
         sendMsg:sendMsg,
         sendForgotpassword: sendForgotpassword,
         externalLogin: externalLogin,
-        externalRegister:externalRegister,
+        externalRegister: externalRegister,
         getAllUserswithCountry:getAllUserswithCountry,
         isAuthenticated: function () { return isAuthenticated; },
         checkUniqueValue: function (table, field, value) {

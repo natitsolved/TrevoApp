@@ -19,6 +19,24 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
             profileService.getUserDetailsById($scope.userId).then(function (data) {
                 $scope.userDetails = data;
                 $scope.selfIntro = data.Self_Introduction;
+                var item = { Id: $scope.userId, ScheduleId: 1 };
+                profileService.getUserFollowerFollowingList(item).then(function (data) {
+                    item = { Id: $scope.userId, ScheduleId: 0 };
+                    $scope.followersCount = data.length;
+                    profileService.getUserFollowerFollowingList(item).then(function (data1) {
+                        $scope.followingCount = data1.length;
+                    }, function (err2) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Error',
+                            template: err2.Message
+                        });
+                    });
+                }, function (err1) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error',
+                        template: err1.Message
+                    });
+                });
             }, function (error) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Error',
@@ -229,6 +247,18 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
                     myElement[0].innerHTML = '<img src="img/emblem_ok.png" style="border:none !important;width:12px;float:right;"/>';
                 }
             }
+        }
+    }
+
+
+    $scope.showButton = function () {
+        $scope.showPasteButton = true;
+    }
+    $scope.pasteText = function () {
+
+        $scope.showPasteButton = false;
+        if ($rootScope.coipedMessage) {
+            $scope.data = $rootScope.coipedMessage;
         }
     }
     

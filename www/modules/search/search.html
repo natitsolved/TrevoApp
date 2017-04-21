@@ -1,55 +1,49 @@
 <ion-view view-title="UserList">
-    <!--<div class="row bar bar-header">
-        <div class="col col-70">
-            <h3 class="cart_heading">User Listing</h3>
-        </div>
-       
-        <div class="col col-30">
-            <a href="javascript:void(0);" ng-click="goToChatbot()"><img src="img/chat_bot_icon.jpg" style="width:45px; float:right; border-radius:50%;margin-top: -7px; margin-right: -2px;height:42px;" /></a>
-</div>
-    </div>-->
+   
 	 <div class="bar bar-header new-header">
-	  <!--<button class="ion-android-arrow-back"></button>-->
-	  <h1 class="title">User Listing</h1>
-	  <button class="button" ng-click="goToChatbot()"><img src="img/chat_bot_icon.png"></button>
+	  <h1 class="title">Best Match</h1>
+	 
 	</div> 
     <ion-content class="padding-top sign_in_back">
-     	<div class="card">
-		  <div class="item">
-		    <div class="row">
-		    	<div class="col col-20">
-		    		sasa
-		    	</div>
-		    	<div class="col">
-		    		asasaS AsasSas  SGa UYTuya  yYSYSUY ya y
-		    	</div>
-		    	<div class="col col-10">
-		    		sasa
-		    	</div>
-		    </div>
-		  </div>
+    
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    
+	<div class="list card search-card">
+		<div class="item item-avatar">
+			<img class="circle-image" src="http://4.bp.blogspot.com/-BHhUazKytmw/VbCfWPqrOJI/AAAAAAAAB7c/qj6WVX3du-s/s1600/51b91bba5a3fd9b6c8b9c53bc0ab6c65.jpg">
+			<h2>John Doe <span class="country-flag"><img src="http://166.62.40.135:8094/Content/Images/USA_zps6856acc3.png"></span></h2>
+			<p class="ng-binding lng">EN <span><i style="margin:0 3px;font-size:13px;" class="icon ion-ios-arrow-forward"></i></span> ES</p>
+			<p class="loctn"><span><i class="icon ion-ios-location"></i></span> California, USA</p>
+			<div class="right-arrow"><i class="icon ion-ios-arrow-forward"></i></div>
 		</div>
-    </ion-content>
-    <div class="tabs tabs-icon-bottom">
-       <a class="tab-item foot" href="#/userList">
-        <i class="icon ion-chatbubbles"></i>
-        Chat
-    </a>
-    <a class="tab-item foot" href="#/mirror">
-        <i class="icon ion-ios-settings-strong"></i>
-        Mirror
-    </a>
-	<a class="tab-item foot" href="#/search">
-        <i class="icon ion-search"></i>
-        Search
-    </a>
-	<a class="tab-item foot" href="#/profile">
-        <i class="icon ion-person-stalker"></i>
-        Profile
-    </a>
-    <a class="tab-item foot" href="javascript:void(0)" ng-click="logOut()">
-        <i class="icon ion-log-out"></i>
-        Logout
-    </a>
-    </div>
+	</div>
+    <div class="list card search-card">
+		<div class="item item-avatar">
+			<img class="circle-image" src="http://4.bp.blogspot.com/-BHhUazKytmw/VbCfWPqrOJI/AAAAAAAAB7c/qj6WVX3du-s/s1600/51b91bba5a3fd9b6c8b9c53bc0ab6c65.jpg">
+			<h2>John Doe <span class="country-flag"><img src="http://166.62.40.135:8094/Content/Images/USA_zps6856acc3.png"></span></h2>
+			<p class="ng-binding lng">EN <span><i style="margin:0 3px;font-size:13px;" class="icon ion-ios-arrow-forward"></i></span> ES</p>
+			<p class="loctn"><span><i class="icon ion-ios-location"></i></span> California, USA</p>
+			<div class="right-arrow"><i class="icon ion-ios-arrow-forward"></i></div>
+		</div>
+	</div>
+	<div class="list card search-card">
+		<div class="item item-avatar">
+			<img class="circle-image" src="http://4.bp.blogspot.com/-BHhUazKytmw/VbCfWPqrOJI/AAAAAAAAB7c/qj6WVX3du-s/s1600/51b91bba5a3fd9b6c8b9c53bc0ab6c65.jpg">
+			<h2>John Doe <span class="country-flag"><img src="http://166.62.40.135:8094/Content/Images/USA_zps6856acc3.png"></span></h2>
+			<p class="ng-binding lng">EN <span><i style="margin:0 3px;font-size:13px;" class="icon ion-ios-arrow-forward"></i></span> ES</p>
+			<p class="loctn"><span><i class="icon ion-ios-location"></i></span> California, USA</p>
+			<div class="right-arrow"><i class="icon ion-ios-arrow-forward"></i></div>
+		</div>
+	</div>
+	<div class="list card search-card">
+		<div class="item item-avatar">
+			<img class="circle-image" src="http://4.bp.blogspot.com/-BHhUazKytmw/VbCfWPqrOJI/AAAAAAAAB7c/qj6WVX3du-s/s1600/51b91bba5a3fd9b6c8b9c53bc0ab6c65.jpg">
+			<h2>John Doe <span class="country-flag"><img src="http://166.62.40.135:8094/Content/Images/USA_zps6856acc3.png"></span></h2>
+			<p class="ng-binding lng">EN <span><i style="margin:0 3px;font-size:13px;" class="icon ion-ios-arrow-forward"></i></span> ES</p>
+			<p class="loctn"><span><i class="icon ion-ios-location"></i></span> California, USA</p>
+			<div class="right-arrow"><i class="icon ion-ios-arrow-forward"></i></div>
+		</div>
+	</div>
+</ion-content>
+    <div data-ng-include="'modules/partials/footerMenu.html'"></div>
 </ion-view>

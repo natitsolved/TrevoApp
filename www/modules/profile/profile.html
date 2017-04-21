@@ -6,15 +6,15 @@
   <ion-content class="padding-top sign_in_back">
 	<div class="row profile-head">
 	  <div class="col col-75">
-	  	<img src="{{userDetails.ImagePath}}" ng-show="userDetails.ImagePath!=null" name=file ngf-select="takeFromCamera(files)" ng-model="files" ngf-accept="'image/*'">
+	  	<img ng-src="{{userDetails.ImagePath}}" ng-show="userDetails.ImagePath!=null" name=file ngf-select="takeFromCamera(files)" ng-model="files" ngf-accept="'image/*'">
 	  	<h5 ng-click="takeToUpdatePage('name',userDetails.Name)">{{userDetails.Name}}</h5>
 	  	<p>{{userDetails.Email_Id}}</p>
-	  	<a ng-click="takeToUpdatePage('address',userDetails.Address)" style="cursor:pointer;">{{userDetails.Address}}</a>
+	  	<a class="loctn" ng-click="takeToUpdatePage('address',userDetails.Address)" style="cursor:pointer;">{{userDetails.Address}} </a> 
 	  	<p class="ng-binding">EN <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> ES</p>
 	  </div>
 	  <div class="col">
-	  	<p class="follow"><span>1</span> Following</p>
-	  	<p class="follow"><span>1</span> Followers</p>
+	  	<p class="follow"><span>{{followingCount}}</span> Following</p>
+	  	<p class="follow"><span>{{followersCount}}</span> Followers</p>
 	  </div>
 	</div>
 	<div class="row profile-options">

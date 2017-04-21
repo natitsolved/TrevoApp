@@ -50,6 +50,13 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          controller: 'ChatCtrl'
 
      })
+         .state('spellCheck', {
+             url: '/spellCheck',
+             templateUrl: 'modules/chat/spellChecker.html',
+             resolve: loadSequence('chat'),
+             controller: 'ChatCtrl'
+
+         })
 
         .state('chatbot', {
             url: '/chatbot',
@@ -90,10 +97,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          controller: 'ExternalRegisterCtrl'
      })
       .state('externalsignupnext', {
-         url: '/externalsignupnext',
-         templateUrl: 'modules/external-register/external_sign_up_2.html',
-         resolve: loadSequence('signup', '720kb.datepicker'),
-         controller: 'ExternalRegisterCtrl'
+          url: '/externalsignupnext',
+          templateUrl: 'modules/external-register/external_sign_up_2.html',
+          resolve: loadSequence('signup', '720kb.datepicker'),
+          controller: 'ExternalRegisterCtrl'
       })
     .state('discover', {
         url: '/discover',
@@ -136,6 +143,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          templateUrl: 'modules/publicProfile/publicProfile.html',
          resolve: loadSequence('profile'),
          controller: 'publicProfileCtrl'
+     })
+     .state('search', {
+         url: '/search',
+         templateUrl: 'modules/search/search.html',
+         resolve: loadSequence('search'),
+         controller: 'SearchCtrl'
      })
     ;
 

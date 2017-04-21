@@ -166,6 +166,83 @@ angular.module('starter')
             });
         });
     };
+
+    var saveUserFollowDetails = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "InsertUserFollowDetails",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var removeUserFollowDetails = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "RemoveUserFollowDetails",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var checkIfUserFollowsTheUser = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "CheckIfTheUserIsFollowingAnotherUser",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var getUserFollowerFollowingList = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "GetUserFollowerFollowingList",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     return {
         updateUserSelfIntroduction: updateUserSelfIntroduction,
         updateUserName: updateUserName,
@@ -174,13 +251,15 @@ angular.module('starter')
         saveProfilePicture: saveProfilePicture,
         getAllHobbies: getAllHobbies,
         saveUserHobbies: saveUserHobbies,
-        getMomentsListByUserId: getMomentsListByUserId
+        getMomentsListByUserId: getMomentsListByUserId,
+        saveUserFollowDetails: saveUserFollowDetails,
+        removeUserFollowDetails: removeUserFollowDetails,
+        checkIfUserFollowsTheUser: checkIfUserFollowsTheUser,
+        getUserFollowerFollowingList: getUserFollowerFollowingList
     };
 })
 
 
 
-//configurations {
-//   all*.exclude group: 'com.android.support', module: 'support-v4'
-//}
+
 

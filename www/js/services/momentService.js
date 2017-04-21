@@ -64,10 +64,53 @@ angular.module('starter')
             });
         });
     };
+
+    var markMomentAsFavourite = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "InsertFavouriteDetails",
+                data: item,
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var removeMomentAsFavourite = function (userId, momentId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "RemoveFavByUserAndMomentId",
+                data: { Id: userId, ScheduleId :momentId},
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     return {
         getAllMoments: getAllMoments,
         getAllMomentListByParentId: getAllMomentListByParentId,
         saveMoments: saveMoments,
+        markMomentAsFavourite: markMomentAsFavourite,
+        removeMomentAsFavourite: removeMomentAsFavourite
     };
 })
 

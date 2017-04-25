@@ -44,6 +44,33 @@ angular.module('starter')
             });
         });
     };
+    var getAllMomentListByCriteria = function (nativeLang, learningLang,userId,value) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            var data1;
+            if (value == true) {
+                data1 = { NativeLang: nativeLang, LearningLang: learningLang };
+            }
+            else {
+                data1 = { FollowingUserId: userId };
+            }
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "GetMomentListByCriteria",
+                data: data1,
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
 
     var saveMoments = function (item) {
         return $q(function (resolve, reject) {
@@ -105,12 +132,75 @@ angular.module('starter')
             });
         });
     };
+    var getAllCountry = function () {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'GET',
+                url: $rootScope.serviceurl + "GetAllCountry",
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var getAllLanguages = function () {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'GET',
+                url: $rootScope.serviceurl + "GetAllLanguages",
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+
+    var insertTransliterationDetails = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "InsertUserTransliterationDetails",
+                data: item,
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     return {
         getAllMoments: getAllMoments,
         getAllMomentListByParentId: getAllMomentListByParentId,
         saveMoments: saveMoments,
         markMomentAsFavourite: markMomentAsFavourite,
-        removeMomentAsFavourite: removeMomentAsFavourite
+        removeMomentAsFavourite: removeMomentAsFavourite,
+        getAllCountry: getAllCountry,
+        getAllLanguages: getAllLanguages,
+        getAllMomentListByCriteria: getAllMomentListByCriteria,
+        insertTransliterationDetails: insertTransliterationDetails
     };
 })
 

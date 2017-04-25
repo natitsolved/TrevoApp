@@ -1,0 +1,78 @@
+<ion-view view-title="UserList">
+
+    <div class="bar bar-header new-header" ng-click="takeToSearch()">
+        <button class="ion-android-arrow-back"></button>
+        <h1 class="title">Advanced Search</h1>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+
+        <div class="row self-intro">
+            <div class="row self-intro">
+                <div class="col col-40">
+                    Nationality
+                </div>
+                <div class="col col-60">
+                    <select style="width:100%;" ng-model="selectedCountry">
+                        <option ng-repeat="country in countryList" value="{{country.Country_Id}}">
+                            {{country.Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col col-100">
+
+                <textarea ng-model="selectedCity" style="width:100%;" placeholder="Search by city"></textarea>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col col-20">
+                Native
+            </div>
+            <div class="col col-20" style="font-weight:bold">
+                {{userInfo.nativeLang}}
+            </div>
+            <div class="col col-60">
+                <select style="width:100%;" ng-model="selectedNatLanguage">
+                    <option ng-repeat="lang in languageList" value="{{lang.Language_Id}}">
+                        {{lang.Name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-25">
+                Learning
+            </div>
+            <div class="col col-65">
+                <select style="width:100%;" ng-model="selectedLearnLanguage">
+                    <option ng-repeat="lang in languageList" value="{{lang.Language_Id}}">
+                        {{lang.Name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-100">
+                Language Level
+            </div>
+        </div>
+        <div class="list card card-mirror new-card-mirror">
+
+            <div class="row" ng-repeat="level in langLevelList" style="padding:5px 10px">
+                <div class="col-75">
+                    <h5 ng-click="showRight(level.LevelId)">{{level.LevelName}}</h5>
+                </div>
+                <div class="col-25"><span style="float:right; margin-top:8px" class="ng-binding" id="{{'rightDiv_'+level.LevelId}} "></span></div>
+            </div>
+
+        </div>
+
+        <button type="button" style="padding:7px 7px;margin-left:32px;width:60%" ng-click="advancedSearch(selectedCountry,selectedCity,selectedNatLanguage,selectedLearnLanguage,selectedLangLevel)">Search</button>
+    </ion-content>
+
+</ion-view>

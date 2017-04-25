@@ -35,6 +35,23 @@ app.controller('MirrorCtrl', function ($scope, momentService, ionicMaterialInk, 
             }
         }
 
+        if ($window.localStorage["disCoverActiveMenu"]) {
+            var activeValue = $window.localStorage["disCoverActiveMenu"];
+            if (activeValue == "classMate") {
+                $rootScope.isFollowingActive = false;
+                $rootScope.isClassMateActive = true;
+            }
+            else if (activeValue == "following") {
+                $rootScope.isFollowingActive = true;
+                $rootScope.isClassMateActive = false;
+            }
+            $window.localStorage["disCoverActiveMenu"] = '';
+        }
+        else {
+            $rootScope.isFollowingActive = false;
+            $rootScope.isClassMateActive = false;
+        }
+
         $ionicLoading.hide();
     }
     $scope.getAllMoments = function () {
@@ -175,4 +192,41 @@ app.controller('MirrorCtrl', function ($scope, momentService, ionicMaterialInk, 
             $scope.data = $rootScope.coipedMessage;
         }
     }
+
+    $scope.goToChatbot = function () {
+        $state.go('chatbot', {}, { reload: true });
+    }
+    $scope.getMomentsByCriteria = function (value) {
+        if ($window.localStorage["userInfo"])
+        {
+            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+            momentService.getAllMomentListByCriteria(userDetails.nativeLang, userDetails.learningLang, userDetails.userId, value).then(function (data) {
+                $rootScope.mirrorListByLang = data;
+                $window.localStorage["disCoverActiveMenu"] = value == true ? "classMate" : "following";
+                $state.go('discoverListByLang', {}, { reload: true });
+            }, function (error) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: error.Message
+                });
+            })
+
+        }
+    }
+
+
+    $scope.getDefaultMoments = function ()
+    {
+        $state.go('discover', {}, { reload: true });
+    }
+
+    $scope.doLangListRefresh = function ()
+    {
+        if ($rootScope.isClassMateActive)
+            $scope.getMomentsByCriteria(true);
+        else
+            $scope.getMomentsByCriteria(false);
+        $scope.$broadcast('scroll.refreshComplete');
+    }
+
 });

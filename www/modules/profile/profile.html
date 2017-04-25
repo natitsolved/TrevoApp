@@ -2,8 +2,10 @@
 
  <div class="bar bar-header new-header">
   <h1 class="title">Profile</h1>
+     <button class="button" ng-click="goToChatbot()"><img src="img/chat_bot_icon.png"></button>
 </div> 
   <ion-content class="padding-top sign_in_back">
+      <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
 	<div class="row profile-head">
 	  <div class="col col-75">
 	  	<img ng-src="{{userDetails.ImagePath}}" ng-show="userDetails.ImagePath!=null" name=file ngf-select="takeFromCamera(files)" ng-model="files" ngf-accept="'image/*'">
@@ -19,11 +21,11 @@
 	</div>
 	<div class="row profile-options">
 		<div class="col">
-			<a href=""><img src="img/004-translation-and-localization.png"><span>0</span></a>
-			<a href=""><img src="img/003-spell-check-interface-symbol.png"><span>2</span></a>
-			<a href=""><img src="img/002-star.png"><span>1</span></a>
-			<a href=""><img src="img/001-speaker.png"><span>0</span></a>
-            <a href=""><img src="img/001-speaker.png"><span>0</span></a>
+			<a href=""><img src="img/004-translation-and-localization.png"><span>{{userDetails.TranslateCount}}</span></a>
+			<a href=""><img src="img/003-spell-check-interface-symbol.png"><span>{{userDetails.SpellCheckCount}}</span></a>
+			<a href=""><img src="img/002-star.png"><span>{{userDetails.FavCount}}</span></a>
+			<a href=""><img src="img/001-speaker.png"><span>{{userDetails.TTSCount}}</span></a>
+            <!--<a href=""><img src="img/001-speaker.png"><span>0</span></a>-->
             <a href="" ng-click="addNewDiscover()"><i class="ion-android-add"></i>Add discover</a>
 		</div>
 	</div>
@@ -55,11 +57,11 @@
 			
 		</div>
 	</div>	
-	<div class="row self-intro">
+	<div class="row self-intro" ng-click="showBlockedUsers(userDetails.User_Id)">
 		<div class="col col-10">
-		<i class="ion-ios-settings-strong"></i></div>
+		<img src="img/stop.png" style="width:20px;"/></div>
 		<div class="col col-90">
-			<h2>Moments</h2>
+			<h2>Blocked Users</h2>
 		</div>
 	</div>
   </ion-content>

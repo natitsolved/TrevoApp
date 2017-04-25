@@ -261,5 +261,53 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
             $scope.data = $rootScope.coipedMessage;
         }
     }
-    
+    $scope.goToChatbot = function () {
+        $state.go('chatbot', {}, { reload: true });
+    }
+
+    $scope.doRefresh = function () {
+        $scope.init();
+        $scope.$broadcast('scroll.refreshComplete');
+    }
+
+
+
+    $scope.showBlockedUsers = function (userId)
+    {
+        profileService.getBlockedUserListByUserId(userId).then(function (data) {
+            $rootScope.blockedUserList = data;
+            $state.go('blockedUserList', {}, { reload: true });
+        }, function (error) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: error.Message
+            });
+        });
+    }
+
+
+    $scope.unBlockUser = function (userID)
+    {
+        var confirmPopup = $ionicPopup.show({
+            title: 'unblock User?',
+            template: 'Are you sure you want to unblock this user?',
+            buttons: [{
+                text: 'Cancel',
+                type: 'button-royal button-outline',
+            }, {
+                text: 'Ok',
+                type: 'button-royal',
+                onTap: function () {
+                    profileService.unBlockUser($scope.userInfo.userId,userID).then(function (data) {
+                        $scope.showBlockedUsers($scope.userInfo.userId);
+                    }, function (error) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Error',
+                            template: error.Message
+                        });
+                    });
+                }
+            }]
+        });
+    }
 });

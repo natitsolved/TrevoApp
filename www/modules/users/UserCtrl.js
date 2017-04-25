@@ -13,8 +13,11 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     }
     $scope.getUserListing = function () {
-       
-        authService.getAllUserswithCountry().then(function (data) {
+        if (!$scope.userInfo)
+        {
+            $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
+        }
+        authService.getAllUserswithCountry($scope.userInfo.userId).then(function (data) {
             $scope.userList = [];
             for (var i = 0; i < data.length; i++) {
                 if (data[i].User_Id != $scope.userInfo.userId) {
@@ -67,5 +70,9 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $state.go('publicProfile', {}, { reload: true });
     }
    
+    $scope.goToAdvancedSearch = function ()
+    {
+        $state.go('advancedSearch', {}, { reload: true });
+    }
 
 });

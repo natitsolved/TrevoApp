@@ -82,6 +82,7 @@ app.run(['$rootScope', '$state', '$stateParams', '$ionicPlatform', '$ionicPopup'
                 });
             });
             if ($window.localStorage["userInfo"]) {
+                $window.localStorage["activeFooter"] = "user";
                 $state.go('userListing', {}, { reload: true });
             }
             else {

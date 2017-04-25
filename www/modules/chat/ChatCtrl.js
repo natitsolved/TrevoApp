@@ -450,58 +450,68 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         console.log($scope.transaltionObj);
         $scope.show = true;
         if ($window.localStorage["userInfo"]) {
-            var element;
-            //var spinnerId = "spinner_" + $scope.transaltionObj.id;
-            //var spinnerElement = angular.element(document.querySelector('#' + spinnerId));
-            //spinnerElement[0].style.display = "block";
-            var isSender = $scope.transaltionObj.isSender;
-            if (isSender == 1) {
-                if ($scope.hideShowLoader == undefined) {
-                    $scope.hideShowLoader = [];
+            var item = { User_Id: $scope.userInfo.userId, IsTranslate: 1 };
+            momentService.insertTransliterationDetails(item).then(function (data) {
+                var element;
+                //var spinnerId = "spinner_" + $scope.transaltionObj.id;
+                //var spinnerElement = angular.element(document.querySelector('#' + spinnerId));
+                //spinnerElement[0].style.display = "block";
+                var isSender = $scope.transaltionObj.isSender;
+                if (isSender == 1) {
+                    if ($scope.hideShowLoader == undefined) {
+                        $scope.hideShowLoader = [];
+                    }
+                    $scope.hideShowLoader[$scope.transaltionObj.id] = true;
                 }
-                $scope.hideShowLoader[$scope.transaltionObj.id] = true;
-            }
-            else {
-                if ($scope.rcvrHideShowLoader == undefined) {
-                    $scope.rcvrHideShowLoader = [];
+                else {
+                    if ($scope.rcvrHideShowLoader == undefined) {
+                        $scope.rcvrHideShowLoader = [];
+                    }
+                    $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = true;
                 }
-                $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = true;
-            }
-            var userDetails = JSON.parse($window.localStorage["userInfo"]);
-            var targetEn = userDetails.nativeLang;
-            if (targetEn) {
-                var sourceEn = "en";
-                if (isSender == 1)
-                    element = "translatedText_" + $scope.transaltionObj.id;
-                else
-                    element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
-                var myElement = angular.element(document.querySelector('#' + element));
-                var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
-                $http({
-                    url: urlToHit,
-                }).then(function (data) {
-                    myElement[0].innerHTML = data.data.data.translations[0].translatedText;
-                    //spinnerElement[0].style.display = "none";
-                    if (isSender == 1) {
-                        $scope.hideShowLoader[$scope.transaltionObj.id] = false;
-                    }
-                    else {
-                        $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
-                    }
-                }, function (error) {
-                    //spinnerElement[0].style.display = "none";
-                    if (isSender == 1) {
-                        $scope.hideShowLoader[$scope.transaltionObj.id] = false;
-                    }
-                    else {
-                        $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
-                    }
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Incorect',
-                        template: error.data.error.message
+                var userDetails = JSON.parse($window.localStorage["userInfo"]);
+                var targetEn = userDetails.nativeLang;
+                if (targetEn) {
+                    var sourceEn = "en";
+                    if (isSender == 1)
+                        element = "translatedText_" + $scope.transaltionObj.id;
+                    else
+                        element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
+                    var myElement = angular.element(document.querySelector('#' + element));
+                    var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
+                    $http({
+                        url: urlToHit,
+                    }).then(function (data) {
+                        myElement[0].innerHTML = data.data.data.translations[0].translatedText;
+                        //spinnerElement[0].style.display = "none";
+                        if (isSender == 1) {
+                            $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                        }
+                        else {
+                            $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                        }
+                    }, function (error) {
+                        //spinnerElement[0].style.display = "none";
+                        if (isSender == 1) {
+                            $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                        }
+                        else {
+                            $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                        }
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Incorect',
+                            template: error.data.error.message
+                        });
                     });
+                }
+            }, function (error) {
+                $ionicLoading.hide();
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: error.Message
                 });
-            }
+            });
+           
 
         }
 
@@ -525,23 +535,33 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $ionicLoading.show({
             template: 'Loading...'
         });
-        var message = $scope.transaltionObj.message;
-        window.TTS.speak({
-            text: message,
-            locale: 'en-GB',
-            rate: 1.5
-        }, function () {
-            $scope.show = true;
+        var item = { User_Id: $scope.userInfo.userId, IsTTS: 1 };
+        momentService.insertTransliterationDetails(item).then(function (data) {
+            var message = $scope.transaltionObj.message;
+            window.TTS.speak({
+                text: message,
+                locale: 'en-GB',
+                rate: 1.5
+            }, function () {
+                $scope.show = true;
+                $ionicLoading.hide();
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }, function () {
+                $ionicLoading.hide();
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            });
+        }, function (error) {
             $ionicLoading.hide();
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
-        }, function () {
-            $ionicLoading.hide();
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: error.Message
+            });
         });
+       
 
     }
 
@@ -571,12 +591,22 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $ionicLoading.show({
             template: 'Loading...'
         });
-        var message = $scope.transaltionObj.message;
-        $rootScope.messageToChangeSpell = message;
-        $rootScope.array_of_suggestions = $scope.dictionary.suggest(message);
-        console.log($rootScope.array_of_suggestions);
-        $ionicLoading.hide();
-        $state.go('spellCheck', {}, { reload: true });
+        var item = { User_Id: $scope.userInfo.userId, IsSpellCheck: 1 };
+        momentService.insertTransliterationDetails(item).then(function (data) {
+            var message = $scope.transaltionObj.message;
+            $rootScope.messageToChangeSpell = message;
+            $rootScope.array_of_suggestions = $scope.dictionary.suggest(message);
+            console.log($rootScope.array_of_suggestions);
+            $ionicLoading.hide();
+            $state.go('spellCheck', {}, { reload: true });
+        }, function (error) {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: error.Message
+            });
+        });
+        
     }
 
     $scope.showRight = function (id, item) {
@@ -646,48 +676,41 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         var message = $scope.transaltionObj.message;
         var isSender = $scope.transaltionObj.isSender;
         var item = { Message: message, FavouriteUserId: $scope.userInfo.userId, IsSender: 0, SenderRecieverId: 0, MomentId: 0 };
-        //momentService.markMomentAsFavourite(item).then(function (data) {
-        //    var query = "Update ChatTable set IsFavourite= ? Where id=?";
-        //    $cordovaSQLite.execute($scope.db, query, [1, $scope.transaltionObj.messageID]).then(function (res) {
-        //        var message = "INSERT ID -> " + res.insertId;
-        //        console.log(message);
-        //        if (isSender == 1) {
-        //            if ($scope.senderFav == undefined) {
-        //                $scope.senderFav = [];
-        //            }
-        //            $scope.senderFav[$scope.transaltionObj.messageID] = true;
-        //        }
-        //        $scope.show = true;
-        //        $ionicLoading.hide();
-        //    }, function (err) {
-        //        console.error(err);
-        //        //alert(err);
-        //    });
-
-        //}, function (error) {
-        //    $ionicLoading.hide();
-        //    var alertPopup = $ionicPopup.alert({
-        //        title: 'Error',
-        //        template: 'There is some error. Please try again later.'
-        //    });
-
-        //});
-       
-        var query = "Update ChatTable set IsFavourite= ? Where id=?";
-        $cordovaSQLite.execute($scope.db, query, [1, $scope.transaltionObj.messageID]).then(function (res) {
-            var message = "INSERT ID -> " + res.insertId;
-            console.log(message);
-            if (isSender == 1) {
-                if ($scope.senderFav == undefined) {
-                    $scope.senderFav = [];
+        momentService.markMomentAsFavourite(item).then(function (data) {
+            var query = "Update ChatTable set IsFavourite= ? Where id=?";
+            $cordovaSQLite.execute($scope.db, query, [1, $scope.transaltionObj.messageID]).then(function (res) {
+                var message = "INSERT ID -> " + res.insertId;
+                console.log(message);
+                if (isSender == 1) {
+                    if ($scope.senderFav == undefined) {
+                        $scope.senderFav = [];
+                    }
+                    $scope.senderFav[$scope.transaltionObj.messageID] = true;
                 }
-                $scope.senderFav[$scope.transaltionObj.messageID] = true;
-            }
-            $scope.show = true;
+                $scope.show = true;
+                $ionicLoading.hide();
+            }, function (err) {
+                console.error(err);
+                //alert(err);
+            });
+
+        }, function (error) {
             $ionicLoading.hide();
-        }, function (err) {
-            console.error(err);
-            //alert(err);
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: 'There is some error. Please try again later.'
+            });
+
         });
+       
+       
+    }
+
+
+    $scope.goToUserProfile = function (userId) {
+        var obj = JSON.stringify({ userId: userId });
+        $window.localStorage["userProfile"] = obj;
+
+        $state.go('publicProfile', {}, { reload: true });
     }
 });

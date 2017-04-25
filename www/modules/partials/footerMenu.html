@@ -1,17 +1,17 @@
 <div class="tabs tabs-icon-bottom" ng-controller="MenuCtrl">
-    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToUserListing()">
+    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToUserListing()"  ng-class="{'active': isUserActive}">
         <i class="icon ion-chatbubbles"></i>
         Chat
     </a>
-    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToMoments()">
+    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToMoments()" ng-class="{'active': isMomentActive}">
         <i class="icon ion-ios-settings-strong"></i>
         Discover
     </a>
-    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToSearch()">
+    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToSearch()" ng-class="{'active': isSearchActive}">
         <i class="icon ion-search"></i>
         Search
     </a>
-    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToProfile()">
+    <a class="tab-item foot" href="javascript:void(0)" ng-click="takeToProfile()"  ng-class="{'active': isProfileActive}">
         <i class="icon ion-person-stalker"></i>
         Profile
     </a>

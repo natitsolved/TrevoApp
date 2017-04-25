@@ -1,0 +1,26 @@
+<ion-view view-title="Hobbies" cache-view="false">
+
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToProfile()"></button>
+        <h1 class="title">Blocked User List</h1>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+        <ion-list class="list_user_list" ng-repeat="user in blockedUserList track by $index">
+            <ion-item>
+                <div class="left_image_list">
+                    <img ng-src="{{user.ImagePath}}" ng-click="goToUserProfile(user.User_Id)">
+                    <div class="country_image">
+                        <img ng-src="{{user.Flag_Icon}}" style="width: 20px; height:20px;">
+                    </div>
+                </div>
+                <div class="right_list_text">
+                    <div class="list_user_list-name_date">
+                        <h2>{{user.Name}}</h2>
+                        <span ng-click="unBlockUser(user.User_Id)"><img src="img/unblock-blocked-websites.png" style="width:20px;"/></span>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

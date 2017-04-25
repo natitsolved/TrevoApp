@@ -83,4 +83,22 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
 
 
 
+    $scope.block = function (userID)
+    {
+        if ($window.localStorage["userInfo"])
+        {
+            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+            profileService.blockUser(userDetails.userId, userID).then(function (data) {
+                $state.go('userListing', {}, { reload: true });
+            }, function (error) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: error.Message
+                });
+            });
+        }
+    }
+
+
+
 });

@@ -1,0 +1,23 @@
+<ion-view view-title="UserList">
+
+    <div class="bar bar-header new-header" ng-click="takeToSearch()">
+        <button class="ion-android-arrow-back"></button>
+        <h1 class="title">Advanced Search List</h1>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+
+        <div class="list card search-card" ng-repeat="user in advancedUserList">
+            <div class="item item-avatar">
+                <img class="circle-image" ng-src="{{user.ImagePath}}" ng-click="goToUserProfile(user.User_Id,user.Name,user.ImagePath,user.NativeAbbrv,user.LearningAbbrv)">
+                <h2>{{user.Name}}<span class="country-flag"><img ng-src="{{user.Icon_Path}}"></span></h2>
+                <p class="ng-binding lng">{{user.NativeAbbrv}} <span><i style="margin:0 3px;font-size:13px;" class="icon ion-ios-arrow-forward"></i></span> {{user.LearningAbbrv}}</p>
+                <p class="loctn"><span><i class="icon ion-ios-location"></i></span> {{user.Address}}</p>
+                <!--<div class="right-arrow"><i class="icon ion-ios-arrow-forward"></i></div>-->
+            </div>
+        </div>
+
+    </ion-content>
+   
+</ion-view>

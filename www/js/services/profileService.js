@@ -243,6 +243,64 @@ angular.module('starter')
             });
         });
     };
+
+    var blockUser = function (blockingUserId,blockedUserId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "InsertBlockDetails",
+                data: { Id: blockingUserId, ScheduleId: blockedUserId }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var unBlockUser = function (blockingUserId, blockedUserId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "DeleteBlockDetails",
+                data: { Id: blockingUserId, ScheduleId: blockedUserId }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+    var getBlockedUserListByUserId = function (blockingUserId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "GetBlockedUserListByUserId",
+                data: { Id: blockingUserId }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     return {
         updateUserSelfIntroduction: updateUserSelfIntroduction,
         updateUserName: updateUserName,
@@ -255,7 +313,10 @@ angular.module('starter')
         saveUserFollowDetails: saveUserFollowDetails,
         removeUserFollowDetails: removeUserFollowDetails,
         checkIfUserFollowsTheUser: checkIfUserFollowsTheUser,
-        getUserFollowerFollowingList: getUserFollowerFollowingList
+        getUserFollowerFollowingList: getUserFollowerFollowingList,
+        blockUser: blockUser,
+        getBlockedUserListByUserId: getBlockedUserListByUserId,
+        unBlockUser: unBlockUser
     };
 })
 

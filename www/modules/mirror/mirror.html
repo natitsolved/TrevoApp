@@ -1,9 +1,30 @@
 <ion-view view-title="Discover" cache-view="false">
-
+    <!--<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs">
+            <a class="tab-item active" href="#">
+                <i class="icon ion-home"></i>
+                Test
+            </a>
+            <a class="tab-item" href="#" ng-click="takeToUserListing()">
+                <i class="icon ion-star"></i>
+                Favorites
+            </a>
+            <a class="tab-item" href="#">
+                <i class="icon ion-gear-a"></i>
+                Settings
+            </a>
+        </div>
+    </div>-->
  <div class="bar bar-header new-header">
-  <!--<button class="button ion-android-arrow-back"></button>-->
-  <h1 class="title">Discover</h1>
-  <!--<button class="button"><img src="img/chat_bot_icon.png"></button>-->
+     <a class="tab-item active" href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getDefaultMoments()">
+         Default
+     </a>
+     <a class="tab-item" href="javascript:void(0)"  style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(false)">
+         Following
+     </a>
+     <a class="tab-item" href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(true)">
+         Classmates
+     </a>
 </div> 
   <ion-content class="padding-top sign_in_back">
       <ion-refresher pulling-text="Pull to refresh..."

@@ -114,12 +114,24 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          resolve: loadSequence('discover'),
          controller: 'MirrorCtrl'
      })
+  .state('discoverListByLang', {
+      url: '/discoverListByLang',
+      templateUrl: 'modules/mirror/mirrorListByNativeLearnLang.html',
+      resolve: loadSequence('discover'),
+      controller: 'MirrorCtrl'
+  })
     .state('profile', {
         url: '/profile',
         templateUrl: 'modules/profile/profile.html',
         resolve: loadSequence('profile'),
         controller: 'ProfileCtrl'
     })
+ .state('blockedUserList', {
+     url: '/blockedUserList',
+     templateUrl: 'modules/profile/BlockedUserList.html',
+     resolve: loadSequence('profile'),
+     controller: 'ProfileCtrl'
+ })
      .state('newDiscover', {
          url: '/newDiscover',
          templateUrl: 'modules/profile/NewDiscover.html',
@@ -149,6 +161,18 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          templateUrl: 'modules/search/search.html',
          resolve: loadSequence('search'),
          controller: 'SearchCtrl'
+     })
+    .state('advancedSearch', {
+        url: '/advancedSearch',
+        templateUrl: 'modules/advanced-search/advancedSearch.html',
+        resolve: loadSequence('search'),
+        controller: 'advancedSearchCtrl'
+    })
+     .state('advancedSearchUserListing', {
+         url: '/advancedSearchUserListing',
+         templateUrl: 'modules/advanced-search/advancedSearchUserListing.html',
+         resolve: loadSequence('search'),
+         controller: 'advancedSearchCtrl'
      })
     ;
 

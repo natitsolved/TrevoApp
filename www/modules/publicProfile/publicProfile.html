@@ -1,7 +1,7 @@
 <ion-view view-title="Public Profile" cache-view="false">
    
-    <div class="bar bar-header new-header">
-        <button class="button ion-android-arrow-back" ng-click="takeToUserListing()"></button>
+    <div class="bar bar-header new-header" ng-click="takeToUserListing()">
+        <button class="button ion-android-arrow-back" ></button>
         <h1 class="title">User Profile</h1>
     </div>
     <ion-content class="padding-top sign_in_back">
@@ -54,7 +54,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="">
+                <a href="" ng-click="block(userProfile.User_Id)">
                     <span><i class="icon ion-close"></i></span>
                     <b>Block/Report</b>
                 </a>

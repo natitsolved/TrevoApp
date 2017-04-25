@@ -43,6 +43,8 @@ angular.module('starter')
         $window.localStorage["translateInfo"] = '';
         $window.localStorage["firstencodedString"] = ''
         $window.localStorage["userProfile"] = '';
+        $window.localStorage["activeFooter"] = '';
+        $window.localStorage["disCoverActiveMenu"] = '';
         userInfo = '';
     }
 
@@ -72,6 +74,7 @@ angular.module('starter')
                         name: response.Name,
                         image: response.ImagePath,
                         nativeLang: response.NativeLangugae,
+                        learningLang:response.LearningLanguage,
                         favMomentList: response.FavMomentList
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
@@ -125,14 +128,15 @@ angular.module('starter')
     };
 
     
-    var getAllUserswithCountry = function () {
+    var getAllUserswithCountry = function (userId) {
         return $q(function (resolve, reject) {
             $ionicLoading.show({
                 template: 'Loading...'
             });
             $http({
-                method: 'GET',
+                method: 'POST',
                 url: $rootScope.serviceurl + "GetAllUserWithCountryIcon",
+                data:{Id:userId},
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (response) {
                 console.log(response);
@@ -295,7 +299,27 @@ angular.module('starter')
         });
     };
     
-
+    var getAllUsersForAdvancedSearch = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            var data = { NatioanlityId: item.nationalityId, Address: item.address, NativeLangId: item.natLangId, LearningLangId: item.learningLangId, LangLevelId: item.langLevelId };
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "AdvancedSearch",
+                data:data,
+                headers: { 'Content-Type': 'application/json' },
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function () {
+                $ionicLoading.hide();
+                reject('Login Failed.');
+            });
+        });
+    };
     return {
         getUser: getUser,
         setUser: setUser,
@@ -308,7 +332,8 @@ angular.module('starter')
         sendForgotpassword: sendForgotpassword,
         externalLogin: externalLogin,
         externalRegister: externalRegister,
-        getAllUserswithCountry:getAllUserswithCountry,
+        getAllUserswithCountry: getAllUserswithCountry,
+        getAllUsersForAdvancedSearch:getAllUsersForAdvancedSearch,
         isAuthenticated: function () { return isAuthenticated; },
         checkUniqueValue: function (table, field, value) {
             var encodedString = 'table=' + encodeURIComponent(table) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(value);

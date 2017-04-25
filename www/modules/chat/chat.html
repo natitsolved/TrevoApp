@@ -2,7 +2,7 @@
 
     <div class="bar bar-header new-header">
         <button class="button ion-android-arrow-back" ng-click="takeToUserListing()"></button>
-        <h1 class="title"><span><img ng-src="{{recieverImage}}" /> {{recieverName}}<span style="float:right;font-size:7px;margin-top:14px;margin-left:-27px;" ng-show="IsOnline">Online</span></span></h1>
+        <h1 class="title"  ng-click="goToUserProfile(recieverId)"><span><img ng-src="{{recieverImage}}" /> {{recieverName}}<span style="float:right;font-size:7px;margin-top:14px;margin-left:-27px;" ng-show="IsOnline">Online</span></span></h1>
 
         <!--<img src="img/green_dot.jpg" style="width:12px;height:12px;margin-top:30px;" />-->
         <button class="button" ng-click="showsearch()"><i class="icon-right ion-grid"></i></button>
@@ -30,7 +30,7 @@
                 <div ng-repeat="msg in ChatList track by $index">
 
                     <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
-                        <div class="avatar-image"><img ng-src="{{recieverImage}}"></div>
+                        <div class="avatar-image"><img ng-src="{{recieverImage}}" ng-click="goToUserProfile(recieverId)"></div>
                         <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender,msg.id)">
                             {{msg.message}}
                             <div class="bottom-part" id="{{'rcvrTranslatedText_'+$index}}"></div>

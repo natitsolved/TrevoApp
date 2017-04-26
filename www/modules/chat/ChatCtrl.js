@@ -16,7 +16,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $window.localStorage["messageToSend"] = '';
     }
     $scope.dictionary = new Typo("en_US", false, false, { dictionaryPath: "js/dictionaries" });
-    if ($window.localStorage["userDetails"] != '') {
+    if ($window.localStorage["userDetails"]) {
         var userDetails = JSON.parse($window.localStorage["userDetails"]);
         $scope.recieverId = userDetails.userId;
         $scope.recieverName = userDetails.name;
@@ -450,7 +450,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         console.log($scope.transaltionObj);
         $scope.show = true;
         if ($window.localStorage["userInfo"]) {
-            var item = { User_Id: $scope.userInfo.userId, IsTranslate: 1 };
+            var item = { User_Id: $scope.userInfo.userId, IsTranslate: 1, Details: $scope.transaltionObj.message };
             momentService.insertTransliterationDetails(item).then(function (data) {
                 var element;
                 //var spinnerId = "spinner_" + $scope.transaltionObj.id;
@@ -535,9 +535,9 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $ionicLoading.show({
             template: 'Loading...'
         });
-        var item = { User_Id: $scope.userInfo.userId, IsTTS: 1 };
+        var message = $scope.transaltionObj.message;
+        var item = { User_Id: $scope.userInfo.userId, IsTTS: 1, Details: message };
         momentService.insertTransliterationDetails(item).then(function (data) {
-            var message = $scope.transaltionObj.message;
             window.TTS.speak({
                 text: message,
                 locale: 'en-GB',
@@ -591,9 +591,9 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $ionicLoading.show({
             template: 'Loading...'
         });
-        var item = { User_Id: $scope.userInfo.userId, IsSpellCheck: 1 };
+        var message = $scope.transaltionObj.message;
+        var item = { User_Id: $scope.userInfo.userId, IsSpellCheck: 1, Details: message };
         momentService.insertTransliterationDetails(item).then(function (data) {
-            var message = $scope.transaltionObj.message;
             $rootScope.messageToChangeSpell = message;
             $rootScope.array_of_suggestions = $scope.dictionary.suggest(message);
             console.log($rootScope.array_of_suggestions);
@@ -675,7 +675,7 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
 
         var message = $scope.transaltionObj.message;
         var isSender = $scope.transaltionObj.isSender;
-        var item = { Message: message, FavouriteUserId: $scope.userInfo.userId, IsSender: 0, SenderRecieverId: 0, MomentId: 0 };
+        var item = { Message: message, FavouriteUserId: $scope.userInfo.userId, IsSender: 0, SenderRecieverId: 0, MomentId: 0, Details :message};
         momentService.markMomentAsFavourite(item).then(function (data) {
             var query = "Update ChatTable set IsFavourite= ? Where id=?";
             $cordovaSQLite.execute($scope.db, query, [1, $scope.transaltionObj.messageID]).then(function (res) {

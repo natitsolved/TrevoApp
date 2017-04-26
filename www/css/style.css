@@ -756,3 +756,12 @@ p.custom-para{overflow: visible;text-overflow: ellipsis;white-space: normal;}
 .mirror-bottom-wrapper a span.sign{width:26px; height: 26px; border-radius:100%; text-align: center; line-height: 24px; border: 1px solid #3a3a3a; font-size:16px}
 .mirror-bottom-wrapper a:hover, .mirror-bottom-wrapper a.active{color: #60cdf4}
 .mirror-bottom-wrapper a:hover span.sign, .mirror-bottom-wrapper a.active span.sign{border-color: #60cdf4}
+
+/********************** Adv search *********************/
+
+.adv-search-wrap{font-size:14px}
+.adv-search-wrap .input-label, .adv-search-wrap .item-input, .adv-search-wrap textarea{font-size:14px; color:#444}
+.adv-search-wrap .item-divider{line-height: 30px; font-weight:normal; font-size:14px; color:#000}
+.adv-search-wrap .card{ margin-top:10px}
+.adv-search-wrap .radio-content{font-size:14px}
+.adv-search-wrap .item.item-radio .radio-icon{padding: 10px; color:#4DBDE6}

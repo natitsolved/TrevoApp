@@ -1,66 +1,53 @@
 <ion-view view-title="Discover" cache-view="false">
-    <!--<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
-        <div class="tabs">
-            <a class="tab-item active" href="#">
-                <i class="icon ion-home"></i>
-                Test
+
+    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs" style="background: #4DBDE6; border-color:#46afd6; top:0">
+            <a class="tab-item active" href="javascript:void(0)" ng-click="getDefaultMoments()">
+                Default
             </a>
-            <a class="tab-item" href="#" ng-click="takeToUserListing()">
-                <i class="icon ion-star"></i>
-                Favorites
+            <a class="tab-item" href="javascript:void(0)" ng-click="getMomentsByCriteria(false)">
+                Following
             </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-gear-a"></i>
-                Settings
+            <a class="tab-item" href="javascript:void(0)" ng-click="getMomentsByCriteria(true)">
+                Classmates
             </a>
         </div>
-    </div>-->
- <div class="bar bar-header new-header">
-     <a class="tab-item active" href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getDefaultMoments()">
-         Default
-     </a>
-     <a class="tab-item" href="javascript:void(0)"  style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(false)">
-         Following
-     </a>
-     <a class="tab-item" href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(true)">
-         Classmates
-     </a>
-</div> 
-  <ion-content class="padding-top sign_in_back">
-      <ion-refresher pulling-text="Pull to refresh..."
-                     on-refresh="doRefresh()">
-      </ion-refresher>
-	<div class="list card card-mirror" ng-repeat="moment in momentsList track by $index">
-	  <div class="item item-avatar">
-	    <img ng-src="{{moment.ImagePath}}">
-	    <div class="country_image">
-      		<img ng-src="{{moment.CountryImagePath}}" style="width: 20px; height:20px;">
-      	</div>
-      	<div class="row">
-		  <div class="col">
-		  	<h2>{{moment.Name}}</h2>
-		  	<p class="ng-binding">{{moment.NativeLangAbbrev}} <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> {{moment.LearningLangAbbrev}}</p>
-		  </div>
-		  <div class="col">
-		  	<b>{{moment.PostingTime}}</b>
-		  </div>
-		</div>
-	  </div>
-		
-	  <div class="item item-body">
-	    <img class="full-image" ng-src="{{moment.UploadedImage}}" ng-show="moment.UploadedImage!=null">
-	    <p>
-            {{moment.Message}}
-	    </p>
-	    <p>
-	      <a href="javascript:void(0)" class="subdued" ng-click="markMomentAsFav(moment.MomentId,moment.PosterUserId)"><i class="ion-heart" id="{{'heart_'+moment.MomentId}}"></i>{{moment.FavouritesCount}}</a>
-	      <a href="javascript:void(0)" class="subdued" ng-click="takeToAddMomentPage(moment.MomentId)"><i class="ion-ios-chatbubble"></i>{{moment.RepliesCount}}</a>
-	      <a href="javascript:void(0)" class="subdued"><i class="ion-settings"></i></a>
-	    </p>
-	  </div>
-	</div>
-	
-  </ion-content>
+    </div>
+    <ion-content class="padding-top sign_in_back">
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="list card card-mirror" ng-repeat="moment in momentsList track by $index">
+            <div class="item item-avatar">
+                <img ng-src="{{moment.ImagePath}}">
+                <div class="country_image">
+                    <img ng-src="{{moment.CountryImagePath}}" style="width: 20px; height:20px;">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2>{{moment.Name}}</h2>
+                        <p class="ng-binding">{{moment.NativeLangAbbrev}} <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> {{moment.LearningLangAbbrev}}</p>
+                    </div>
+                    <div class="col">
+                        <b>{{moment.PostingTime}}</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{moment.UploadedImage}}" ng-show="moment.UploadedImage!=null">
+                <p>
+                    {{moment.Message}}
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="subdued" ng-click="markMomentAsFav(moment.MomentId,moment.PosterUserId)"><i class="ion-heart" id="{{'heart_'+moment.MomentId}}"></i>{{moment.FavouritesCount}}</a>
+                    <a href="javascript:void(0)" class="subdued" ng-click="takeToAddMomentPage(moment.MomentId)"><i class="ion-ios-chatbubble"></i>{{moment.RepliesCount}}</a>
+                    <a href="javascript:void(0)" class="subdued"><i class="ion-settings"></i></a>
+                </p>
+            </div>
+        </div>
+
+    </ion-content>
     <div data-ng-include="'modules/partials/footerMenu.html'"></div>
 </ion-view>
 

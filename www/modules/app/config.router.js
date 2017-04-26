@@ -174,6 +174,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          resolve: loadSequence('search'),
          controller: 'advancedSearchCtrl'
      })
+    .state('transliteration', {
+        url: '/transliteration',
+        templateUrl: 'modules/profile/UserTranslitertionList.html',
+        resolve: loadSequence('profile'),
+        controller: 'ProfileCtrl'
+    })
     ;
 
     $urlRouterProvider.otherwise('welcome');

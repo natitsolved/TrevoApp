@@ -15,10 +15,10 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
     $scope.init = function ()
     {
         if ($window.localStorage["translateInfo"] != undefined) {
+            var translateInfo = JSON.parse($window.localStorage["translateInfo"]);
             var userDetails = JSON.parse($window.localStorage["userInfo"]);
-            var item = { User_Id: userDetails.userId, IsTranslate: 1 };
+            var item = { User_Id: userDetails.userId, IsTranslate: 1, Details: translateInfo.text };
             momentService.insertTransliterationDetails(item).then(function (data) {
-                var translateInfo = JSON.parse($window.localStorage["translateInfo"]);
                 var sourceEn = translateInfo.sourceEn;
                 var targetEn = translateInfo.targetEn;
                 var text = translateInfo.text;
@@ -65,7 +65,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
         if ($window.localStorage["userInfo"])
         {
             var userDetails = JSON.parse($window.localStorage["userInfo"]);
-            var item = { User_Id: userDetails.userId, IsTranslate: 1 };
+            var item = { User_Id: userDetails.userId, IsTranslate: 1, Details: changeLanguage };
             momentService.insertTransliterationDetails(item).then(function (data) {
                 console.log(changeLanguage);
                 console.log($scope.toTranslateText);

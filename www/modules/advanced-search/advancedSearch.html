@@ -6,73 +6,73 @@
     </div>
     <ion-content class="padding-top sign_in_back">
 
-        <div class="row self-intro">
-            <div class="row self-intro">
-                <div class="col col-40">
-                    Nationality
-                </div>
-                <div class="col col-60">
-                    <select style="width:100%;" ng-model="selectedCountry">
-                        <option ng-repeat="country in countryList" value="{{country.Country_Id}}">
-                            {{country.Name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col col-100">
+        <div class="list adv-search-wrap">
+            <label class="item item-input item-select">
+                <div class="input-label">Nationality</div>
+                <select ng-model="selectedCountry">
+                    <option ng-repeat="country in countryList" value="{{country.Country_Id}}">
+                        {{country.Name}}
+                    </option>
+                </select>
+            </label>
 
-                <textarea ng-model="selectedCity" style="width:100%;" placeholder="Search by city"></textarea>
-            </div>
-        </div>
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon" style="margin-top: -11px; padding-left: 0"></i>
+                <textarea ng-model="selectedCity" placeholder="Search by city"></textarea>
+            </label>
 
-        <br />
-        <div class="row">
-            <div class="col col-20">
-                Native
-            </div>
-            <div class="col col-20" style="font-weight:bold">
-                {{userInfo.nativeLang}}
-            </div>
-            <div class="col col-60">
-                <select style="width:100%;" ng-model="selectedNatLanguage">
+            <label class="item item-input item-select">
+                <div class="input-label">Native</div>
+                <select ng-model="selectedNatLanguage">
                     <option ng-repeat="lang in languageList" value="{{lang.Language_Id}}">
                         {{lang.Name}}
                     </option>
                 </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-25">
-                Learning
-            </div>
-            <div class="col col-65">
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">Learning</div>
                 <select style="width:100%;" ng-model="selectedLearnLanguage">
                     <option ng-repeat="lang in languageList" value="{{lang.Language_Id}}">
                         {{lang.Name}}
                     </option>
                 </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-100">
-                Language Level
-            </div>
-        </div>
-        <div class="list card card-mirror new-card-mirror">
+            </label>
 
-            <div class="row" ng-repeat="level in langLevelList" style="padding:5px 10px">
-                <div class="col-75">
-                    <h5 ng-click="showRight(level.LevelId)">{{level.LevelName}}</h5>
+
+            <div class="item item-divider">Language Level</div>
+            <div class="card ">
+                <label class="item item-radio" >
+                    <input type="radio"  ng-model="selectedLangLevel"  value="1">
+                    <div class="radio-content">
+                        <div class="item-content">Begineer</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </div>
+                </label>
+                <label class="item item-radio" >
+                    <input type="radio" ng-model="selectedLangLevel" value="2" >
+                    <div class="radio-content">
+                        <div class="item-content">Intermediate</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </div>
+                </label>
+                <label class="item item-radio" >
+                    <input type="radio"  ng-model="selectedLangLevel" value="3">
+                    <div class="radio-content">
+                        <div class="item-content">Expert</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </div>
+                </label>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button class="button button-block button-stable" ng-click="advancedSearch(selectedCountry,selectedCity,selectedNatLanguage,selectedLearnLanguage,selectedLangLevel)">Search</button>
                 </div>
-                <div class="col-25"><span style="float:right; margin-top:8px" class="ng-binding" id="{{'rightDiv_'+level.LevelId}} "></span></div>
             </div>
 
         </div>
-
-        <button type="button" style="padding:7px 7px;margin-left:32px;width:60%" ng-click="advancedSearch(selectedCountry,selectedCity,selectedNatLanguage,selectedLearnLanguage,selectedLangLevel)">Search</button>
     </ion-content>
 
 </ion-view>

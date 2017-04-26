@@ -98,6 +98,12 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
     $scope.init();
 
 
+    $scope.goToUserProfile = function (userId) {
+        var obj = JSON.stringify({ userId: userId });
+        $window.localStorage["userProfile"] = obj;
+
+        $state.go('publicProfile', {}, { reload: true });
+    }
     $scope.updateUserInfo = function () {
 
       var Id = "content";
@@ -171,6 +177,20 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
                 });
             });
         }
+    }
+
+
+    $scope.showPopup = function (type, count)
+    {
+     
+        var confirmPopup = $ionicPopup.show({
+            title: type+" Count. ",
+            template:count ,
+            buttons: [ {
+                text: 'Ok',
+                type: 'button-royal',
+            }]
+        });
     }
 
     $scope.updateHobbies = function () {
@@ -289,7 +309,7 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
     $scope.unBlockUser = function (userID)
     {
         var confirmPopup = $ionicPopup.show({
-            title: 'unblock User?',
+            title: 'Unblock User?',
             template: 'Are you sure you want to unblock this user?',
             buttons: [{
                 text: 'Cancel',
@@ -308,6 +328,39 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
                     });
                 }
             }]
+        });
+    }
+
+
+
+    $scope.getTransliterationDetails = function (type)
+    {
+        var item;
+        if (type == 'translate')
+        {
+            item = { IsTTS: 0, IsSpellCheck: 0, IsTranslate: 1, IsFavourite: 0, User_Id: $scope.userDetails.User_Id };
+
+        }
+        else if (type == 'spellCheck')
+        {
+            item = { IsTTS: 0, IsSpellCheck: 1, IsTranslate: 0, IsFavourite: 0, User_Id: $scope.userDetails.User_Id };
+        }
+
+        else if (type == 'fav') {
+            item = { IsTTS: 0, IsSpellCheck: 0, IsTranslate: 0, IsFavourite: 1, User_Id: $scope.userDetails.User_Id };
+        }
+        else if (type == 'tts') {
+            item = { IsTTS: 1, IsSpellCheck: 0, IsTranslate: 0, IsFavourite: 0, User_Id: $scope.userDetails.User_Id };
+        }
+        profileService.getTransliterationListByUserId(item).then(function (data) {
+            $rootScope.transliterationList = data;
+
+            $state.go('transliteration', {}, { reload: true });
+        }, function (error) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: error.Message
+            });
         });
     }
 });

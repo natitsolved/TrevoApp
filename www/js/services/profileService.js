@@ -301,6 +301,25 @@ angular.module('starter')
             });
         });
     };
+    var getTransliterationListByUserId = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "GetTransliterationListByUserId",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     return {
         updateUserSelfIntroduction: updateUserSelfIntroduction,
         updateUserName: updateUserName,
@@ -316,7 +335,8 @@ angular.module('starter')
         getUserFollowerFollowingList: getUserFollowerFollowingList,
         blockUser: blockUser,
         getBlockedUserListByUserId: getBlockedUserListByUserId,
-        unBlockUser: unBlockUser
+        unBlockUser: unBlockUser,
+        getTransliterationListByUserId: getTransliterationListByUserId
     };
 })
 

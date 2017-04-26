@@ -21,10 +21,10 @@
 	</div>
 	<div class="row profile-options">
 		<div class="col">
-			<a href=""><img src="img/004-translation-and-localization.png"><span>{{userDetails.TranslateCount}}</span></a>
-			<a href=""><img src="img/003-spell-check-interface-symbol.png"><span>{{userDetails.SpellCheckCount}}</span></a>
-			<a href=""><img src="img/002-star.png"><span>{{userDetails.FavCount}}</span></a>
-			<a href=""><img src="img/001-speaker.png"><span>{{userDetails.TTSCount}}</span></a>
+			<a href="" ng-click="showPopup('Translations',userDetails.TranslateCount)"><img src="img/004-translation-and-localization.png"><span>{{userDetails.TranslateCount}}</span></a>
+			<a href="" ng-click="showPopup('Spell Corrections',userDetails.SpellCheckCount)"><img src="img/003-spell-check-interface-symbol.png"><span>{{userDetails.SpellCheckCount}}</span></a>
+			<a href=""ng-click="showPopup('Favourites',userDetails.FavCount)"><img src="img/002-star.png"><span>{{userDetails.FavCount}}</span></a>
+			<a href=""ng-click="showPopup('TTS',userDetails.TTSCount)"><img src="img/001-speaker.png"><span>{{userDetails.TTSCount}}</span></a>
             <!--<a href=""><img src="img/001-speaker.png"><span>0</span></a>-->
             <a href="" ng-click="addNewDiscover()"><i class="ion-android-add"></i>Add discover</a>
 		</div>
@@ -70,3 +70,8 @@
 
 
 
+<style>
+    .popup-body {
+        text-align:center;
+    }
+</style>

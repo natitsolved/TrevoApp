@@ -21,9 +21,11 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
                     profileService.checkIfUserFollowsTheUser(item).then(function (data) {
                         if (data.IsSuccess) {
                             $scope.isdiplay = true;
+                            $scope.followLabel = "Unfollow";
                         }
                         else {
                             $scope.isdiplay = false;
+                            $scope.followLabel = "Follow";
                         }
                        
                     }, function (err1) {

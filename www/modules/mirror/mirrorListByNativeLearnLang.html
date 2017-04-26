@@ -1,15 +1,17 @@
 <ion-view view-title="Discover" cache-view="false">
-   
-    <div class="bar bar-header new-header">
-        <a class="tab-item " href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getDefaultMoments()">
-            Default
-        </a>
-        <a class="tab-item " href="javascript:void(0)"  style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(false)"  ng-class="{'active': isFollowingActive}">
-            Following
-        </a>
-        <a class="tab-item" href="javascript:void(0)" style="font-weight:bolder;font-size:medium;" ng-click="getMomentsByCriteria(true)" ng-class="{'active': isClassMateActive}">
-            Classmates
-        </a>
+
+    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs" style="background: #4DBDE6; border-color:#46afd6; top:0">
+            <a class="tab-item " href="javascript:void(0)"  ng-click="getDefaultMoments()">
+                Default
+            </a>
+            <a class="tab-item " href="javascript:void(0)"  ng-click="getMomentsByCriteria(false)" ng-class="{'active': isFollowingActive}">
+                Following
+            </a>
+            <a class="tab-item" href="javascript:void(0)"  ng-click="getMomentsByCriteria(true)" ng-class="{'active': isClassMateActive}">
+                Classmates
+            </a>
+        </div>
     </div>
     <ion-content class="padding-top sign_in_back">
         <ion-refresher pulling-text="Pull to refresh..."
@@ -45,7 +47,7 @@
             </div>
         </div>
         <div ng-if="!mirrorListByLang" class="list card card-mirror">
-          No Results found !!!
+            No Results found !!!
         </div>
 
     </ion-content>

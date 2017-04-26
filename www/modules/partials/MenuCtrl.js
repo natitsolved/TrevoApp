@@ -65,5 +65,6 @@ app.controller('MenuCtrl', function ($scope, authService, $state, $window) {
         $window.localStorage["activeFooter"] = "search";
         $state.go('search', {}, { reload: true });
     }
+    
     $scope.init();
 });

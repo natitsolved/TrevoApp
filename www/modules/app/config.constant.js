@@ -16,6 +16,8 @@ app.constant('JS_REQUIRES', {
         'discover': ['modules/mirror/MirrorCtrl.js', 'js/services/momentService.js'],
         'profile': ['modules/profile/ProfileCtrl.js', 'js/services/momentService.js', 'js/services/profileService.js', 'modules/publicProfile/publicProfileCtrl.js'],
         'search': ['modules/search/SearchCtrl.js', 'js/services/momentService.js', 'modules/advanced-search/advancedSearchCtrl.js', 'js/services/authService.js'],
+        'changePass': ['modules/change-password/ChangePasswordCtrl.js', 'js/services/profileService.js', 'js/services/authService.js'],
+        'practice': ['modules/practice/PracticeCtrl.js','js/services/momentService.js'],
         //*** Services
 
     },

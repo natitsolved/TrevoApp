@@ -2,7 +2,7 @@
 
  <div class="bar bar-header new-header">
   <h1 class="title">Profile</h1>
-     <button class="button" ng-click="goToChatbot()"><img src="img/chat_bot_icon.png"></button>
+    <button class="button" ng-click="goToChatbot()"><img src="img/chat_bot_icon.png"></button>
 </div> 
   <ion-content class="padding-top sign_in_back">
       <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
@@ -50,13 +50,22 @@
 	</div>
 	<div class="row self-intro">
 		<div class="col col-10">
-			<i class="ion-gear-a"></i>
+			<i class="ion-navicon-round"></i>
 		</div>
-		<div class="col col-90">
-			<h2>Settings</h2>
+		<div class="col col-90" ng-click="takeToPractice()">
+			<h2>Practice</h2>
 			
 		</div>
 	</div>	
+      <div class="row self-intro" ng-click="takeToChangePass()">
+          <div class="col col-10">
+              <i class="ion-gear-a"></i>
+          </div>
+          <div class="col col-90">
+              <h2>Change Password</h2>
+
+          </div>
+      </div>	
 	<div class="row self-intro" ng-click="showBlockedUsers(userDetails.User_Id)">
 		<div class="col col-10">
 		<img src="img/stop.png" style="width:20px;"/></div>
@@ -64,6 +73,7 @@
 			<h2>Blocked Users</h2>
 		</div>
 	</div>
+      
   </ion-content>
     <div data-ng-include="'modules/partials/footerMenu.html'"></div>
 </ion-view>

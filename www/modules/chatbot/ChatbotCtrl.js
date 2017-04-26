@@ -49,6 +49,7 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
 
 
     $scope.takebotToUserListing = function () {
+        $window.localStorage["activeFooter"] = "user";
         $state.go('userListing', {}, { reload: true });
     }
    

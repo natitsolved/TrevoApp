@@ -363,4 +363,15 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
             });
         });
     }
+
+    $scope.takeToChangePass = function ()
+    {
+        $state.go('changePass', {}, { reload: true });
+    }
+
+
+    $scope.takeToPractice = function ()
+    {
+        $state.go('practice', {}, {reload:true});
+    }
 });

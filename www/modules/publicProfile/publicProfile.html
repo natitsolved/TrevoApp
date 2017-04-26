@@ -6,7 +6,7 @@
     </div>
     <ion-content class="padding-top sign_in_back">
         <div class="row profile-head">
-            <div class="col col-50">
+            <div class="col col-67">
                 <div class="row">
                     <div class="col col-25 pad-left0">
                         <img ng-src="{{userProfile.ImagePath}}">
@@ -14,12 +14,12 @@
                     <div class="col col-75">
                         <h5>{{userProfile.Name}}</h5>
                         <!--<p>@hello_soutikbose </p>-->
-                        <p class="loctn"><span><i class="icon ion-ios-location"></i></span>{{userProfile.Address}}</p>
+                        <p class="loctn"><span><i class="icon ion-ios-location"></i></span> {{userProfile.Address}}</p>
                         <!--<p class="ng-binding">EN <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> ES</p>-->
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col col-33">
                 <div class="lang-box-holder">
                     <div class="lang-holder">
                         <h4>{{userProfile.NativeAbbrv}}</h4>
@@ -93,10 +93,13 @@
                 </div>
             </div>
         </div>
-
+       
     </ion-content>
   
 </ion-view>
 
-
-
+<style>
+    .button-primary{
+        background-color: red;
+    }
+</style>

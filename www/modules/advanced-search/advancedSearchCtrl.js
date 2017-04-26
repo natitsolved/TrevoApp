@@ -12,6 +12,7 @@ app.controller('advancedSearchCtrl', function ($scope, ionicMaterialInk, $ionicP
         });
     }
 
+
    
     $scope.getCountryList = function ()
     {

@@ -25,7 +25,25 @@ angular.module('starter')
             });
         });
     };
-
+    var changePassword = function (item) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'POST',
+                url: $rootScope.serviceurl + "ChangePassword",
+                data: item
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
     var updateUserName = function (item) {
         return $q(function (resolve, reject) {
             $ionicLoading.show({
@@ -336,7 +354,8 @@ angular.module('starter')
         blockUser: blockUser,
         getBlockedUserListByUserId: getBlockedUserListByUserId,
         unBlockUser: unBlockUser,
-        getTransliterationListByUserId: getTransliterationListByUserId
+        getTransliterationListByUserId: getTransliterationListByUserId,
+        changePassword: changePassword
     };
 })
 

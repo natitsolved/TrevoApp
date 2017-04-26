@@ -89,7 +89,17 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
     {
         if ($window.localStorage["userInfo"])
         {
-            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+             var confirmPopup = $ionicPopup.show({
+            title: 'Block User?',
+            template: 'Are you sure you want to block this user?',
+            buttons: [{
+                text: 'Cancel',
+                type: 'button-royal button-outline',
+            }, {
+                text: 'Ok',
+                type: 'button-primary',
+                onTap: function () {
+                    var userDetails = JSON.parse($window.localStorage["userInfo"]);
             profileService.blockUser(userDetails.userId, userID).then(function (data) {
                 $state.go('userListing', {}, { reload: true });
             }, function (error) {
@@ -98,6 +108,10 @@ app.controller('publicProfileCtrl', function ($scope, $stateParams, ionicMateria
                     template: error.Message
                 });
             });
+                }
+            }]
+        });
+           
         }
     }
 

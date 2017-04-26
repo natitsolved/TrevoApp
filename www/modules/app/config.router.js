@@ -84,6 +84,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
          resolve: loadSequence('forgotPass'),
          controller: 'ForgotPswdCtrl'
      })
+      .state('changePass', {
+          url: '/changePass',
+          templateUrl: 'modules/change-password/change-password.html',
+          resolve: loadSequence('changePass'),
+          controller: 'ChangePasswordCtrl'
+      })
         .state('afterSplash', {
             url: '/welcome',
             templateUrl: 'modules/app/after-splash.html',
@@ -180,6 +186,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('profile'),
         controller: 'ProfileCtrl'
     })
+     .state('practice', {
+         url: '/practice',
+         templateUrl: 'modules/practice/Practice.html',
+         resolve: loadSequence('practice'),
+         controller: 'PracticeCtrl'
+     })
     ;
 
     $urlRouterProvider.otherwise('welcome');

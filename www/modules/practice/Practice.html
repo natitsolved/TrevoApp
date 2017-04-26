@@ -1,0 +1,47 @@
+<ion-view view-title="Practice" cache-view="false">
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToProfile()"></button>
+        <h1 class="title">Practice</h1>
+    </div>
+
+
+
+    <ion-content class="padding-top sign_in_back">
+        <div class="row profile-options">
+            <div class="col">
+                <a href="" ng-click="translateText(inputText)" style="margin-left:60px;"><img src="img/004-translation-and-localization.png"><span></span></a>
+                <a href="" ng-click="spellCorrection(inputText)"><img src="img/003-spell-check-interface-symbol.png"><span></span></a>
+                <a href="" ng-click="speakText(inputText)"><img src="img/001-speaker.png"><span></span></a>
+            </div>
+        </div>
+        <div class="list">
+            <div class="card">
+                <span class="item item-input">
+                    <textarea placeholder="Enter text and select an option from above" ng-model="inputText" id="inputContent"></textarea>
+                    <span ng-click="reset()">  <i class="ion-close-circled" style="padding:8px;font-size:20px;float:right;"></i></span>
+                </span>
+                 
+                <hr>
+                <label class="item item-input">
+                    <textarea placeholder="Result" ng-model="outputText" ng-readonly="IsReadOnly" id="correctContent"></textarea>
+                </label>
+            </div>
+
+        </div>
+
+          <div class="list card card-mirror new-card-mirror" ng-if="isShowSuggestion">
+
+            <div class="row" ng-repeat="item in array_of_suggestions track by $index" style="padding:5px 10px">
+                <div class="col-75">
+                    <h5 ng-click="showRight($index,item)">{{item}}</h5>
+                </div>
+                <div class="col-25"><span style="float:right; margin-top:8px" class="ng-binding" id="{{'rightDiv_'+$index}} "></span></div>
+            </div>
+
+        </div>
+    </ion-content>
+    <div data-ng-include="'modules/partials/footerMenu.html'"></div>
+</ion-view>
+
+
+

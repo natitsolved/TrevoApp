@@ -5,6 +5,9 @@
         <h1 class="title">User Profile</h1>
     </div>
     <ion-content class="padding-top sign_in_back">
+         <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="row profile-head">
             <div class="col col-67">
                 <div class="row">
@@ -15,7 +18,7 @@
                         <h5>{{userProfile.Name}}</h5>
                         <!--<p>@hello_soutikbose </p>-->
                         <p class="loctn"><span><i class="icon ion-ios-location"></i></span> {{userProfile.Address}}</p>
-                        <!--<p class="ng-binding">EN <span><i style="margin:0 3px;font-size:13px; " class="ion-code-working"></i></span> ES</p>-->
+                        
                     </div>
                 </div>
             </div>

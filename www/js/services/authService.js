@@ -142,12 +142,53 @@ angular.module('starter')
                 console.log(response);
                 $ionicLoading.hide();
                 resolve(response);
-            }).error(function () {
+            }).error(function (data) {
                 $ionicLoading.hide();
-                reject('Login Failed.');
+                reject(data);
             });
         });
     };
+
+ var getAllCountryList = function (userId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'GET',
+                url: $rootScope.serviceurl + "GetAllCountry",
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+
+ var getAllLanguageList = function (userId) {
+        return $q(function (resolve, reject) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            $http({
+                method: 'GET',
+                url: $rootScope.serviceurl + "GetAllLanguages",
+                headers: { 'Content-Type': 'application/json' }
+            }).success(function (response) {
+                console.log(response);
+                $ionicLoading.hide();
+                resolve(response);
+            }).error(function (error) {
+                $ionicLoading.hide();
+                reject(error);
+            });
+        });
+    };
+
     var register = function (data) {
         return $q(function (resolve, reject) {
             $ionicLoading.show({
@@ -162,13 +203,16 @@ angular.module('starter')
                 data: data,
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (response) {
-                if (response.UserId !== '') {
+                if (response.UserID !== '') {
                     //storeUserCredentials(response.email);
                     userInfo = {
-                        userId: response.UserId,
+                        userId: response.UserID,
                         emailId: response.Email,
                         name: response.Name,
-                        nativeLang: response.NativeLangugae
+                        image: response.ImagePath,
+                        nativeLang: response.NativeLangugae,
+                        learningLang:response.LearningLanguage,
+                        favMomentList: response.FavMomentList
                     };
                     $window.localStorage["userInfo"] = JSON.stringify(userInfo);
                     $ionicLoading.hide();
@@ -231,10 +275,10 @@ angular.module('starter')
                 data: data,
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (response) {
-                if (response.UserId !== '') {
+                if (response.UserID !== '') {
                     //storeUserCredentials(response.email);
                     userInfo = {
-                        accessId: response.UserId,
+                        accessId: response.UserID,
                         email: response.Email,
                         name: response.Name
                     };
@@ -334,6 +378,8 @@ angular.module('starter')
         externalRegister: externalRegister,
         getAllUserswithCountry: getAllUserswithCountry,
         getAllUsersForAdvancedSearch:getAllUsersForAdvancedSearch,
+        getAllCountryList:getAllCountryList,
+        getAllLanguageList:getAllLanguageList,
         isAuthenticated: function () { return isAuthenticated; },
         checkUniqueValue: function (table, field, value) {
             var encodedString = 'table=' + encodeURIComponent(table) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(value);

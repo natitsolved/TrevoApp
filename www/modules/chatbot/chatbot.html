@@ -21,7 +21,7 @@
 	<div ng-repeat="msg in ChatBotList track by $index" >
 
         <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
-            <div class="avatar-image"><img src="img/chat_bot_icon.jpg"></div>
+            <!--<div class="avatar-image"><img src="img/icon.png"></div>-->
             <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender)">
                 {{msg.message}}
                 <div class="bottom-part" id="{{'rcvrTranslatedText_'+$index}}"></div>
@@ -31,15 +31,12 @@
 
         </div>
         <div class="sender-1 chat_row" ng-show="msg.IsSender==1">
-
+             <div class="avatar-image"><img ng-src="{{userInfo.image}}"></div>
             <div class="msg"  ng-show="msg.message !==undefined"  ng-click="alerts($index, msg.message,msg.IsSender)">
                 <i class="icon ion-star" ng-show="senderFav[msg.id]" style="color:orange;"></i>
                 {{msg.message}}
-                <div class="bottom-part" id="{{'translatedText_'+$index}}"></div>
-                <div ng-show="msg.IncorrectText!=undefined" class="incorrectBottom-part">{{msg.IncorrectText}} <img ng-src="{{msg.inCorrectedPngSrc}}" ng-show="msg.inCorrectedPngSrc!=undefined" style="width:12px;" /></div>
-                <div ng-show="msg.CorrectedText!=undefined" class="correctBottom-part">{{msg.CorrectedText}} <img ng-src="{{msg.correctedPngSrc}}" ng-show="msg.correctedPngSrc!=undefined" style="width:12px;" /></div>
-                <div ng-show="msg.notes!=undefined" style="font-weight:bolder;color:black;">Notes</div>
-                <div class="bottom-part" ng-show="msg.notes!=''">{{msg.notes}}</div>
+                <div class="bottom-part" ng-show="hideShowTranlatedText[$index]" id="{{'translatedText_'+$index}}"></div>
+               
             </div>
             <div class="clearfix"></div>
             <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark" ng-show="hideShowLoader[$index]" id="{{'spinner_'+$index}}"></ion-spinner></div>
@@ -65,6 +62,9 @@
                         <a href="javascript:void(0)" class="icon-item" ng-click="tranlateToNativeLang()">
                             <span><img src="img/004-translation-and-localization.png"></span> Translate
                         </a>
+                        <a href="javascript:void(0)" class="icon-item" ng-click="transliteration()">
+                            <span><img src="img/transliteration.png"></span> Transliteration
+                        </a>
                     </div>
                     <div class="bottomarea">
                         <button ng-click="hideCard()">Cancel</button>
@@ -80,6 +80,7 @@
             	<div class="col col-70">
                 	<span class="item item-input">  
                         <textarea placeholder="Type Message" required="" ng-model="data" id="msgs" rows="1" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" style="height:35px"></textarea>
+                         <span ng-click="takeToTranslatePage(data)" style="margin-right:4px;margin-top: 5px;"> <img src="img/translate.png" style="width:32px;" /> </span>
                     </span>  
                 </div>
                 <div class="col col-20">

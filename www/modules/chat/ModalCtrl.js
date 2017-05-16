@@ -9,11 +9,10 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
             this.classList.toggle('active');
         });
     }
-    
+
     $scope.nativeLanguage = "EN";
     $scope.changeLanguage = "FR";
-    $scope.init = function ()
-    {
+    $scope.init = function () {
         if ($window.localStorage["translateInfo"] != undefined) {
             var translateInfo = JSON.parse($window.localStorage["translateInfo"]);
             var userDetails = JSON.parse($window.localStorage["userInfo"]);
@@ -46,24 +45,38 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
     }
 
     $scope.init();
-    
 
 
-    $scope.goToChat = function ()
-    {
-        $state.go('chat');
+
+    $scope.goToChat = function () {
+        if ($rootScope.fromPage) {
+            if ($rootScope.fromPage == 'chat') {
+                $state.go('chat');
+            }
+            else if ($rootScope.fromPage == 'chatBot') {
+                $state.go('chatbot');
+            }
+        }
     }
 
-    $scope.SendChat = function (message)
-    {
+    $scope.SendChat = function (message) {
         $window.localStorage["messageToSend"] = message;
-        $state.go('chat', {}, { reload: true });
+         if ($rootScope.fromPage) {
+            if ($rootScope.fromPage == 'chat') {
+                $state.go('chat', {}, { reload: true });
+            }
+            else if ($rootScope.fromPage == 'chatBot') {
+                $state.go('chatbot', {}, { reload: true });
+            }
+        }
+       
     }
 
-    $scope.changeTranslation = function (changeLanguage)
-    {
-        if ($window.localStorage["userInfo"])
-        {
+
+
+    $scope.changeTranslation = function (changeLanguage) {
+        if ($window.localStorage["userInfo"]) {
+            console.log($scope.toTranslateText);
             var userDetails = JSON.parse($window.localStorage["userInfo"]);
             var item = { User_Id: userDetails.userId, IsTranslate: 1, Details: changeLanguage };
             momentService.insertTransliterationDetails(item).then(function (data) {
@@ -92,9 +105,14 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
                 });
             });
         }
-       
+
     }
 
+    $scope.changeTranslationDirectly = function (changeLanguage, toTranslateText) {
+        if (changeLanguage && toTranslateText) {
+            $scope.toTranslateText = toTranslateText;
+            $scope.changeTranslation(changeLanguage);
+        }
+    }
 
-   
 });

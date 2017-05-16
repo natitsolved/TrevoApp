@@ -1,0 +1,41 @@
+<ion-view view-title="Practice Session" cache-view="false">
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToDeck()"></button>
+        <h1 class="title">Practice Session</h1>
+    </div>
+
+
+
+    <ion-content class="padding-top sign_in_back">
+       <div class="question-div" ng-show="cardDetails.MainText!=undefined" style="text-align:center;text-transform:capitalize;font-weight:bold;" id="inputPracticeContent">
+           {{cardDetails.MainText}}
+           
+           </div>
+
+         <div class="ans-div" ng-show="IsShowCorrectedText" style="text-align:center;text-transform:capitalize;font-weight:bold;" id="correctPracticeContent">
+           {{OutText}}
+           
+           </div>
+
+           <div ng-show="cardDetails.MainText==undefined" style="text-align:center;text-transform:capitalize;font-weight:bold;color:red;">
+         No records found!!!!!
+           
+           </div>
+    </ion-content>
+   
+    <div class="writing_chat">
+
+        <div class="form-group">
+            <div class="row">
+                    <div class="col col-25"><button class="button button-block button-calm" ng-show="IsShowPrevious" ng-click="showPrevious()" style="border:0"><i class="ion-android-arrow-dropleft" style="font-size: 32px;"></i></button></div>
+                    <div class="col col-50"><button class="button button-block" ng-click="showAnswer()" ng-show="cardDetails!=undefined"> Show Answer</button></div>
+                    <div class="col col-25"><button class="button button-block" ng-show="IsShowNext" ng-click="showNext()" style="border:0;background:#4DBDE6;color:#fff"><i class="ion-android-arrow-dropright" style="font-size: 32px;"></i></button></div>
+                  
+            </div>
+        </div>
+
+    </div>
+</ion-view>
+
+
+

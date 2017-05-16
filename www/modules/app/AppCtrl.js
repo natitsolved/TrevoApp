@@ -21,4 +21,7 @@ app.controller('AppCtrl', function ($scope, $stateParams, ionicMaterialInk, $ion
     {
         $state.go('signin', {}, { reload: true });
     }
+
+
+    
 });

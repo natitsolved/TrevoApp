@@ -8,7 +8,7 @@
                 <form name="form" ng-submit="login(user)" class="list padding-right padding-left">
                     <label class="item item-input-inset  log_in_email" ng-class="{ 'red' :form.userEmail.$error.required,'otherwise':!form.userEmail.$error.required}">
                         <i class="icon ion-ios-person-outline placeholder-icon"></i>
-                        <input type="email" name="userEmail" placeholder="Email" ng-model="user.email" required ng-pattern="emailFormat">
+                        <input type="email" name="userEmail" placeholder="Email" ng-model="user.email" required ng-pattern="emailFormat" style="width:100%;"> 
                     </label>
                    
 
@@ -29,4 +29,5 @@
     </ion-content>
     
 </ion-view>
+
 

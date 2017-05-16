@@ -372,6 +372,12 @@ app.controller('ProfileCtrl', function ($scope, ionicMaterialInk, $ionicPopup, $
 
     $scope.takeToPractice = function ()
     {
-        $state.go('practice', {}, {reload:true});
+        $state.go('deck', {}, {reload:true});
+    }
+
+
+    $scope.takeToFavorites=function()
+    {
+        $state.go('favorite',{},{reload:true});
     }
 });

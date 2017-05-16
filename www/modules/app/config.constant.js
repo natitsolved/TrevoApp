@@ -17,31 +17,34 @@ app.constant('JS_REQUIRES', {
         'profile': ['modules/profile/ProfileCtrl.js', 'js/services/momentService.js', 'js/services/profileService.js', 'modules/publicProfile/publicProfileCtrl.js'],
         'search': ['modules/search/SearchCtrl.js', 'js/services/momentService.js', 'modules/advanced-search/advancedSearchCtrl.js', 'js/services/authService.js'],
         'changePass': ['modules/change-password/ChangePasswordCtrl.js', 'js/services/profileService.js', 'js/services/authService.js'],
-        'practice': ['modules/practice/PracticeCtrl.js','js/services/momentService.js'],
+        'practice': ['modules/practice/PracticeCtrl.js', 'js/services/momentService.js'],
+        'practiceSession': ['modules/PracticeSession/PracticeSessionCtrl.js', 'js/services/momentService.js'],
+        'favorite': ['modules/favourites/FavoriteCtrl.js', 'js/services/momentService.js'],
+        'spellCheck': ['modules/spell-check/SpellCheckCtrl.js'],
         //*** Services
 
     },
     modules: [
-       {
-           name: 'ds.clock',
-           files: ['js/dependency/angular-clock.js']
-       },
-       {
-           name: 'ngFileUpload',
-           files: ['js/dependency/ng-file-upload-shim.min.js', 'js/dependency/ng-file-upload.min.js']
-       },
-       {
-           name: 'angularUtils.directives.dirPagination',
-           files: ['lib/pagination/dirPagination.js']
-       },
-       {
-           name: '720kb.datepicker',
-           files: ['js/datepicker/angular-datepicker.min.css', 'js/datepicker/angular-datepicker.min.js']
-       },
-       {
-           name: 'angularjs-dropdown-multiselect',
-           files: ['js/angularjs-dropdown-multiselect.min.js']
-       }
+        {
+            name: 'ds.clock',
+            files: ['js/dependency/angular-clock.js']
+        },
+        {
+            name: 'ngFileUpload',
+            files: ['js/dependency/ng-file-upload-shim.min.js', 'js/dependency/ng-file-upload.min.js']
+        },
+        {
+            name: 'angularUtils.directives.dirPagination',
+            files: ['lib/pagination/dirPagination.js']
+        },
+        {
+            name: '720kb.datepicker',
+            files: ['js/datepicker/angular-datepicker.min.css', 'js/datepicker/angular-datepicker.min.js']
+        },
+        {
+            name: 'angularjs-dropdown-multiselect',
+            files: ['js/angularjs-dropdown-multiselect.min.js']
+        }
     ]
 });
 

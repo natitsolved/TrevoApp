@@ -124,6 +124,12 @@ app.controller('MirrorCtrl', function ($scope, momentService, ionicMaterialInk, 
                 }
                 var item = { Message: '', FavouriteUserId: userDetails.userId, IsSender: isSender, SenderRecieverId: posterUserId, MomentId: id };
                 momentService.markMomentAsFavourite(item).then(function (data) {
+                    if(userDetails.favMomentList)
+                    {}
+                    else
+                    {
+                        userDetails.favMomentList=[];
+                    }
                     userDetails.favMomentList.push(id);
                     $window.localStorage["userInfo"] = '';
                     $window.localStorage["userInfo"] = JSON.stringify(userDetails);

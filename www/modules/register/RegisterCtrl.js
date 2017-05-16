@@ -9,6 +9,38 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
             this.classList.toggle('active');
         });
     }
+
+
+$scope.getCountryList=function()
+{
+
+    authService.getAllCountryList().then(function(data){
+
+        $scope.countryList=data;
+    },function(error){
+ var alertPopup = $ionicPopup.alert({
+                    title: 'Error!',
+                    template: error.Message
+                });
+
+    });
+}
+$scope.getLanguageList=function()
+{
+
+    authService.getAllLanguageList().then(function(data){
+
+        $scope.languageList=data;
+    },function(error){
+ var alertPopup = $ionicPopup.alert({
+                    title: 'Error!',
+                    template: error.Message
+                });
+
+    });
+}
+
+
     $scope.isShowText = true;
     $scope.isShowImg = false;
     $scope.isShowNatText = true;
@@ -18,7 +50,10 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     $scope.datafirst = {};
     $scope.data = {};
     $scope.udl = { country: '1', nativeLanguage: '1', learningLanguage: '1', languagelevel: '1' };
-    var uuid = $cordovaDevice.getUUID();
+
+    $scope.getCountryList();
+    $scope.getLanguageList();
+  //  var uuid = $cordovaDevice.getUUID();
     $scope.signup = function () {
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {
             var firstencodedString = JSON.parse($window.localStorage["firstencodedString"]);
@@ -170,16 +205,13 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     {
         $scope.isShowText = false;
         $scope.isShowImg = true;
-        if ($scope.udl.country == "1") {
-            $scope.imgSrc = "img/india_flag_circle-128.png";
-        }
-        else if ($scope.udl.country == "2")
+        for(var i=0;i<$scope.countryList.length;i++)
         {
-            $scope.imgSrc = "img/australia-128.png";
-        }
-        else if ($scope.udl.country == "3")
-        {
-            $scope.imgSrc = "img/France Flag.ico";
+            if($scope.udl.country==$scope.countryList[i].Country_Id)
+            {
+                 $scope.imgSrc = $scope.countryList[i].ImagePath;
+                 break;
+            }
         }
     }
 
@@ -188,15 +220,14 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     {
         $scope.isShowNatText = false;
         $scope.isShowAbbrv = true;
-        if ($scope.udl.nativeLanguage == "1")
+        for(var i=0;i<$scope.languageList.length;i++)
         {
-            $scope.NatAbbrv = "BN";
-        }
-        else if ($scope.udl.nativeLanguage == "2") {
-            $scope.NatAbbrv = "FR";
-        }
-        else if ($scope.udl.nativeLanguage == "3") {
-            $scope.NatAbbrv = "EN";
+
+            if($scope.udl.nativeLanguage==$scope.languageList[i].Language_Id)
+            {
+             $scope.NatAbbrv=$scope.languageList[i].Abbreviation;
+             break;   
+            }
         }
     }
 
@@ -204,14 +235,14 @@ app.controller('RegisterCtrl', function ($scope, $stateParams, ionicMaterialInk,
     {
         $scope.isShowLearningText = false;
         $scope.isShowLearningAbbrev = true;
-        if ($scope.udl.learningLanguage == "1") {
-            $scope.LearningAbbrev = "EN";
-        }
-        else if ($scope.udl.learningLanguage == "2") {
-            $scope.LearningAbbrev = "BN";
-        }
-        else if ($scope.udl.learningLanguage == "3") {
-            $scope.LearningAbbrev = "FR";
+        for(var i=0;i<$scope.languageList.length;i++)
+        {
+
+            if($scope.udl.learningLanguage==$scope.languageList[i].Language_Id)
+            {
+             $scope.LearningAbbrev=$scope.languageList[i].Abbreviation;
+             break;   
+            }
         }
     }
 });

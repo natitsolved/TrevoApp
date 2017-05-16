@@ -13,8 +13,7 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     }
     $scope.getUserListing = function () {
-        if (!$scope.userInfo)
-        {
+        if (!$scope.userInfo) {
             $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
         }
         authService.getAllUserswithCountry($scope.userInfo.userId).then(function (data) {
@@ -24,9 +23,9 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                     $scope.userList.push(data[i]);
                 }
             }
-           
+
         }, function (err) {
-          
+
             var alertPopup = $ionicPopup.alert({
                 title: 'Error',
                 template: 'There is some error. Please try again later.'
@@ -45,13 +44,13 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $ionicLoading.show({
             template: 'Loading...'
         });
-        var userDetails = { userId: userId, name: name, imagePath:imagePath };
+        var userDetails = { userId: userId, name: name, imagePath: imagePath };
         $window.localStorage["userDetails"] = JSON.stringify(userDetails);
         $ionicLoading.hide();
         $state.go('chat', {}, { reload: true });
     }
 
-   
+
 
     $scope.goToChatbot = function () {
         $state.go('chatbot', {}, { reload: true });
@@ -62,16 +61,14 @@ app.controller('UserCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         $scope.$broadcast('scroll.refreshComplete');
     }
 
-    $scope.goToUserProfile = function (userId)
-    {
-        var obj = JSON.stringify({ userId: userId});
+    $scope.goToUserProfile = function (userId) {
+        var obj = JSON.stringify({ userId: userId });
         $window.localStorage["userProfile"] = obj;
 
         $state.go('publicProfile', {}, { reload: true });
     }
-   
-    $scope.goToAdvancedSearch = function ()
-    {
+
+    $scope.goToAdvancedSearch = function () {
         $state.go('advancedSearch', {}, { reload: true });
     }
 

@@ -661,7 +661,7 @@ body {color: #777;text-align: left;}
 .sender-2.chat_row > .msg-area {width: auto;float: left;max-width: 76%;margin-left: 9px;font-size: 13px;}
 .sender-2.chat_row > .msg-area > .msg {width: auto;float: left;background: #fff;padding: 6px;border-radius: 6px;font-size: 13px;}
 .sender-2.chat_row > .msg-area > .loading-area{float: left;}
-
+.sender-2.chat_row > .msg {width: auto;float: left;background:#8c8c8c;padding: 10px;border-radius: 10px;margin-left:5px;color: #fff;}
 .sender-1.chat_row {width: 100%;float: left;display: block;padding: 8px;position: relative;margin-top: 5px;}
 .sender-1.chat_row > .avatar-image {width: 40px;height: 40px;overflow: hidden;float: right;border-radius: 50%;}
 .sender-1.chat_row > .avatar-image > img {width: 40px;height: 40px;}
@@ -670,6 +670,8 @@ body {color: #777;text-align: left;}
 .sender-1.chat_row > .msg > .bottom-part{width:100%; float: left; border-top: 1px solid #5abade}
 .sender-1.chat_row > .loading-area{float: right;}
 
+
+.sender-2.chat_row > .msg > .bottom-part{width:100%; float: left; border-top: 1px solid #5abade}
 .list.chat_only {width:100%;float: left; margin-top: 5px; padding: 5px 0 135px 0; margin: 15px 0;}
 .writing_chat{position: fixed; width: 100%; bottom: 0px;background: #e4e3e3;}
 
@@ -686,7 +688,7 @@ h3.cart_heading { color: #fff; font-size: 20px; margin-left: 5px; margin-top: 0p
 ion-list.list_user_list.disable-user-behavior {width: 97%; margin: 5px auto; display: block;}
 .country_image {position: absolute;bottom: 5px;left: -2px;}
 .list_user_list-name_date {width: 100%;margin: 0 auto; display: block;}
-.list_user_list-name_date h2 {width: 84%;float: left;}
+.list_user_list-name_date h2 {width: 81%;float: left;}
 .list_user_list-name_date span {width: 15%;float: left;font-size: 12px;}
 .remaining_list_info {width: 100%;float: left;}
 .remaining_list_info h3 {font-size: 13px;}
@@ -728,6 +730,10 @@ p.custom-para{overflow: visible;text-overflow: ellipsis;white-space: normal;}
 .modal_part.new-modal_part .toparea{width:100%; border-radius: 8px; overflow: hidden; background: #fff; margin-bottom: 10px}
 .modal_part.new-modal_part .bottomarea{width:100%; padding-bottom: 20px}
 .modal_part.new-modal_part .bottomarea button{border-radius: 8px; background:red; padding:10px; text-align: center;color:#fff; display: block; box-shadow: none!important; width:100%; outline: none !important; border: none !important}
+
+.modal_part.new-modal_part .bottomareaSave{width:100%; padding-bottom: 20px}
+.modal_part.new-modal_part .bottomareaSave button{border-radius: 8px; background:#60cdf6; padding:10px;text-transform: uppercase; text-align: center;color:#fff; display: block; box-shadow: none!important; width:100%; outline: none !important; border: none !important}
+
 .modal_part.new-modal_part a{display: block; padding: 10px 6px; text-align: left; color:#000; text-decoration: none; font-size:14px; border-top:1px solid #ececec;  font-size:14px; position: relative; padding-left: 38px}
 .modal_part.new-modal_part a:first-child{border-top:0}
 .modal_part.new-modal_part a span{position: absolute; left:10px; top:10px; font-size:18px; color:#000; text-align: center; display: inline-block;width:20px; opacity: 0.4}
@@ -765,3 +771,19 @@ p.custom-para{overflow: visible;text-overflow: ellipsis;white-space: normal;}
 .adv-search-wrap .card{ margin-top:10px}
 .adv-search-wrap .radio-content{font-size:14px}
 .adv-search-wrap .item.item-radio .radio-icon{padding: 10px; color:#4DBDE6}
+
+
+/*************************05-05*****************************/
+/*.decname-box input{border-radius:4;padding:10px 0;height:35px;}*/
+
+.question-div,.ans-div{padding: 8px;
+    width: 90%;
+    border-radius: 2px;
+    margin: 7px auto;box-shadow: 0px 1px 2px 1px #e1e1e1;}
+.question-div{background: #fff}
+.ans-div{background: #c9e6f1}
+
+
+.item-radio input:checked + .radio-content .item-content{
+    background: none !important;
+}

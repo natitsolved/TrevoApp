@@ -1,0 +1,57 @@
+<ion-view view-title="Hobbies" cache-view="false">
+
+    <div class="bar bar-header new-header">
+        <button class="button ion-android-arrow-back" ng-click="takeToProfile()"></button>
+        <h1 class="title">Favorite</h1>
+      
+    </div>
+    <ion-content class="padding-top sign_in_back">
+ <ion-list class="list_user_list" ng-repeat="item in favoritesList track by $index">
+		  <ion-item >
+		    <div class="left_image_list">
+		      <img ng-src="{{item.ImagePath}}">
+		      <div class="country_image">
+		      		<img ng-src="{{item.Icon_Path}}" style="width: 20px; height:20px;">
+		      	</div>
+		    </div>
+		    <div class="right_list_text" ng-click="alerts(item.FavouritesId,item.Message,item.LocalMessageId)">
+			    <div class="list_user_list-name_date">
+			    <h2>{{item.SenderRecieverName}}</h2>
+			    <span>{{item.AddedDate}}</span>
+			    </div>
+			    <div class="remaining_list_info" ng-show="item.Message !=undefined">
+                   {{item.Message}}
+			    </div>
+              <div ng-show="item.IncorrectedText!=undefined" style="float:left;margin-left:10px;">{{item.IncorrectedText}} <img ng-src="{{item.inCorrectedPngSrc}}" ng-show="item.inCorrectedPngSrc!=undefined" style="width:12px;margin-top:3px;"
+    /></div>
+<div ng-show="item.CorrectedText!=undefined" class="remaining_list_info">{{item.CorrectedText}} <img ng-src="{{item.correctedPngSrc}}" ng-show="item.correctedPngSrc!=undefined" style="width:12px;"
+    /></div>
+		    </div>
+		  </ion-item>
+		</ion-list>
+    </ion-content>
+   
+  <div class="dark-overlay" ng-hide="show">
+        <div style="position: relative; width:100%; height:100%">
+            <div class="modal_part new-modal_part animated bounceInUp">
+                <div class="onclick_part" style="position: relative; width:100%; float:left">
+                    <div class="toparea">
+                        <a href="javascriipt:void(0)" class="icon-item" ng-click="delete()">
+                            <span><i class="icon ion-android-remove"></i></span> Delete
+                        </a>
+                        <a href="javascript:void(0)" class="icon-item" ng-click="copyText()">
+                            <span><i class="icon ion-ios-copy-outline"></i></span> Copy
+                        </a>
+                    </div>
+                    <div class="bottomarea">
+                        <button ng-click="hideCard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</ion-view>
+
+
+

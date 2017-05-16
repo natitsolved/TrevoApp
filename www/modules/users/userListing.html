@@ -12,7 +12,7 @@
 		 <ion-list class="list_user_list" ng-repeat="user in userList track by $index">
 		  <ion-item >
 		    <div class="left_image_list">
-		      <img ng-src="{{user.ImagePath}}" ng-click="goToUserProfile(user.User_Id,user.Name,user.ImagePath,user.NativeAbbrv,user.LearningAbbrv)">
+		      <img ng-src="{{user.ImagePath}}" ng-click="goToUserProfile(user.User_Id)">
 		      <div class="country_image">
 		      		<img ng-src="{{user.Icon_Path}}" style="width: 20px; height:20px;">
 		      	</div>

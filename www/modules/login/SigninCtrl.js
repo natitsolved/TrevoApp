@@ -1,4 +1,5 @@
-﻿app.controller('SigninCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state) {
+﻿
+app.controller('SigninCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, $timeout, authService, $state) {
     //ionic.material.ink.displayEffect();
     ionicMaterialInk.displayEffect();
    
@@ -9,18 +10,9 @@
             this.classList.toggle('active');
         });
     }
+  
     $scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-    //$scope.showPopup = function() {
-    //    var alertPopup = $ionicPopup.alert({
-    //        title: 'Wrong User name or password',
-    //        template: 'Please check or create an account'
-    //    });
-
-    //    $timeout(function() {
-    //        //ionic.material.ink.displayEffect();
-    //        ionicMaterialInk.displayEffect();
-    //    }, 0);
-    //};
+    
 
 
   

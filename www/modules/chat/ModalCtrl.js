@@ -10,16 +10,17 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
         });
     }
 
-    $scope.nativeLanguage = "EN";
-    $scope.changeLanguage = "FR";
+   
     $scope.init = function () {
         if ($window.localStorage["translateInfo"] != undefined) {
             var translateInfo = JSON.parse($window.localStorage["translateInfo"]);
             var userDetails = JSON.parse($window.localStorage["userInfo"]);
             var item = { User_Id: userDetails.userId, IsTranslate: 1, Details: translateInfo.text };
             momentService.insertTransliterationDetails(item).then(function (data) {
-                var sourceEn = translateInfo.sourceEn;
+                var sourceEn = translateInfo.sourceEn.toUpperCase();
                 var targetEn = translateInfo.targetEn;
+                 $scope.nativeLanguage = sourceEn;
+                  $scope.changeLanguage = targetEn;
                 var text = translateInfo.text;
                 $scope.toTranslateText = text;
                 // $scope.message = "dhfgshjdf";
@@ -32,7 +33,8 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
                     $scope.message = data.data.data.translations[0].translatedText;
                     $window.localStorage["translateInfo"] = undefined;
 
-                }, function (error) {
+                }, function (error) { 
+                    $scope.message=translateInfo.text;
                     console.log(error.data.error.message);
                 });
             }, function (error) {
@@ -61,7 +63,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
 
     $scope.SendChat = function (message) {
         $window.localStorage["messageToSend"] = message;
-         if ($rootScope.fromPage) {
+        if ($rootScope.fromPage) {
             if ($rootScope.fromPage == 'chat') {
                 $state.go('chat', {}, { reload: true });
             }
@@ -69,7 +71,7 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
                 $state.go('chatbot', {}, { reload: true });
             }
         }
-       
+
     }
 
 
@@ -82,22 +84,35 @@ app.controller('ModalCtrl', function ($scope, $stateParams, ionicMaterialInk, $i
             momentService.insertTransliterationDetails(item).then(function (data) {
                 console.log(changeLanguage);
                 console.log($scope.toTranslateText);
-                var sourceEn = "EN";
-                var target = changeLanguage;
-                var text = $scope.toTranslateText;
-                //$scope.message = "dhfgshjdf";
-                var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + target + '&q=' + text;
+                 var myElement = angular.element(document.querySelector('#inputTextContent'));
+                var text = myElement[0].value;
+                $scope.toTranslateText=text;
+                var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + text;
                 $http({
-                    url: urlToHit,
+                    url: urlToHitForDetection
                 }).then(function (data) {
+                    var sourceEn = data.data.data.detections[0][0].language;
+                    var target = changeLanguage;
+                    var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + target + '&q=' + text;
+                    $http({
+                        url: urlToHit,
+                    }).then(function (data) {
 
-                    console.log(data.data.data.translations[0].translatedText);
-                    $scope.message = data.data.data.translations[0].translatedText;
-                    $window.localStorage["translateInfo"] = undefined;
+                        console.log(data.data.data.translations[0].translatedText);
+                        $scope.message = data.data.data.translations[0].translatedText;
+                        $window.localStorage["translateInfo"] = undefined;
 
-                }, function (error) {
-                    console.log(error.data.error.message);
-                });
+                    }, function (error) {
+                         $scope.message=text;
+                        console.log(error.data.error.message);
+                    });
+                }, function (error1) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error',
+                        template: error1.Message
+                    });
+                })
+
             }, function (error) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Error',

@@ -69,9 +69,8 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
         if ($scope.senderFav == undefined) {
             $scope.senderFav = [];
         }
-        if($scope.rcvrFav==undefined)
-        {
-            $scope.rcvrFav=[];
+        if ($scope.rcvrFav == undefined) {
+            $scope.rcvrFav = [];
         }
         if ($scope.hideShowTranslatedText == undefined) {
             $scope.hideShowTranslatedText = [];
@@ -96,15 +95,13 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                 var obj = { message: data.rows.item(i).message == null ? undefined : data.rows.item(i).message, IsSender: data.rows.item(i).IsSender, imgURI: data.rows.item(i).imagePath == null ? undefined : data.rows.item(i).imagePath, videoURI: data.rows.item(i).videoPath == null ? undefined : data.rows.item(i).videoPath, isFavourite: data.rows.item(i).IsFavourite, id: data.rows.item(i).id, TranslatedText: data.rows.item(i).TranslatedText };
                 $rootScope.ChatList.push(obj);
             }
-            if (data.rows.item(i).IsFavourite == 1 ) {
-                if( data.rows.item(i).IsSender==1)
-                {
-                $scope.senderFav[obj.id] = true;
-            }
-            else
-            {
-                $scope.rcvrFav[obj.id]=true;
-            }
+            if (data.rows.item(i).IsFavourite == 1) {
+                if (data.rows.item(i).IsSender == 1) {
+                    $scope.senderFav[obj.id] = true;
+                }
+                else {
+                    $scope.rcvrFav[obj.id] = true;
+                }
             }
         }
         $ionicLoading.hide();
@@ -422,10 +419,30 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
             });
         }
         else {
-            var translateInfo = { text: msg, sourceEn: 'en', targetEn: 'fr' };
-            $window.localStorage["translateInfo"] = JSON.stringify(translateInfo);
-            $rootScope.fromPage = 'chat';
-            $state.go('chatTranslate');
+
+            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+            var targetEn = userDetails.nativeLang;
+            if (targetEn) {
+                var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + msg;
+                $http({
+                    url: urlToHitForDetection,
+                }).then(function (data) {
+
+                    var sourceEn = data.data.data.detections[0][0].language;
+                    var translateInfo = { text: msg, sourceEn: sourceEn, targetEn: targetEn };
+                    $window.localStorage["translateInfo"] = JSON.stringify(translateInfo);
+                    $rootScope.fromPage = 'chat';
+                    $state.go('chatTranslate');
+
+                }, function (error) {
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Incorect',
+                        template: error.data.error.message
+                    });
+                });
+            }
+
         }
     }
 
@@ -530,31 +547,69 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                 var userDetails = JSON.parse($window.localStorage["userInfo"]);
                 var targetEn = userDetails.nativeLang;
                 if (targetEn) {
-                    var sourceEn = "en";
-                    if (isSender == 1)
-                        element = "translatedText_" + $scope.transaltionObj.id;
-                    else
-                        element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
-                    var myElement = angular.element(document.querySelector('#' + element));
-                    var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
+
+                    var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + $scope.transaltionObj.message;
+
+
                     $http({
-                        url: urlToHit,
+                        url: urlToHitForDetection,
                     }).then(function (data) {
-                        myElement[0].innerHTML = data.data.data.translations[0].translatedText;
-                        //spinnerElement[0].style.display = "none";
-                        var query = "Update ChatTable set TranslatedText= ? Where id=?";
-                        $cordovaSQLite.execute($scope.db, query, [data.data.data.translations[0].translatedText, $scope.transaltionObj.messageID]).then(function (res) {
-                            var message = "INSERT ID -> " + res.insertId;
-                            console.log(message);
-                            if (isSender == 1) {
-                                $scope.hideShowLoader[$scope.transaltionObj.id] = false;
-                            }
-                            else {
-                                $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
-                            }
-                        }, function (err) {
-                            console.error(err);
-                            //alert(err);
+
+                        var sourceEn = data.data.data.detections[0][0].language;
+                        if (isSender == 1)
+                            element = "translatedText_" + $scope.transaltionObj.id;
+                        else
+                            element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
+                        var myElement = angular.element(document.querySelector('#' + element));
+                        var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
+                        $http({
+                            url: urlToHit,
+                        }).then(function (data) {
+                            myElement[0].innerHTML = data.data.data.translations[0].translatedText;
+                            //spinnerElement[0].style.display = "none";
+                            var query = "Update ChatTable set TranslatedText= ? Where id=?";
+                            $cordovaSQLite.execute($scope.db, query, [data.data.data.translations[0].translatedText, $scope.transaltionObj.messageID]).then(function (res) {
+                                var message = "INSERT ID -> " + res.insertId;
+                                console.log(message);
+                                if (isSender == 1) {
+                                    $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                                }
+                                else {
+                                    $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                                }
+                            }, function (err) {
+                                console.error(err);
+                                //alert(err);
+                            });
+
+                        }, function (error) {
+                            // //spinnerElement[0].style.display = "none";
+                            // if (isSender == 1) {
+                            //     $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                            // }
+                            // else {
+                            //     $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                            // }
+                            // var alertPopup = $ionicPopup.alert({
+                            //     title: 'Incorect',
+                            //     template: error.data.error.message
+                            // });
+                            myElement[0].innerHTML = $scope.transaltionObj.message;
+                            //spinnerElement[0].style.display = "none";
+                            var query = "Update ChatTable set TranslatedText= ? Where id=?";
+                            $cordovaSQLite.execute($scope.db, query, [$scope.transaltionObj.message, $scope.transaltionObj.messageID]).then(function (res) {
+                                var message = "INSERT ID -> " + res.insertId;
+                                console.log(message);
+                                if (isSender == 1) {
+                                    $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                                }
+                                else {
+                                    $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                                }
+                            }, function (err) {
+                                console.error(err);
+                                //alert(err);
+                            });
                         });
 
                     }, function (error) {
@@ -750,9 +805,8 @@ app.controller('ChatCtrl', function ($scope, $stateParams, ionicMaterialInk, $io
                     }
                     $scope.senderFav[$scope.transaltionObj.messageID] = true;
                 }
-                else
-                {
-                     if ($scope.rcvrFav == undefined) {
+                else {
+                    if ($scope.rcvrFav == undefined) {
                         $scope.rcvrFav = [];
                     }
                     $scope.rcvrFav[$scope.transaltionObj.messageID] = true;

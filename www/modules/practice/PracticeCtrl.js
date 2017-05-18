@@ -20,20 +20,19 @@ app.controller('PracticeCtrl', function ($scope, $state, $window, $ionicLoading,
         $scope.IsShowReset = true;
         $scope.show = true;
         $scope.optionShow = true;
-        if($rootScope.spellCheckForPrctcObj)
-        {
-            $scope.inputText=$rootScope.spellCheckForPrctcObj.InputText;
-            $scope.IsSpellCheck=1;
-            $scope.IsTranslate=0;
-            $scope.IsTTS=0
-        var myElement1 = angular.element(document.querySelector('#inputContent'));
-        myElement1[0].style.color = "red";
-        myElement1[0].style.textDecoration = "line-through";
-        myElement1 = angular.element(document.querySelector('#correctContent'));
-        myElement1[0].style.color = "green";
-        //angular.element(document.querySelector('#inputContent')).val($rootScope.spellCheckForPrctcObj.InputText);
-        $scope.outputText=$rootScope.spellCheckForPrctcObj.OutputText;
-        $rootScope.spellCheckForPrctcObj='';
+        if ($rootScope.spellCheckForPrctcObj) {
+            $scope.inputText = $rootScope.spellCheckForPrctcObj.InputText;
+            $scope.IsSpellCheck = 1;
+            $scope.IsTranslate = 0;
+            $scope.IsTTS = 0
+            var myElement1 = angular.element(document.querySelector('#inputContent'));
+            myElement1[0].style.color = "red";
+            myElement1[0].style.textDecoration = "line-through";
+            myElement1 = angular.element(document.querySelector('#correctContent'));
+            myElement1[0].style.color = "green";
+            //angular.element(document.querySelector('#inputContent')).val($rootScope.spellCheckForPrctcObj.InputText);
+            $scope.outputText = $rootScope.spellCheckForPrctcObj.OutputText;
+            $rootScope.spellCheckForPrctcObj = '';
         }
         var db = $scope.db = $cordovaSQLite.openDB({ name: "my.db", location: "default" });
 
@@ -120,20 +119,35 @@ app.controller('PracticeCtrl', function ($scope, $state, $window, $ionicLoading,
         momentService.insertTransliterationDetails(item).then(function (data) {
             var targetEn = $scope.userInfo.nativeLang;
             if (targetEn) {
-                var sourceEn = "en";
-                var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + value;
+                var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + value;
+
                 $http({
-                    url: urlToHit,
+                    url: urlToHitForDetection,
                 }).then(function (data) {
-                    $scope.outputText = data.data.data.translations[0].translatedText;
-                    $ionicLoading.hide();
-                }, function (error) {
+                    var sourceEn = data.data.data.detections[0][0].language;
+                    var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + value;
+                    $http({
+                        url: urlToHit,
+                    }).then(function (data) {
+                        $scope.outputText = data.data.data.translations[0].translatedText;
+                        $ionicLoading.hide();
+                    }, function (error) {
+                        $ionicLoading.hide();
+                        // var alertPopup = $ionicPopup.alert({
+                        //     title: 'Incorect',
+                        //     template: error.data.error.message
+                        // });
+                         $scope.outputText=value;
+                    });
+                }, function (error1) {
                     $ionicLoading.hide();
                     var alertPopup = $ionicPopup.alert({
                         title: 'Incorect',
-                        template: error.data.error.message
+                        template: error1.data.error.message
                     });
                 });
+
+
             }
         }, function (error) {
             $ionicLoading.hide();
@@ -164,7 +178,7 @@ app.controller('PracticeCtrl', function ($scope, $state, $window, $ionicLoading,
             $rootScope.btnText = "OK";
             $rootScope.isSpellCheckFromChat = false;
             $ionicLoading.hide();
-             $state.go('spellCheck', {}, { reload: true });
+            $state.go('spellCheck', {}, { reload: true });
         }, function (error) {
             $ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
@@ -221,12 +235,12 @@ app.controller('PracticeCtrl', function ($scope, $state, $window, $ionicLoading,
         var Id = "inputContent";
         var myElement1 = angular.element(document.querySelector('#' + Id));
         myElement1[0].value = '';
-        myElement1[0].style.color="black";
-        myElement1[0].style.textDecoration="none";
+        myElement1[0].style.color = "black";
+        myElement1[0].style.textDecoration = "none";
         Id = "correctContent";
         myElement1 = angular.element(document.querySelector('#' + Id));
         myElement1[0].value = '';
-        myElement1[0].style.color="black";
+        myElement1[0].style.color = "black";
         // $state.go('practice',{},{reload:true});
     }
 

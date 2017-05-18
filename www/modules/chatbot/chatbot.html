@@ -24,7 +24,7 @@
             <!--<div class="avatar-image"><img src="img/icon.png"></div>-->
             <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender)">
                 {{msg.message}}
-                <div class="bottom-part" id="{{'rcvrTranslatedText_'+$index}}"></div>
+                <div class="bottom-part" ng-show="hideShowRcvrTranlatedText[$index]" id="{{'rcvrTranslatedText_'+$index}}"></div>
             </div>
             <div class="clearfix"></div>
             <div class="loading-area"><ion-spinner icon="dots" class="spinner-dark" ng-show="rcvrHideShowLoader[$index]" id="{{'spinner_'+$index}}"></ion-spinner></div>

@@ -53,7 +53,7 @@ $scope.getLanguageList=function()
 
     $scope.getCountryList();
     $scope.getLanguageList();
-  //  var uuid = $cordovaDevice.getUUID();
+    var uuid = $cordovaDevice.getUUID();
     $scope.signup = function () {
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {
             var firstencodedString = JSON.parse($window.localStorage["firstencodedString"]);

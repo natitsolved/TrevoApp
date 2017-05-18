@@ -26,10 +26,13 @@
                   </span>
               </div>
 
-              <select ng-model="udl.country" style="border-radius: 10px;" ng-change="getTheFlagIcon()">
+              <!--<select ng-model="udl.country" style="border-radius: 10px;" ng-change="getTheFlagIcon()">
                   <option value="1">India</option>
                   <option value="2" >Australia</option>
                   <option value="3">France</option>
+              </select>-->
+               <select ng-model="udl.country" style="border-radius: 10px;" ng-change="getTheFlagIcon()">
+                   <option ng-repeat="option in countryList" value="{{option.Country_Id}}">{{option.Name}}</option>
               </select>
           </label>
           
@@ -44,10 +47,8 @@
                   </span>
               </div>
 
-              <select ng-model="udl.nativeLanguage" style="border-radius: 10px;" ng-change="getTheAbbreviation()">
-                  <option value="1">English</option>
-                  <option value="2">Spanish</option>
-                  <option value="3">French</option>
+               <select ng-model="udl.nativeLanguage" style="border-radius: 10px;" ng-change="getTheAbbreviation()">
+                  <option ng-repeat="option in languageList" value="{{option.Language_Id}}">{{option.Name}}</option>
               </select>
           </label> 
           
@@ -63,9 +64,7 @@
               </div>
 
               <select ng-model="udl.learningLanguage" style="border-radius: 10px;" ng-change="getTheLearningAbbreviation()">
-                  <option value="1">English</option>
-                  <option value="2">Spanish</option>
-                  <option value="3">French</option>
+                 <option ng-repeat="option in languageList" value="{{option.Language_Id}}">{{option.Name}}</option>
               </select>
           </label>
                
@@ -79,7 +78,7 @@
               </div>
 
               <select ng-model="udl.languagelevel" style="border-radius: 10px;">
-                  <option value="1">Beginer</option>
+                  <option value="1">Beginner</option>
                   <option value="2">Intermediate</option>
                   <option value="3">Professional</option>
               </select>

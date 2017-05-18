@@ -2,7 +2,7 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
     //ionic.material.ink.displayEffect();
     ionicMaterialInk.displayEffect();
 
-   
+
     // Toggle Code Wrapper
     var code = document.getElementsByClassName('code-wrapper');
     for (var i = 0; i < code.length; i++) {
@@ -11,30 +11,28 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
         });
     }
     $scope.show = true;
-    if ($scope.ChatBotList == undefined)
-    {
+    if ($scope.ChatBotList == undefined) {
         $scope.ChatBotList = [];
     }
     $scope.userInfo = JSON.parse($window.localStorage["userInfo"]);
     console.log($scope.userInfo);
     $scope.dictionary = new Typo("en_US", false, false, { dictionaryPath: "js/dictionaries" });
 
-   
+
     $scope.isdiplay = false;
-  
-  if($window.localStorage["messageToSend"])
-  {
-      $scope.data=$window.localStorage["messageToSend"];
-      $window.localStorage["messageToSend"]='';
-  } 
-     
+
+    if ($window.localStorage["messageToSend"]) {
+        $scope.data = $window.localStorage["messageToSend"];
+        $window.localStorage["messageToSend"] = '';
+    }
+
     $scope.hideCard = function () {
         $scope.show = true;
     }
 
-   
+
     $scope.transliteration = function () {
-        $scope.show=true;
+        $scope.show = true;
         var element;
         var isSender = $scope.transaltionObj.isSender;
         if (isSender == 1) {
@@ -51,7 +49,11 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
             if ($scope.rcvrHideShowLoader == undefined) {
                 $scope.rcvrHideShowLoader = [];
             }
+            if ($scope.hideShowRcvrTranlatedText == undefined) {
+                $scope.hideShowRcvrTranlatedText = [];
+            }
             $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = true;
+            $scope.hideShowRcvrTranlatedText[$scope.transaltionObj.id] = true;
         }
 
         if (isSender == 1)
@@ -91,7 +93,7 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
         $window.localStorage["activeFooter"] = "user";
         $state.go('userListing', {}, { reload: true });
     }
-   
+
     $scope.alerts = function (id, message, isSender, messageId) {
         $scope.transaltionObj = { id: id, message: message, isSender: isSender, messageID: messageId };
         $scope.show = false;
@@ -142,40 +144,59 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
                     if ($scope.hideShowLoader == undefined) {
                         $scope.hideShowLoader = [];
                     }
-                    if($scope.hideShowTranlatedText==undefined)
-                    {
-                        $scope.hideShowTranlatedText=[];
+                    if ($scope.hideShowTranlatedText == undefined) {
+                        $scope.hideShowTranlatedText = [];
                     }
                     $scope.hideShowLoader[$scope.transaltionObj.id] = true;
-                    $scope.hideShowTranlatedText[$scope.transaltionObj.id]=true;
+                    $scope.hideShowTranlatedText[$scope.transaltionObj.id] = true;
                 }
                 else {
                     if ($scope.rcvrHideShowLoader == undefined) {
                         $scope.rcvrHideShowLoader = [];
                     }
+                    if ($scope.hideShowRcvrTranlatedText == undefined) {
+                        $scope.hideShowRcvrTranlatedText = [];
+                    }
                     $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = true;
+                    $scope.hideShowRcvrTranlatedText[$scope.transaltionObj.id] = true;
                 }
                 var userDetails = JSON.parse($window.localStorage["userInfo"]);
                 var targetEn = userDetails.nativeLang;
                 if (targetEn) {
-                    var sourceEn = "en";
-                    if (isSender == 1)
-                        element = "translatedText_" + $scope.transaltionObj.id;
-                    else
-                        element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
-                    var myElement = angular.element(document.querySelector('#' + element));
-                    var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
+                    var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + $scope.transaltionObj.message;
                     $http({
-                        url: urlToHit,
+                        url: urlToHitForDetection,
                     }).then(function (data) {
-                        myElement[0].innerHTML = data.data.data.translations[0].translatedText;
-                        if (isSender == 1) {
-                            $scope.hideShowLoader[$scope.transaltionObj.id] = false;
-                        }
-                        else {
-                            $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
-                        }
-                    }, function (error) {
+                        var sourceEn = data.data.data.detections[0][0].language;
+                        if (isSender == 1)
+                            element = "translatedText_" + $scope.transaltionObj.id;
+                        else
+                            element = "rcvrTranslatedText_" + $scope.transaltionObj.id;
+                        var myElement = angular.element(document.querySelector('#' + element));
+                        var urlToHit = 'https://translation.googleapis.com/language/translate/v2?key=' + $rootScope.googleTranslateApiKey + '&source=' + sourceEn + '&target=' + targetEn + '&q=' + $scope.transaltionObj.message;
+                        $http({
+                            url: urlToHit,
+                        }).then(function (data) {
+                            myElement[0].innerHTML = data.data.data.translations[0].translatedText;
+                            if (isSender == 1) {
+                                $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                            }
+                            else {
+                                $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                            }
+                        }, function (error) {
+                            if (isSender == 1) {
+                                $scope.hideShowLoader[$scope.transaltionObj.id] = false;
+                            }
+                            else {
+                                $scope.rcvrHideShowLoader[$scope.transaltionObj.id] = false;
+                            }
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Incorect',
+                                template: error.data.error.message
+                            });
+                        });
+                    }, function (error1) {
                         if (isSender == 1) {
                             $scope.hideShowLoader[$scope.transaltionObj.id] = false;
                         }
@@ -187,6 +208,8 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
                             template: error.data.error.message
                         });
                     });
+
+
                 }
             }, function (error) {
                 $ionicLoading.hide();
@@ -210,10 +233,28 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
             });
         }
         else {
-            var translateInfo = { text: msg, sourceEn: 'en', targetEn: 'fr' };
-            $window.localStorage["translateInfo"] = JSON.stringify(translateInfo);
-            $rootScope.fromPage='chatBot';
-            $state.go('chatTranslate');
+            var userDetails = JSON.parse($window.localStorage["userInfo"]);
+            var targetEn = userDetails.nativeLang;
+            if (targetEn) {
+                var urlToHitForDetection = 'https://translation.googleapis.com/language/translate/v2/detect?key=' + $rootScope.googleTranslateApiKey + '&q=' + msg;
+                $http({
+                    url: urlToHitForDetection,
+                }).then(function (data) {
+
+                    var sourceEn = data.data.data.detections[0][0].language;
+                    var translateInfo = { text: msg, sourceEn: sourceEn, targetEn: targetEn };
+                    $window.localStorage["translateInfo"] = JSON.stringify(translateInfo);
+                    $rootScope.fromPage = 'chatBot';
+                    $state.go('chatTranslate');
+
+                }, function (error) {
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Incorect',
+                        template: error.data.error.message
+                    });
+                });
+            }
         }
     }
 

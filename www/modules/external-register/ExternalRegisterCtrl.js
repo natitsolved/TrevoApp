@@ -9,6 +9,34 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
             this.classList.toggle('active');
         });
     }
+    $scope.getCountryList=function()
+{
+
+    authService.getAllCountryList().then(function(data){
+
+        $scope.countryList=data;
+    },function(error){
+ var alertPopup = $ionicPopup.alert({
+                    title: 'Error!',
+                    template: error.Message
+                });
+
+    });
+}
+$scope.getLanguageList=function()
+{
+
+    authService.getAllLanguageList().then(function(data){
+
+        $scope.languageList=data;
+    },function(error){
+ var alertPopup = $ionicPopup.alert({
+                    title: 'Error!',
+                    template: error.Message
+                });
+
+    });
+}
     $scope.isShowText = true;
     $scope.isShowImg = false;
     $scope.isShowNatText = true;
@@ -17,11 +45,13 @@ app.controller('ExternalRegisterCtrl', function ($scope, $stateParams, ionicMate
     $scope.isShowLearningAbbrev = false;
     $scope.datafirst = {};
     $scope.data = {};
-    $scope.udl = { country: '', nativeLanguage: '', learningLanguage: '', languagelevel: '' };
+   $scope.udl = { country: '1', nativeLanguage: '1', learningLanguage: '1', languagelevel: '1' };
     $scope.udl.country="1";
     $scope.udl.nativeLanguage="1";
     $scope.udl.learningLanguage="1";
     $scope.udl.languagelevel="1";
+    $scope.getCountryList();
+    $scope.getLanguageList();
     var uuid = $cordovaDevice.getUUID();
     $scope.signup = function () {
         if ($scope.udl.country && $scope.udl.nativeLanguage && $scope.udl.learningLanguage && $scope.udl.languagelevel) {

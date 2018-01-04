@@ -55,7 +55,9 @@ app.controller('MirrorCtrl', function ($scope, momentService, ionicMaterialInk, 
         $ionicLoading.hide();
     }
     $scope.getAllMoments = function () {
-        momentService.getAllMoments().then(function (data) {
+          var userDetails = JSON.parse($window.localStorage["userInfo"]);
+          var obj={NativeLang:userDetails.nativeLang,LearningLang:userDetails.learningLang};
+        momentService.getAllMomentsForExchange(obj).then(function (data) {
             $scope.momentsList = data;
             $timeout(markMomentFav, 2000);
         }, function (err) {

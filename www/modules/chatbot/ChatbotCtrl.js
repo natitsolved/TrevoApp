@@ -258,5 +258,47 @@ app.controller('ChatbotCtrl', function ($scope, $stateParams, ionicMaterialInk, 
         }
     }
 
+    $scope.markAsFav = function () {
+        $ionicLoading.show({
+            template: 'Loading....'
+        });
 
+        //  var message = $scope.transaltionObj.message;
+        var message;
+        if ($scope.transaltionObj.IncorrectText) {
+            message = $scope.transaltionObj.IncorrectText + "," + $scope.transaltionObj.CorrectedText;
+        }
+        else {
+            message = $scope.transaltionObj.message;
+        }
+        var isSender = $scope.transaltionObj.isSender;
+        var item = { Message: message, FavouriteUserId: $scope.userInfo.userId, IsSender: 0, SenderRecieverId: $scope.userInfo.userId, MomentId: 0, Details: message, LocalMessageId: $scope.transaltionObj.messageID };
+        momentService.markMomentAsFavourite(item).then(function (data) {
+            if (isSender == 1) {
+                if ($scope.senderFav == undefined) {
+                    $scope.senderFav = [];
+                }
+                $scope.senderFav[$scope.transaltionObj.messageID] = true;
+            }
+            else {
+                if ($scope.rcvrFav == undefined) {
+                    $scope.rcvrFav = [];
+                }
+                $scope.rcvrFav[$scope.transaltionObj.messageID] = true;
+            }
+            $scope.show = true;
+            $ionicLoading.hide();
+
+
+        }, function (error) {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error',
+                template: 'There is some error. Please try again later.'
+            });
+
+        });
+
+
+    }
 });

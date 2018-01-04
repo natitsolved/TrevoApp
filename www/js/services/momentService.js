@@ -22,8 +22,26 @@ angular.module('starter')
                 });
             });
         };
-
-
+ var getAllMomentsForExchange = function (data) {
+            return $q(function (resolve, reject) {
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+                $http({
+                    method: 'POST',
+                    url: $rootScope.serviceurl + "GetMomentsListByLangForExchange",
+                    data:data,
+                    headers: { 'Content-Type': 'application/json' }
+                }).success(function (response) {
+                    console.log(response);
+                    $ionicLoading.hide();
+                    resolve(response);
+                }).error(function (error) {
+                    $ionicLoading.hide();
+                    reject(error);
+                });
+            });
+        };
         var getAllMomentListByParentId = function (id) {
             return $q(function (resolve, reject) {
                 $ionicLoading.show({
@@ -244,7 +262,8 @@ angular.module('starter')
             getAllMomentListByCriteria: getAllMomentListByCriteria,
             insertTransliterationDetails: insertTransliterationDetails,
             getFavoritesListByUserId: getFavoritesListByUserId,
-            deleteFavoritesById: deleteFavoritesById
+            deleteFavoritesById: deleteFavoritesById,
+            getAllMomentsForExchange:getAllMomentsForExchange
         };
     })
 

@@ -23,7 +23,7 @@
         <div class="sender-2 chat_row" ng-show="msg.IsSender==0">
             <!--<div class="avatar-image"><img src="img/icon.png"></div>-->
             <div class="msg" ng-show="msg.message !==undefined" ng-click="alerts($index, msg.message,msg.IsSender)">
-                {{msg.message}}
+                  <i class="icon ion-star" ng-show="rcvrFav[msg.id]" style="color:orange;"></i> {{msg.message}}
                 <div class="bottom-part" ng-show="hideShowRcvrTranlatedText[$index]" id="{{'rcvrTranslatedText_'+$index}}"></div>
             </div>
             <div class="clearfix"></div>
@@ -56,6 +56,9 @@
             <div class="modal_part new-modal_part animated bounceInUp">
                 <div class="onclick_part" style="position: relative; width:100%; float:left">
                     <div class="toparea">
+                          <a href="javascriipt:void(0)" class="icon-item" ng-click="markAsFav()">
+                            <span><i class="icon ion-star"></i></span> Favorite
+                        </a>
                         <a href="javascript:void(0)" class="icon-item" ng-click="speakText()">
                             <span><img src="img/001-speaker.png"></span> Sound
                         </a>
